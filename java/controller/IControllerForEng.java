@@ -1,9 +1,9 @@
 package controller;
 
-public interface IKontrolleriForM {
+public interface IControllerForEng {
 
     // Rajapinta, joka tarjotaan moottorille:
 
-    public void naytaLoppuaika(double aika);
+    public void showEndTime(double aika);
     public void visualisoiAsiakas();
 }

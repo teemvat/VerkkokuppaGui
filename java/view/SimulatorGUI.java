@@ -21,7 +21,7 @@ import javafx.scene.text.*;
 
 
 
-public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
+public class SimulatorGUI extends Application implements ISimulatorUI {
 
     //Kontrollerin esittely (tarvitaan käyttöliittymässä)
     private IKontrolleriForV kontrolleri;
@@ -38,7 +38,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
     private Button hidastaButton;
     private Button nopeutaButton;
 
-    private IVisualisointi naytto;
+    private IVisualization naytto;
 
 
     @Override
@@ -46,7 +46,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
 
         Trace.setTraceLevel(Level.INFO);
 
-        kontrolleri = new Kontrolleri(this);
+        kontrolleri = new Controller(this);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
             grid.add(nopeutaButton, 0, 4);   // sarake, rivi
             grid.add(hidastaButton, 1, 4);   // sarake, rivi
 
-            naytto = new Visualisointi(400, 200);
+            naytto = new Visualization(400, 200);
 
             // TÃ¤ytetÃ¤Ã¤n boxi:
             hBox.getChildren().addAll(grid, (Canvas) naytto);
@@ -139,24 +139,24 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
     //Käyttöliittymän rajapintametodit (kutsutaan kontrollerista)
 
     @Override
-    public double getAika() {
+    public double getTime() {
         return Double.parseDouble(aika.getText());
     }
 
     @Override
-    public long getViive() {
+    public long getDelay() {
         return Long.parseLong(viive.getText());
     }
 
     @Override
-    public void setLoppuaika(double aika) {
+    public void setEndTime(double time) {
         DecimalFormat formatter = new DecimalFormat("#0.00");
-        this.tulos.setText(formatter.format(aika));
+        this.tulos.setText(formatter.format(time));
     }
 
 
     @Override
-    public IVisualisointi getVisualisointi() {
+    public IVisualization getVisualization() {
         return naytto;
     }
 }

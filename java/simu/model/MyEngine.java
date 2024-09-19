@@ -1,22 +1,24 @@
 package simu.model;
 
+import controller.IControllerForEng;
 import simu.framework.*;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 
 public class MyEngine extends Engine {
 
-    private ArriveProcess arriveProcess;
+    private ArrivalProcess arrivalProcess;
 
     private ServicePoint[] servicePoints;
 
 
-    public MyEngine() {
+    public MyEngine(IControllerForEng controller) {
+        super(controller);
 //		servicepoint[0]= orderHandler
 //		servicepoint[1]= warehouse
 //		servicepoint[2]= packaging
 //		servicepoint[3]= shipping
-        arriveProcess = new ArriveProcess(new Negexp(15, 5), eventList, EventType.ARR1);
+        arrivalProcess = new ArrivalProcess(new Negexp(15, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4];
         servicePoints[0] = new ServicePoint(new Normal(15, 5), eventList, EventType.ORDHNDL);
         servicePoints[1] = new ServicePoint(new Normal(15, 5), eventList, EventType.WAREHOUSE);
@@ -28,22 +30,21 @@ public class MyEngine extends Engine {
 
     }
 
-
     @Override
     protected void initialization() {
-        arriveProcess.generateNext(); // Ensimmäinen saapuminen järjestelmään
+        arrivalProcess.generateNext(); // Ensimmäinen saapuminen järjestelmään
     }
 
     @Override
-    protected void runEvent(Event t) {  // B-vaiheen tapahtumat
+    protected void runEvent(Event evt) {  // B-vaiheen tapahtumat
 
         Order a;
 
-        switch ((EventType) t.getType()) {
+        switch ((EventType) evt.getType()) {
 
             case ARR1:
                 servicePoints[0].addToQueue(new Order()); //ARR1 = tilaustyyppi 1 ja ARR2 = tilaustyyppi 2
-                arriveProcess.generateNext();
+                arrivalProcess.generateNext();
                 break;
 
             case ORDHNDL:
@@ -82,7 +83,10 @@ public class MyEngine extends Engine {
     protected void results() {
         System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
         System.out.println("Results ... are not implemented yet");
+
+        controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
     }
+
 
 
 }

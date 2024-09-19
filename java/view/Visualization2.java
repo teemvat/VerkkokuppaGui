@@ -5,25 +5,25 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class Visualisointi2 extends Canvas implements IVisualisointi{
+public class Visualization2 extends Canvas implements IVisualization {
 	
 	private GraphicsContext gc;
 	
 	int asiakasLkm = 0;
 
-	public Visualisointi2(int w, int h) {
+	public Visualization2(int w, int h) {
 		super(w, h);
 		gc = this.getGraphicsContext2D();
-		tyhjennaNaytto();
+		clearScreen();
 	}
 	
 
-	public void tyhjennaNaytto() {
+	public void clearScreen() {
 		gc.setFill(Color.YELLOW);
 		gc.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 	
-	public void uusiAsiakas() {
+	public void newPackage() {
 		
 		asiakasLkm++;
 		

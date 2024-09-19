@@ -10,12 +10,10 @@ public class EventList {
 	}
 	
 	public Event remove(){
-		Trace.out(Trace.Level.INFO,"Removing from eventlist " + list.peek().getType() + " " + list.peek().getTime() );
 		return list.remove();
 	}
 	
 	public void add(Event t){
-		Trace.out(Trace.Level.INFO,"Added to eventlist " + t.getType() + " " + t.getTime());
 		list.add(t);
 	}
 	
