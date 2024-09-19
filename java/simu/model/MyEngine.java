@@ -44,6 +44,7 @@ public class MyEngine extends Engine {
 
             case ARR1:
                 servicePoints[0].addToQueue(new Order()); //ARR1 = tilaustyyppi 1 ja ARR2 = tilaustyyppi 2
+                controller.visualizeOrder();
                 arrivalProcess.generateNext();
                 break;
 

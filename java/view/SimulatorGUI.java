@@ -24,21 +24,21 @@ import javafx.scene.text.*;
 public class SimulatorGUI extends Application implements ISimulatorUI {
 
     //Kontrollerin esittely (tarvitaan käyttöliittymässä)
-    private IKontrolleriForV kontrolleri;
+    private IControllerForView controller;
 
     // Käyttöliittymäkomponentit:
-    private TextField aika;
-    private TextField viive;
-    private Label tulos;
-    private Label aikaLabel;
-    private Label viiveLabel;
-    private Label tulosLabel;
+    private TextField time;
+    private TextField delay;
+    private Label result;
+    private Label timeLabel;
+    private Label delayLabel;
+    private Label resultLabel;
 
-    private Button kaynnistaButton;
-    private Button hidastaButton;
-    private Button nopeutaButton;
+    private Button startButton;
+    private Button slowButton;
+    private Button fastButton;
 
-    private IVisualization naytto;
+    private IVisualization screen;
 
 
     @Override
@@ -46,7 +46,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
         Trace.setTraceLevel(Level.INFO);
 
-        kontrolleri = new Controller(this);
+        controller = new Controller(this);
     }
 
     @Override
@@ -56,50 +56,50 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
-                public void handle(WindowEvent t) {
+                public void handle(WindowEvent evt) {
                     Platform.exit();
                     System.exit(0);
                 }
             });
 
 
-            primaryStage.setTitle("Simulaattori");
+            primaryStage.setTitle("Simulator");
 
-            kaynnistaButton = new Button();
-            kaynnistaButton.setText("Käynnistä simulointi");
-            kaynnistaButton.setOnAction(new EventHandler<ActionEvent>() {
+            startButton = new Button();
+            startButton.setText("Start simulation");
+            startButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    kontrolleri.kaynnistaSimulointi();
-                    kaynnistaButton.setDisable(true);
+                    controller.startSimulation();
+                    startButton.setDisable(true);
                 }
             });
 
-            hidastaButton = new Button();
-            hidastaButton.setText("Hidasta");
-            hidastaButton.setOnAction(e -> kontrolleri.hidasta());
+            slowButton = new Button();
+            slowButton.setText("Slower");
+            slowButton.setOnAction(e -> controller.slow());
 
-            nopeutaButton = new Button();
-            nopeutaButton.setText("Nopeuta");
-            nopeutaButton.setOnAction(e -> kontrolleri.nopeuta());
+            fastButton = new Button();
+            fastButton.setText("Faster");
+            fastButton.setOnAction(e -> controller.fast());
 
-            aikaLabel = new Label("Simulointiaika:");
-            aikaLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            aika = new TextField("Syötä aika");
-            aika.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            aika.setPrefWidth(150);
+            timeLabel = new Label("Simulation time:");
+            timeLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+            time = new TextField("Give time");
+            time.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+            time.setPrefWidth(150);
 
-            viiveLabel = new Label("Viive:");
-            viiveLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            viive = new TextField("Syötä viive");
-            viive.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            viive.setPrefWidth(150);
+            delayLabel = new Label("Delay:");
+            delayLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+            delay = new TextField("Give delay");
+            delay.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+            delay.setPrefWidth(150);
 
-            tulosLabel = new Label("Kokonaisaika:");
-            tulosLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            tulos = new Label();
-            tulos.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            tulos.setPrefWidth(150);
+            resultLabel = new Label("Total time:");
+            resultLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+            result = new Label();
+            result.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+            result.setPrefWidth(150);
 
             HBox hBox = new HBox();
             hBox.setPadding(new Insets(15, 12, 15, 12)); // marginaalit ylÃ¤, oikea, ala, vasen
@@ -110,20 +110,20 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             grid.setVgap(10);
             grid.setHgap(5);
 
-            grid.add(aikaLabel, 0, 0);   // sarake, rivi
-            grid.add(aika, 1, 0);          // sarake, rivi
-            grid.add(viiveLabel, 0, 1);      // sarake, rivi
-            grid.add(viive, 1, 1);           // sarake, rivi
-            grid.add(tulosLabel, 0, 2);      // sarake, rivi
-            grid.add(tulos, 1, 2);           // sarake, rivi
-            grid.add(kaynnistaButton, 0, 3);  // sarake, rivi
-            grid.add(nopeutaButton, 0, 4);   // sarake, rivi
-            grid.add(hidastaButton, 1, 4);   // sarake, rivi
+            grid.add(timeLabel, 0, 0);   // sarake, rivi
+            grid.add(time, 1, 0);          // sarake, rivi
+            grid.add(delayLabel, 0, 1);      // sarake, rivi
+            grid.add(delay, 1, 1);           // sarake, rivi
+            grid.add(resultLabel, 0, 2);      // sarake, rivi
+            grid.add(result, 1, 2);           // sarake, rivi
+            grid.add(startButton, 0, 3);  // sarake, rivi
+            grid.add(fastButton, 0, 4);   // sarake, rivi
+            grid.add(slowButton, 1, 4);   // sarake, rivi
 
-            naytto = new Visualization(400, 200);
+            screen = new Visualization(400, 200);
 
-            // TÃ¤ytetÃ¤Ã¤n boxi:
-            hBox.getChildren().addAll(grid, (Canvas) naytto);
+            // Täytetään boxi:
+            hBox.getChildren().addAll(grid, (Canvas) screen);
 
             Scene scene = new Scene(hBox);
             primaryStage.setScene(scene);
@@ -140,24 +140,24 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     @Override
     public double getTime() {
-        return Double.parseDouble(aika.getText());
+        return Double.parseDouble(time.getText());
     }
 
     @Override
     public long getDelay() {
-        return Long.parseLong(viive.getText());
+        return Long.parseLong(delay.getText());
     }
 
     @Override
     public void setEndTime(double time) {
         DecimalFormat formatter = new DecimalFormat("#0.00");
-        this.tulos.setText(formatter.format(time));
+        this.result.setText(formatter.format(time));
     }
 
 
     @Override
     public IVisualization getVisualization() {
-        return naytto;
+        return screen;
     }
 }
 

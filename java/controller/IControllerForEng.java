@@ -4,6 +4,6 @@ public interface IControllerForEng {
 
     // Rajapinta, joka tarjotaan moottorille:
 
-    public void showEndTime(double aika);
-    public void visualisoiAsiakas();
+    public void showEndTime(double time);
+    public void visualizeOrder();
 }

@@ -31,7 +31,7 @@ public class Visualization2 extends Canvas implements IVisualization {
 		gc.fillRect(100,80, 100, 20);
 		gc.setFill(Color.RED);
 		gc.setFont(new Font(20));
-		gc.fillText("Asiakas " + asiakasLkm, 100, 100);
+		gc.fillText("Package " + asiakasLkm, 100, 100);
 		
 	}
 	

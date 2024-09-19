@@ -2,11 +2,12 @@ package controller;
 
 import javafx.application.Platform;
 import simu.framework.IEngine;
+import simu.model.MyEngine;
 import view.ISimulatorUI;
 
-public class Controller implements IControllerForEng, IKontrolleriForV{   // UUSI
+public class Controller implements IControllerForEng, IControllerForView {   // UUSI
 	
-	private IEngine moottori;
+	private IEngine engine;
 	private ISimulatorUI ui;
 	
 	public Controller(ISimulatorUI ui) {
@@ -18,23 +19,23 @@ public class Controller implements IControllerForEng, IKontrolleriForV{   // UUS
 	// Moottorin ohjausta:
 		
 	@Override
-	public void kaynnistaSimulointi() {
-		moottori = new OmaEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
-		moottori.setSimulationTime(ui.getTime());
-		moottori.setDelay(ui.getDelay());
+	public void startSimulation() {
+		engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
+		engine.setSimulationTime(ui.getTime());
+		engine.setDelay(ui.getDelay());
 		ui.getVisualization().clearScreen();
-		((Thread)moottori).start();
+		((Thread) engine).start();
 		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?		
 	}
 	
 	@Override
-	public void hidasta() { // hidastetaan moottorisäiettä
-		moottori.setDelay((long)(moottori.getDelay()*1.10));
+	public void slow() { // hidastetaan moottorisäiettä
+		engine.setDelay((long)(engine.getDelay()*1.10));
 	}
 
 	@Override
-	public void nopeuta() { // nopeutetaan moottorisäiettä
-		moottori.setDelay((long)(moottori.getDelay()*0.9));
+	public void fast() { // nopeutetaan moottorisäiettä
+		engine.setDelay((long)(engine.getDelay()*0.9));
 	}
 	
 	
@@ -43,13 +44,13 @@ public class Controller implements IControllerForEng, IKontrolleriForV{   // UUS
 	// Koska FX-ui:n päivitykset tulevat moottorisäikeestä, ne pitää ohjata JavaFX-säikeeseen:
 		
 	@Override
-	public void showEndTime(double aika) {
-		Platform.runLater(()->ui.setEndTime(aika));
+	public void showEndTime(double time) {
+		Platform.runLater(()->ui.setEndTime(time));
 	}
 
 	
 	@Override
-	public void visualisoiAsiakas() {
+	public void visualizeOrder() {
 		Platform.runLater(new Runnable(){
 			public void run(){
 				ui.getVisualization().newPackage();
