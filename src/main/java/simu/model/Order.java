@@ -1,6 +1,7 @@
 package simu.model;
 
-import simu.framework.*;
+import simu.framework.Clock;
+import simu.framework.Trace;
 
 import java.util.Random;
 

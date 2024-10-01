@@ -1,8 +1,11 @@
 package simu.model;
 
-import simu.framework.*;
 import java.util.LinkedList;
 import eduni.distributions.ContinuousGenerator;
+import simu.framework.Clock;
+import simu.framework.Event;
+import simu.framework.EventList;
+import simu.framework.Trace;
 
 // TODO:
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava

@@ -2,7 +2,9 @@ package view;
 
 
 import java.text.DecimalFormat;
-import controller.*;
+
+import controller.Controller;
+import controller.IControllerForView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -85,13 +87,15 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
             timeLabel = new Label("Simulation time:");
             timeLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            time = new TextField("Give time");
+            time = new TextField();
+            time.setPromptText("Give time");
             time.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
             time.setPrefWidth(150);
 
             delayLabel = new Label("Delay:");
             delayLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            delay = new TextField("Give delay");
+            delay = new TextField();
+            delay.setPromptText("Simulation speed");
             delay.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
             delay.setPrefWidth(150);
 
@@ -109,6 +113,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             grid.setAlignment(Pos.CENTER);
             grid.setVgap(10);
             grid.setHgap(5);
+            grid.requestFocus();
 
             grid.add(timeLabel, 0, 0);   // sarake, rivi
             grid.add(time, 1, 0);          // sarake, rivi

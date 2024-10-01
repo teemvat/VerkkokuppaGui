@@ -1,5 +1,5 @@
 package simu.framework;
-import eduni.distributions.*;
+import eduni.distributions.ContinuousGenerator;
 import simu.model.EventType;
 public class ArrivalProcess {
 	

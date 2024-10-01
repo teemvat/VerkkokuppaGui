@@ -1,9 +1,12 @@
 package simu.model;
 
 import controller.IControllerForEng;
-import simu.framework.*;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
+import simu.framework.ArrivalProcess;
+import simu.framework.Clock;
+import simu.framework.Engine;
+import simu.framework.Event;
 
 public class MyEngine extends Engine {
 
