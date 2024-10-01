@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Platform;
 import simu.framework.IEngine;
 import simu.model.MyEngine;
+import simu.model.Order;
 import view.ISimulatorUI;
 
 public class Controller implements IControllerForEng, IControllerForView {   // UUSI
@@ -56,6 +57,15 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 				ui.getVisualization().newPackage();
 			}
 		});
+	}
+
+	public void showAverageTime(double time){
+		Platform.runLater(() ->ui.setAverageTime(time));
+		//ui.setAverageTime(Order.getAverageTime());
+	}
+
+	public double getAverageTime(){
+		return Order.getAverageTime();
 	}
 
 

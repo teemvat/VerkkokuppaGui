@@ -6,4 +6,8 @@ public interface IControllerForEng {
 
     public void showEndTime(double time);
     public void visualizeOrder();
+
+    void showAverageTime(double time);
+
+    double getAverageTime();
 }
