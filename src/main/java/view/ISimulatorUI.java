@@ -8,7 +8,13 @@ public interface ISimulatorUI {
 	
 	//Kontrolleri antaa käyttöliittymälle tuloksia, joita Moottori tuottaa 
 	public void setEndTime(double time);
-	
+
+
+	//TODO: make UI methods for setting the number of workers
+	public int getOrderHandlers();
+	public int getWarehousers();
+	public int getPackagers();
+
 	// Kontrolleri tarvitsee  
 	public IVisualization getVisualization();
 
