@@ -23,10 +23,10 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
      */
     @Override
     public void startSimulation() {
-        engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
+        //engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());/*UI:sta saadut arvot**/
+        engine = new MyEngine(this,ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers()); // luodaan uusi moottorisäie jokaista simulointia varten
         engine.setSimulationTime(ui.getTime());
         engine.setDelay(ui.getDelay());
-        engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());/*UI:sta saadut arvot**/
         ui.getVisualization().clearScreen();
         ((Thread) engine).start();
         //((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?

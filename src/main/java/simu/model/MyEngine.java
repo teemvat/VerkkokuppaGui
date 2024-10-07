@@ -9,7 +9,9 @@ import simu.framework.Engine;
 import simu.framework.Event;
 
 public class MyEngine extends Engine {
-
+    private int ordHndlAmount;
+    private int warehouseAmount;
+    private int packagerAmount;
     private ArrivalProcess arrivalProcess;
 
     private ServicePoint[][] servicePoints;
@@ -18,8 +20,11 @@ public class MyEngine extends Engine {
     // private ServicePoint[] servicePoints;
 
 
-    public MyEngine(IControllerForEng controller) {
+    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount) {
         super(controller);
+        this.ordHndlAmount = ordHndlAmount;
+        this.warehouseAmount = warehouseAmount;
+        this.packagerAmount = packagerAmount;
 //		servicepoint[0]= orderHandler
 //		servicepoint[1]= warehouse
 //		servicepoint[2]= packaging
@@ -27,17 +32,21 @@ public class MyEngine extends Engine {
 
 
         arrivalProcess = new ArrivalProcess(new Negexp(15, 5), eventList, EventType.ARR1);
-        servicePoints = new ServicePoint[4][0];
-
+        servicePoints = new ServicePoint[4][];
+        servicePoints[0] = new ServicePoint[ordHndlAmount];
+        servicePoints[1] = new ServicePoint[warehouseAmount];
+        servicePoints[2] = new ServicePoint[packagerAmount];
+        servicePoints[3] = new ServicePoint[1];
+        System.out.println("Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount);
         //TODO: This is test if it works like this, ask teacher
         /**************************************************/
-        for (int i = 0; i <= ordHndlAmount; i++) {
+        for (int i = 0; i < ordHndlAmount; i++) {
             servicePoints[0][i] = new ServicePoint(new Normal(3, 1), eventList, EventType.ORDHNDL);
         }
-        for (int i = 0; i <= warehouseAmount; i++) {
+        for (int i = 0; i < warehouseAmount; i++) {
             servicePoints[1][i] = new ServicePoint(new Normal(15, 5), eventList, EventType.WAREHOUSE);
         }
-        for (int i = 0; i <= packagerAmount; i++) {
+        for (int i = 0; i < packagerAmount; i++) {
             servicePoints[2][i] = new ServicePoint(new Normal(15, 5), eventList, EventType.PACKAGE);
         }
         servicePoints[3][0] = new ServicePoint(new Normal(15, 5), eventList, EventType.INSHIPPING);
@@ -68,21 +77,22 @@ public class MyEngine extends Engine {
         switch ((EventType) evt.getType()) {
 
             case ARR1:
-                for (int i = 0; i <= ordHndlAmount; i++) {
+                for (int i = 0; i < ordHndlAmount; i++) {
                     servicePoints[0][i].addToQueue(new Order());
+                    System.out.println("Order added to queue"+ i);
+                    controller.visualizeOrder();
+                    arrivalProcess.generateNext();
                 }
                 //TODO: check if these need to be in for loop
-                controller.visualizeOrder();
-                arrivalProcess.generateNext();
                 break;
 
             case ORDHNDL:
-                for (int i = 0; i <= ordHndlAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
+                for (int i = 0; i < ordHndlAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
                     if (servicePoints[0][i].isBusy()) {
                         if (servicePoints[0][i].checkEvent().getEndTime() == Clock.getInstance().getTime()) {
                             a = (Order) servicePoints[0][i].getFromQueue();
                             servicePoints[1][i].addToQueue(a);
-                            for (int j = 0; j <= warehouseAmount; j++) {
+                            for (int j = 0; j < warehouseAmount; j++) {
                                 if (!servicePoints[1][j].isQueue()) {//TODO:lisää siihen warehouseen missä vähiten jonoa
                                     servicePoints[1][j].addToQueue(a);
                                     break;
@@ -97,11 +107,11 @@ public class MyEngine extends Engine {
                 break;
 
             case WAREHOUSE:
-                for (int i = 0; i <= warehouseAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
+                for (int i = 0; i < warehouseAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
                     if (servicePoints[1][i].isBusy()) {
                         if (servicePoints[1][i].checkEvent().getEndTime() == Clock.getInstance().getTime()) {
                             a = (Order) servicePoints[1][i].getFromQueue();
-                            for (int j = 0; j <= packagerAmount; j++) {
+                            for (int j = 0; j < packagerAmount; j++) {
                                 if (!servicePoints[2][j].isQueue()) {//TODO:lisää siihen warehouseen missä vähiten jonoa
                                     servicePoints[2][j].addToQueue(a);
                                     break;
@@ -116,7 +126,7 @@ public class MyEngine extends Engine {
                 break;
 
             case PACKAGE:
-                for (int i = 0; i <= packagerAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
+                for (int i = 0; i < packagerAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
                     if (servicePoints[2][i].isBusy()) {
                         if (servicePoints[2][i].checkEvent().getEndTime() == Clock.getInstance().getTime()) {
                             a = (Order) servicePoints[2][i].getFromQueue();
@@ -185,20 +195,20 @@ public class MyEngine extends Engine {
     /** */
     @Override
     protected void tryCEvent() {
-        for (int i = 0; i <= ordHndlAmount; i++) {
+        for (int i = 0; i < ordHndlAmount; i++) {
             if (!servicePoints[0][i].isBusy() && servicePoints[0][i].isQueue()) {
                 servicePoints[0][i].serve();
             }
 
         }
-        for (int i = 0; i <= warehouseAmount; i++) {
+        for (int i = 0; i < warehouseAmount; i++) {
             if (!servicePoints[1][i].isBusy() && servicePoints[1][i].isQueue()) {
                 servicePoints[1][i].serve();
             }
 
         }
 
-        for (int i = 0; i <= packagerAmount; i++) {
+        for (int i = 0; i < packagerAmount; i++) {
             if (!servicePoints[2][i].isBusy() && servicePoints[2][i].isQueue()) {
                 servicePoints[2][i].serve();
             }

@@ -164,6 +164,20 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     public IVisualization getVisualization() {
         return screen;
     }
+    //TODO: Eetu tee nämä metodit jotta saadaan työntekijöiden määrä asetettua ISimulatorUI:lle->controllerille->moottorille
+    @Override
+    public int getOrderHandlers(){
+        return 4;//TODO: korvaa ui:n kentän arvolla
+    };
+    @Override
+    public int getWarehousers(){
+        return 5;//TODO: korvaa ui:n kentän arvolla
+    };
+    @Override
+    public int getPackagers()
+    {
+        return 3;//TODO: korvaa ui:n kentän arvolla
+    };
 }
 
 

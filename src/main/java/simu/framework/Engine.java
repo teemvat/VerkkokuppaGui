@@ -4,9 +4,9 @@ package simu.framework;
 import controller.IControllerForEng; // UUSI
 
 public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄRITYKSET
-    protected int ordHndlAmount = 1;
-    protected int warehouseAmount = 1;
-    protected int packagerAmount = 1;
+    //protected int ordHndlAmount= 0;
+    //protected int warehouseAmount= 0;
+    //protected int packagerAmount= 0;
     private double simulationTime = 0;
     private long delay = 0;
 
@@ -48,12 +48,13 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
     /**
      * This will make define worker amount
      */
-    @Override
-    public void makeWorkers(int orderHandlers, int warehousers, int packagers) {
-        this.ordHndlAmount = orderHandlers;
-        this.warehouseAmount = warehousers;
-        this.packagerAmount = packagers;
-    }
+//    @Override
+//    public void makeWorkers(int orderHandlers, int warehousers, int packagers) {
+//        this.ordHndlAmount = orderHandlers;
+//        this.warehouseAmount = warehousers;
+//        this.packagerAmount = packagers;
+//        System.out.println("Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount);
+//    }
 
     @Override
     public void run() { // Entinen aja()
@@ -117,16 +118,16 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
     /**
      * Getters for amounts if needed
      */
-    private int getOrdHndlAmount() {
-        return ordHndlAmount;
-    }
-
-    private int getWarehouseAmount() {
-        return warehouseAmount;
-    }
-
-    private int getPackagerAmount() {
-        return packagerAmount;
-    }
+//    private int getOrdHndlAmount() {
+//        return ordHndlAmount;
+//    }
+//
+//    private int getWarehouseAmount() {
+//        return warehouseAmount;
+//    }
+//
+//    private int getPackagerAmount() {
+//        return packagerAmount;
+//    }
 
 }
