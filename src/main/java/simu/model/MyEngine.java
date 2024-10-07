@@ -80,18 +80,21 @@ public class MyEngine extends Engine {
                 break;
 
             case ORDHNDL:
-                int secureIdex=0;//this is for the case when warehouseAmount is less than ordHndlAmount so it will not go out of bounds
-                for (int i = 0; i <= ordHndlAmount; i++) {
-                    a = (Order) servicePoints[0][i].getFromQueue();
-                    if(i==warehouseAmount-i){
-                        //if ordHnld index is same as warehouse maximum index, start adding to warehouse from the beginning.
-                        // if  odrnd 4 wants to add to warehouse 3, it will place order to warehouse 0 so it will have 2 on queue
-                        secureIdex=0;
-                    }
-                    servicePoints[1][secureIdex].addToQueue(a);
-                    secureIdex++;
+                    for(int i = 0;i<= ordHndlAmount;i++){//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
+                        if(servicePoints[0][i].isBusy()){
+                            if(servicePoints[0][i].checkEvent().getEndTime()==Clock.getInstance().getTime()){
+                                a = (Order) servicePoints[0][i].getFromQueue();
+                                servicePoints[1][i].addToQueue(a);
+                                for(int j = 0;j<=warehouseAmount;j++){
+                                    if(!servicePoints[1][j].isQueue()){//TODO:lsiää siihen warehouseen missä vähiten jonoa
+                                        servicePoints[1][j].addToQueue(a);
+                                        break;
+                                    }}
+                            }
 
-                }
+                    }
+
+                    }
 
                 break;
 
