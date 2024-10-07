@@ -18,7 +18,6 @@ public class MyEngine extends Engine {
     // private ServicePoint[] servicePoints;
 
 
-
     public MyEngine(IControllerForEng controller) {
         super(controller);
 //		servicepoint[0]= orderHandler
@@ -41,6 +40,7 @@ public class MyEngine extends Engine {
         for (int i = 0; i <= packagerAmount; i++) {
             servicePoints[2][i] = new ServicePoint(new Normal(15, 5), eventList, EventType.PACKAGE);
         }
+        servicePoints[3][0] = new ServicePoint(new Normal(15, 5), eventList, EventType.INSHIPPING);
         /**************************************************/
 
 
@@ -60,9 +60,6 @@ public class MyEngine extends Engine {
     }
 
 
-
-
-
     @Override
     protected void runEvent(Event evt) {  // B-vaiheen tapahtumat
 
@@ -80,40 +77,67 @@ public class MyEngine extends Engine {
                 break;
 
             case ORDHNDL:
-                int secureIdex=0;//this is for the case when warehouseAmount is less than ordHndlAmount so it will not go out of bounds
-                for (int i = 0; i <= ordHndlAmount; i++) {
-                    a = (Order) servicePoints[0][i].getFromQueue();
-                    if(i==warehouseAmount-i){
-                        //if ordHnld index is same as warehouse maximum index, start adding to warehouse from the beginning.
-                        // if  odrnd 4 wants to add to warehouse 3, it will place order to warehouse 0 so it will have 2 on queue
-                        secureIdex=0;
+                for (int i = 0; i <= ordHndlAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
+                    if (servicePoints[0][i].isBusy()) {
+                        if (servicePoints[0][i].checkEvent().getEndTime() == Clock.getInstance().getTime()) {
+                            a = (Order) servicePoints[0][i].getFromQueue();
+                            servicePoints[1][i].addToQueue(a);
+                            for (int j = 0; j <= warehouseAmount; j++) {
+                                if (!servicePoints[1][j].isQueue()) {//TODO:lisää siihen warehouseen missä vähiten jonoa
+                                    servicePoints[1][j].addToQueue(a);
+                                    break;
+                                }
+                            }
+                        }
+
                     }
-                    servicePoints[1][secureIdex].addToQueue(a);
-                    secureIdex++;
 
                 }
 
                 break;
 
             case WAREHOUSE:
-                a = (Order) servicePoints[1].getFromQueue();
-                servicePoints[2].addToQueue(a);
+                for (int i = 0; i <= warehouseAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
+                    if (servicePoints[1][i].isBusy()) {
+                        if (servicePoints[1][i].checkEvent().getEndTime() == Clock.getInstance().getTime()) {
+                            a = (Order) servicePoints[1][i].getFromQueue();
+                            for (int j = 0; j <= packagerAmount; j++) {
+                                if (!servicePoints[2][j].isQueue()) {//TODO:lisää siihen warehouseen missä vähiten jonoa
+                                    servicePoints[2][j].addToQueue(a);
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
                 break;
 
             case PACKAGE:
-                a = (Order) servicePoints[2].getFromQueue();
-                servicePoints[3].addToQueue(a);
+                for (int i = 0; i <= packagerAmount; i++) {//TODO: kuinka tietää missä servicepointissa on kyseinen eventti olio??
+                    if (servicePoints[2][i].isBusy()) {
+                        if (servicePoints[2][i].checkEvent().getEndTime() == Clock.getInstance().getTime()) {
+                            a = (Order) servicePoints[2][i].getFromQueue();
+                            servicePoints[3][0].addToQueue(a);
+
+                        }
+
+                    }
+                }
+
                 break;
 
             case INSHIPPING:
-                a = (Order) servicePoints[3].getFromQueue();
+                a = (Order) servicePoints[3][0].getFromQueue();
                 a.setEndTime(Clock.getInstance().getTime());
                 a.report();
         }
     }
 
 
- //this is orginal switch case
+    //this is orginal switch case
 /*    @Override
     protected void runEvent(Event evt) {  // B-vaiheen tapahtumat
 
@@ -149,8 +173,7 @@ public class MyEngine extends Engine {
         }
     }*/
 
-
-    @Override
+    /*  @Override
     protected void tryCEvent() {
         for (ServicePoint s : servicePoints) {
             if (!s.isBusy() && s.isQueue()) {
@@ -158,7 +181,33 @@ public class MyEngine extends Engine {
             }
 
         }
-    }
+    }*/
+    /** */
+    @Override
+    protected void tryCEvent() {
+        for (int i = 0; i <= ordHndlAmount; i++) {
+            if (!servicePoints[0][i].isBusy() && servicePoints[0][i].isQueue()) {
+                servicePoints[0][i].serve();
+            }
+
+        }
+        for (int i = 0; i <= warehouseAmount; i++) {
+            if (!servicePoints[1][i].isBusy() && servicePoints[1][i].isQueue()) {
+                servicePoints[1][i].serve();
+            }
+
+        }
+
+        for (int i = 0; i <= packagerAmount; i++) {
+            if (!servicePoints[2][i].isBusy() && servicePoints[2][i].isQueue()) {
+                servicePoints[2][i].serve();
+            }
+
+        }
+
+        if (!servicePoints[3][0].isBusy() && servicePoints[3][0].isQueue()) {
+            servicePoints[3][0].serve();
+        }}
 
     @Override
     protected void results() {
