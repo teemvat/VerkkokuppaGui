@@ -4,9 +4,9 @@ package simu.framework;
 import controller.IControllerForEng; // UUSI
 
 public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄRITYKSET
-    //protected int ordHndlAmount= 0;
-    //protected int warehouseAmount= 0;
-    //protected int packagerAmount= 0;
+//    protected int ordHndlAmount= 0;
+//    protected int warehouseAmount= 0;
+//    protected int packagerAmount= 0;
     private double simulationTime = 0;
     private long delay = 0;
 
@@ -45,15 +45,14 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
         return delay;
     }
 
-    /**
-     * This will make define worker amount
-     */
+//    /**
+//     * This will make define worker amount
+//     */
 //    @Override
 //    public void makeWorkers(int orderHandlers, int warehousers, int packagers) {
 //        this.ordHndlAmount = orderHandlers;
 //        this.warehouseAmount = warehousers;
 //        this.packagerAmount = packagers;
-//        System.out.println("Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount);
 //    }
 
     @Override
@@ -114,10 +113,10 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 
     protected abstract void results(); // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
 
-
-    /**
-     * Getters for amounts if needed
-     */
+//
+//    /**
+//     * Getters for amounts if needed
+//     */
 //    private int getOrdHndlAmount() {
 //        return ordHndlAmount;
 //    }

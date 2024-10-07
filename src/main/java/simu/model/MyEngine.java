@@ -79,7 +79,7 @@ public class MyEngine extends Engine {
             case ARR1:
                 for (int i = 0; i < ordHndlAmount; i++) {
                     servicePoints[0][i].addToQueue(new Order());
-                    System.out.println("Order added to queue"+ i);
+                    System.out.println("Order added to queue" + i);
                     controller.visualizeOrder();
                     arrivalProcess.generateNext();
                 }
@@ -192,7 +192,10 @@ public class MyEngine extends Engine {
 
         }
     }*/
-    /** */
+
+    /**
+     *
+     */
     @Override
     protected void tryCEvent() {
         for (int i = 0; i < ordHndlAmount; i++) {
@@ -217,7 +220,8 @@ public class MyEngine extends Engine {
 
         if (!servicePoints[3][0].isBusy() && servicePoints[3][0].isQueue()) {
             servicePoints[3][0].serve();
-        }}
+        }
+    }
 
     @Override
     protected void results() {
