@@ -31,7 +31,7 @@ public class Order {
 
 	public void setEndTime(double endTime) {
 		this.endTime = endTime;
-	}
+	}//this is set at INSHIPPING SERVICEPOINT
 
 	public double getArrivalTime() {
 		return arrivalTime;

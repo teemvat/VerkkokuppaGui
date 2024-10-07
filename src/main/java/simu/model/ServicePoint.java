@@ -33,7 +33,9 @@ public class ServicePoint {
 		queue.add(a);
 
 	}
-	public Order checkEvent(){  // tarkistetaan Eventti olio
+	public Order checkEvent(){
+		// tarkistetaan Eventti olio
+		System.out.println("CheckEvent: "+queue.peek().getOrderType());
 		return queue.peek();
 	}
 
@@ -47,7 +49,6 @@ public class ServicePoint {
 	public void serve(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
 
 		Trace.out(Trace.Level.INFO, "Start new service for the order " + queue.peek().getId());
-
 		busy = true;
 		double serviceTime = generator.sample();
 		eventList.add(new Event(scheduledEventType, Clock.getInstance().getTime()+serviceTime));
