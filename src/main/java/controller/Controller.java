@@ -38,10 +38,11 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 	public void fast() { // nopeutetaan moottorisäiettä
 		engine.setDelay((long)(engine.getDelay()*0.9));
 	}
-	
-	
-	
-	// Simulointitulosten välittämistä käyttöliittymään.
+
+
+
+
+		// Simulointitulosten välittämistä käyttöliittymään.
 	// Koska FX-ui:n päivitykset tulevat moottorisäikeestä, ne pitää ohjata JavaFX-säikeeseen:
 		
 	@Override

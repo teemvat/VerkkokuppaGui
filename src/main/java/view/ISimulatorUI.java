@@ -10,7 +10,7 @@ public interface ISimulatorUI {
 	public void setEndTime(double time);
 
 
-	//TODO: make UI methods for setting the number of workers
+	//TODO: make UI methods for setting the number of workers-> controller
 	public int getOrderHandlers();
 	public int getWarehousers();
 	public int getPackagers();
