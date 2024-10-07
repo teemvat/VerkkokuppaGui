@@ -32,7 +32,7 @@ public class MyEngine extends Engine {
         //TODO: This is test if it works like this, ask teacher
         /**************************************************/
         for (int i = 0; i <= ordHndlAmount; i++) {
-            servicePoints[0][i] = new ServicePoint(new Normal(15, 5), eventList, EventType.ORDHNDL);
+            servicePoints[0][i] = new ServicePoint(new Normal(3, 1), eventList, EventType.ORDHNDL);
         }
         for (int i = 0; i <= warehouseAmount; i++) {
             servicePoints[1][i] = new ServicePoint(new Normal(15, 5), eventList, EventType.WAREHOUSE);
