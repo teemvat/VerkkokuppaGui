@@ -65,7 +65,7 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 		results();
 		
 	}
-
+    //TODO: nämä ehkä turhia...
 	private int getOrdHndlAmount() {
 		return ordHndlAmount;
 	}
