@@ -15,9 +15,9 @@ public class ServicePoint {
 	private final ContinuousGenerator generator;
 	private final EventList eventList;
 	private final EventType scheduledEventType;
-	
+
 	//JonoStartegia strategia; //optio: asiakkaiden järjestys
-	
+
 	private boolean busy = false;
 
 
@@ -25,13 +25,16 @@ public class ServicePoint {
 		this.eventList = eventList;
 		this.generator = generator;
 		this.scheduledEventType = type;
-				
+
 	}
 
 
 	public void addToQueue(Order a){   // Jonon 1. asiakas aina palvelussa
 		queue.add(a);
-		
+
+	}
+	public Order checkEvent(){  // tarkistetaan Eventti olio
+		return queue.peek();
 	}
 
 
@@ -42,9 +45,9 @@ public class ServicePoint {
 
 
 	public void serve(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
-		
+
 		Trace.out(Trace.Level.INFO, "Start new service for the order " + queue.peek().getId());
-		
+
 		busy = true;
 		double serviceTime = generator.sample();
 		eventList.add(new Event(scheduledEventType, Clock.getInstance().getTime()+serviceTime));
@@ -60,6 +63,10 @@ public class ServicePoint {
 
 	public boolean isQueue(){
 		return queue.size() != 0;
+	}
+
+	public int getQueueSize() {
+		return queue.size();
 	}
 
 }
