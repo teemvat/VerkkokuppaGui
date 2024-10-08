@@ -99,7 +99,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             delay.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
             delay.setPrefWidth(150);
 
-            resultLabel = new Label("Total time:");
+            resultLabel = new Label("Order average time:");
             resultLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
             result = new Label();
             result.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -155,6 +155,11 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     @Override
     public void setEndTime(double time) {
+        DecimalFormat formatter = new DecimalFormat("#0.00");
+        this.result.setText(formatter.format(time));
+    }
+
+    public void setAverageTime(double time){
         DecimalFormat formatter = new DecimalFormat("#0.00");
         this.result.setText(formatter.format(time));
     }

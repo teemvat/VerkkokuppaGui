@@ -88,7 +88,7 @@ public class MyEngine extends Engine {
         System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
         System.out.println("Results ... are not implemented yet");
 
-        controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
+        controller.showAverageTime(controller.getAverageTime()); // tämä uus
     }
 
 
