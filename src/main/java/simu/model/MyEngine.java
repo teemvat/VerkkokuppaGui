@@ -12,44 +12,47 @@ public class MyEngine extends Engine {
     private int ordHndlAmount;
     private int warehouseAmount;
     private int packagerAmount;
+    int shippingAmount;
     int orderCount = 0;
     int packageCount = 0;
     int packageShippedCount = 0;
     private ArrivalProcess arrivalProcess;
     private ServicePoint[][] servicePoints;
-    int shippingInterval;
     //orginal servicepoints
     // private ServicePoint[] servicePoints;
 
 
-    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingInterval) {
+    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingAmount) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
         this.warehouseAmount = warehouseAmount;
         this.packagerAmount = packagerAmount;
-        this.shippingInterval = shippingInterval;
+        this.shippingAmount = shippingAmount;
 
 
-        arrivalProcess = new ArrivalProcess(new Negexp(30, 5), eventList, EventType.ARR1);
+        arrivalProcess = new ArrivalProcess(new Negexp(40, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
         servicePoints[0] = new ServicePoint[ordHndlAmount];//servicepoint[0]= orderHandler
         servicePoints[1] = new ServicePoint[warehouseAmount];//servicepoint[1]= warehouse
         servicePoints[2] = new ServicePoint[packagerAmount];//servicepoint[2]= packaging
-        servicePoints[3] = new ServicePoint[1];//servicepoint[3]= shipping
+        servicePoints[3] = new ServicePoint[shippingAmount];//servicepoint[3]= shipping
 
         System.out.println("Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount);
 
         /**************************************************/
         for (int i = 0; i < ordHndlAmount; i++) {
-            servicePoints[0][i] = new ServicePoint(new Normal(1, 1), eventList, EventType.ORDHNDL);
+            servicePoints[0][i] = new ServicePoint(new Normal(5, 1), eventList, EventType.ORDHNDL);
         }
         for (int i = 0; i < warehouseAmount; i++) {
-            servicePoints[1][i] = new ServicePoint(new Normal(10, 2), eventList, EventType.WAREHOUSE);
+            servicePoints[1][i] = new ServicePoint(new Normal(30, 2), eventList, EventType.WAREHOUSE);
         }
         for (int i = 0; i < packagerAmount; i++) {
-            servicePoints[2][i] = new ServicePoint(new Normal(5, 5), eventList, EventType.PACKAGE);
+            servicePoints[2][i] = new ServicePoint(new Normal(45, 5), eventList, EventType.PACKAGE);
         }
-        servicePoints[3][0] = new ServicePoint(new Normal(shippingInterval, 0.1), eventList, EventType.INSHIPPING);
+        for(int i = 0; i < shippingAmount; i++){
+            servicePoints[3][i] = new ServicePoint(new Normal(300, 1), eventList, EventType.INSHIPPING);
+        }
+
 
         //servicePoints[3][0] = new ServicePoint(new Normal(0.3, 1), eventList, EventType.INSHIPPING);
         /**************************************************/
@@ -59,9 +62,9 @@ public class MyEngine extends Engine {
 
     @Override
     protected void initialization() {
-        for (int i = 0; i < ordHndlAmount; i++) {/** First event, generate arrivals as many as there are order handlers*/
-            arrivalProcess.generateNext();
-        }
+        // First event, generate arrival
+        arrivalProcess.generateNext();
+
 
     }
 
@@ -88,8 +91,6 @@ public class MyEngine extends Engine {
                 servicePoints[0][queueIndex].addToQueue(ord);//add order to OrderHandler queue
                 controller.visualizeOrder();
                 arrivalProcess.generateNext();
-
-                //TODO: check if these need to be in for loop
                 break;
 
             case ORDHNDL:
@@ -116,7 +117,6 @@ public class MyEngine extends Engine {
                 break;
 
             case WAREHOUSE:
-
                 int minQueueSize2 = servicePoints[2][0].getQueueSize();//initilize  next min queue  size
                 for (int i = 0; i < warehouseAmount; i++) {
                     if (servicePoints[1][i].isBusy()) {
@@ -142,19 +142,31 @@ public class MyEngine extends Engine {
                     if (servicePoints[2][i].isBusy()) {
                         int queueIndex3 = 0;//initilize  next min queue index
                         a = (Order) servicePoints[2][i].getFromQueue();
+                        for(int j = 0; j < shippingAmount;j++){
+                            int currentQueueSize = servicePoints[3][j].getQueueSize();
+                            if(currentQueueSize < minQueueSize3){
+                                minQueueSize3 = currentQueueSize;
+                                queueIndex3 = j;
+                            }
+                        }
                         packageCount++;//count packages for statistics
-                        servicePoints[3][0].addToQueue(a);//add order to shipping queue
-
+                        servicePoints[3][queueIndex3].addToQueue(a);//add order to shipping queue
 
                     }
                 }
                 break;
 
             case INSHIPPING:
-                packageShippedCount++;
-                a = (Order) servicePoints[3][0].getFromQueue();
-                a.setEndTime(Clock.getInstance().getTime());
-                //a.report();
+                for(int i=0; i<shippingAmount; i++){
+                    if(servicePoints[3][i].isBusy()){
+                        a = (Order) servicePoints[3][i].getFromQueue();
+                        a.setEndTime(Clock.getInstance().getTime());
+                        //a.report();
+                        packageShippedCount++;
+                    }
+                }
+
+
 
 
         }
@@ -188,18 +200,20 @@ public class MyEngine extends Engine {
             }
 
         }
-
-        if (!servicePoints[3][0].isBusy() && servicePoints[3][0].isQueue()) {
-            servicePoints[3][0].serve();
+        for(int i = 0; i < shippingAmount; i++){
+            if (!servicePoints[3][i].isBusy() && servicePoints[3][i].isQueue()) {
+                servicePoints[3][i].serve();
+            }
         }
+
     }
 
     @Override
     protected void results() {
         System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
         System.out.println("" +
-                "Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount + " Shipping interval: " + shippingInterval
-                +"Orders arrived: "+orderCount+
+                "Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount + " Shipping interval: " + shippingAmount
+                + "Orders arrived: " + orderCount +
                 " Orders packed: " + packageCount +
                 " Orders shipped: " + packageShippedCount);
 
