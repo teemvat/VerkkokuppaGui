@@ -168,11 +168,11 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     //TODO: Eetu tee nämä metodit jotta saadaan työntekijöiden määrä asetettua ISimulatorUI:lle->controllerille->moottorille
     @Override
     public int getOrderHandlers(){
-        return 2;//TODO: Tämä tod näk lukittava 1!!!
+        return 1;//TODO: Tämä  lukittava 1, ELI EI SÄÄDETTÄVISSÄ ui!!!
     };
     @Override
     public int getWarehousers(){
-        return 4;//TODO: korvaa ui:n kentän arvolla
+        return 1;//TODO: korvaa ui:n kentän arvolla
     };
     @Override
     public int getPackagers()
@@ -180,9 +180,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         return 2;//TODO: korvaa ui:n kentän arvolla
     };
     @Override
-    public int getShippers()
+    public int getShippingIterval()//shipping interval in minutes
     {
-        return 3;//TODO: korvaa ui:n kentän arvolla
+        return 300;//TODO: korvaa ui:n kentän arvolla
     };
 }
 
