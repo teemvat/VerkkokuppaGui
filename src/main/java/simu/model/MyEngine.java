@@ -12,6 +12,7 @@ public class MyEngine extends Engine {
     private int ordHndlAmount;
     private int warehouseAmount;
     private int packagerAmount;
+    private int orderInterval;
     int shippingAmount;
     int orderCount = 0;
     int packageCount = 0;
@@ -22,15 +23,17 @@ public class MyEngine extends Engine {
     // private ServicePoint[] servicePoints;
 
 
-    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingAmount) {
+    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingAmount, int orderInterval) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
         this.warehouseAmount = warehouseAmount;
         this.packagerAmount = packagerAmount;
         this.shippingAmount = shippingAmount;
+        this.orderInterval = orderInterval;
 
 
-        arrivalProcess = new ArrivalProcess(new Negexp(25, 5), eventList, EventType.ARR1);
+
+        arrivalProcess = new ArrivalProcess(new Negexp(orderInterval, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
         servicePoints[0] = new ServicePoint[ordHndlAmount];//servicepoint[0]= orderHandler
         servicePoints[1] = new ServicePoint[warehouseAmount];//servicepoint[1]= warehouse

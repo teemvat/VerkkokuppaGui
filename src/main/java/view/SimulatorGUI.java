@@ -184,6 +184,10 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     {
         return 2;//TODO: korvaa ui:n kentän arvolla
     };
+    @Override
+    public int  gerOrderInterval(){
+        return 15;
+    }
 }
 
 
