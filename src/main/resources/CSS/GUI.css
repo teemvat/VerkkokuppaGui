@@ -1,0 +1,21 @@
+
+
+    /*--color-red-400: #eb131e;
+    --color-red-500: #d40511;
+    --color-red-600: #9a0000;
+    --color-yellow-300: #fff0b2;
+    --color-yellow-400: #ffde59;
+    --color-yellow-500: #fc0;
+    --color-yellow-600: #e37729; */
+
+
+.label{
+    -fx-font-style: Sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9a0000;
+}
+
+.coloredBackground{
+    -fx-background-color: #fc0;
+}
