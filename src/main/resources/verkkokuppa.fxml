@@ -38,8 +38,8 @@
             <TextField fx:id="delay" promptText="Give speed" />
             <HBox prefHeight="22.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="speedDown" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="-" />
-                  <Button fx:id="speedUp" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="+" />
+                  <Button fx:id="slowButton" mnemonicParsing="false" onAction="#slow" prefHeight="26.0" prefWidth="50.0" text="-" />
+                  <Button fx:id="fastButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fast" prefHeight="26.0" prefWidth="57.0" text="+" />
                </children>
             </HBox>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -69,7 +69,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </StackPane>
-            <VBox prefHeight="54.0" prefWidth="122.0">
+            <VBox alignment="CENTER" prefHeight="54.0" prefWidth="122.0">
                <children>
                   <Label text="Läpimenneet tilaukset" />
                   <Label fx:id="totalOrders" text="numero tähän" />
@@ -78,7 +78,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </VBox>
-            <VBox layoutX="112.0" layoutY="10.0" prefHeight="54.0" prefWidth="122.0">
+            <VBox alignment="CENTER" layoutX="112.0" layoutY="10.0" prefHeight="54.0" prefWidth="122.0">
                <children>
                   <Label text="Keskiarvo käsittelyajoista" />
                   <Label fx:id="result" text="numero tähän" />

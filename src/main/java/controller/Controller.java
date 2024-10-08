@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.application.Platform;
+import simu.framework.Clock;
 import simu.framework.IEngine;
 import simu.model.MyEngine;
 import simu.model.Order;
@@ -65,9 +66,10 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 
 	@Override
 	public void visualizeWarehouse() {
-		Platform.runLater(new Runnable(){
-			public void run(){
+		Platform.runLater(new Runnable() {
+			public void run() {
 				ui.getVisualization2().newPackage();
+				ui.getVisualization1().movePackage();
 			}
 		});
 	}
@@ -77,6 +79,7 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 		Platform.runLater(new Runnable(){
 			public void run(){
 				ui.getVisualization3().newPackage();
+				ui.getVisualization2().movePackage();
 			}
 		});
 	}
@@ -86,8 +89,16 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 		Platform.runLater(new Runnable(){
 			public void run(){
 				ui.getVisualization4().newPackage();
+				ui.getVisualization3().movePackage();
 			}
 		});
+	}
+
+	@Override
+	public void showProgress(){
+		double maxTime = ui.getTime();
+		double currentTime = Clock.getInstance().getTime();
+		ui.setSimuProgress(currentTime / maxTime);
 	}
 
 

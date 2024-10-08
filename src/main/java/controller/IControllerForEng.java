@@ -13,4 +13,6 @@ public interface IControllerForEng {
     void showAverageTime(double time);
 
     double getAverageTime();
+
+    void showProgress();
 }

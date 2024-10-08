@@ -201,6 +201,13 @@ public class SimulatorGUIold extends Application implements ISimulatorUI {
     {
         return 1;//TODO: korvaa ui:n kentän arvolla
     };
+
+
+    @Override
+    public void setSimuProgress(double d){
+        // lisätty vaan et toimii toi toinen
+
+    }
 }
 
 

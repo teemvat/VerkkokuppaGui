@@ -16,7 +16,9 @@ public interface ISimulatorUI {
 	public int getWarehousers();
 	public int getPackagers();
 
-	// Kontrolleri tarvitsee  
+	void setSimuProgress(double d);
+
+	// Kontrolleri tarvitsee
 	public IVisualization getVisualization1();
 	public IVisualization getVisualization2();
 	public IVisualization getVisualization3();

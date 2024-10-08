@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -39,11 +40,16 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private Label delayLabel;
     private Label resultLabel;
 
+    @FXML
     private Button slowButton;
+    @FXML
     private Button fastButton;
 
     @FXML
     private Button startButton;
+
+    @FXML
+    private ProgressBar simuProgress;
 
     @FXML
     private HBox box1;
@@ -137,6 +143,19 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @FXML
     public void startSimulation(){
         controller.startSimulation();
+    }
+
+    @Override
+    public void setSimuProgress(double d){
+        simuProgress.setProgress(d);
+    }
+
+    public void slow(){
+        controller.slow();
+    }
+
+    public void fast(){
+        controller.fast();
     }
 
 

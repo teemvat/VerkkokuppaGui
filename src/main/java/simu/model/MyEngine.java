@@ -47,8 +47,8 @@ public class MyEngine extends Engine {
 
             case ARR1:
                 servicePoints[0].addToQueue(new Order()); //ARR1 = tilaustyyppi 1 ja ARR2 = tilaustyyppi 2
-                controller.visualizeArrival();
                 arrivalProcess.generateNext();
+                controller.visualizeArrival();
                 break;
 
             case ORDHNDL:
@@ -74,6 +74,7 @@ public class MyEngine extends Engine {
                 a.setEndTime(Clock.getInstance().getTime());
                 a.report();
         }
+        controller.showProgress();
     }
 
     @Override
