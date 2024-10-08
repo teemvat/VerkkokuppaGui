@@ -1,8 +1,11 @@
 package simu.model;
 
-import simu.framework.*;
 import java.util.LinkedList;
 import eduni.distributions.ContinuousGenerator;
+import simu.framework.Clock;
+import simu.framework.Event;
+import simu.framework.EventList;
+import simu.framework.Trace;
 
 // TODO:
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
@@ -29,6 +32,9 @@ public class ServicePoint {
 	public void addToQueue(Order a){   // Jonon 1. asiakas aina palvelussa
 		queue.add(a);
 		
+	}
+	public Order checkEvent(){  // tarkistetaan Eventti olio
+		return queue.peek();
 	}
 
 
@@ -57,6 +63,10 @@ public class ServicePoint {
 
 	public boolean isQueue(){
 		return queue.size() != 0;
+	}
+
+	public int getQueueSize() {
+		return queue.size();
 	}
 
 }

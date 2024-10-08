@@ -4,7 +4,9 @@ package simu.framework;
 import controller.IControllerForEng; // UUSI
 
 public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄRITYKSET
-	
+	protected int ordHndlAmount = 1;
+	protected int warehouseAmount = 1;
+	protected int packagerAmount = 1;
 	private double simulationTime = 0;
 	private long delay = 0;
 	
@@ -42,7 +44,15 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 	public long getDelay() {
 		return delay;
 	}
-	
+
+	/**This will make define worker amount */
+	@Override
+	public void makeWorkers(int orderHandlers, int warehousers, int packagers) {
+		this.ordHndlAmount = orderHandlers;
+		this.warehouseAmount = warehousers;
+		this.packagerAmount = packagers;
+	}
+
 	@Override
 	public void run(){ // Entinen aja()
 		initialization(); // luodaan mm. ensimmäinen tapahtuma
@@ -55,7 +65,17 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 		results();
 		
 	}
-	
+    //TODO: nämä ehkä turhia...
+	private int getOrdHndlAmount() {
+		return ordHndlAmount;
+	}
+	private int getWarehouseAmount() {
+		return warehouseAmount;
+	}
+	private int getPackagerAmount() {
+		return packagerAmount;
+	}
+
 	private void runBEvent(){
 		while (eventList.getNextTime() == clock.getTime()){
 			runEvent(eventList.remove());

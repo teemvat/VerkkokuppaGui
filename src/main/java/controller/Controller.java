@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Platform;
 import simu.framework.IEngine;
 import simu.model.MyEngine;
+import simu.model.Order;
 import view.ISimulatorUI;
 
 public class Controller implements IControllerForEng, IControllerForView {   // UUSI
@@ -23,6 +24,7 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 		engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
 		engine.setSimulationTime(ui.getTime());
 		engine.setDelay(ui.getDelay());
+		engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());//UI:sta saadut arvot
 		ui.getVisualization().clearScreen();
 		((Thread) engine).start();
 		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?		
@@ -56,6 +58,15 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 				ui.getVisualization().newPackage();
 			}
 		});
+	}
+
+	public void showAverageTime(double time){
+		Platform.runLater(() ->ui.setAverageTime(time));
+		//ui.setAverageTime(Order.getAverageTime());
+	}
+
+	public double getAverageTime(){
+		return Order.getAverageTime();
 	}
 
 

@@ -1,6 +1,7 @@
 package simu.model;
 
-import simu.framework.*;
+import simu.framework.Clock;
+import simu.framework.Trace;
 
 import java.util.Random;
 
@@ -13,6 +14,9 @@ public class Order {
 	private static int counter = 1; // antaa id:n
 	private static long avgTime = 0; // palveluajan keskiarvo
 	private int orderType; // 1 tai 2
+
+	public static double totalTime = 0;
+	public static double averageTime = 0;
 
 	Random randy = new Random();
 	
@@ -54,10 +58,25 @@ public class Order {
 		Trace.out(Trace.Level.INFO, "\nOrder "+id+ " ready! ");
 		Trace.out(Trace.Level.INFO, "Order "+id+ " arrived: " + arrivalTime);
 		Trace.out(Trace.Level.INFO,"Order "+id+ " exited: " + endTime);
-		Trace.out(Trace.Level.INFO,"Order "+id+ " stayed: " +(endTime - arrivalTime));
+		Trace.out(Trace.Level.INFO,"Order "+id+ " service time: " +(endTime - arrivalTime));
 		avgTime += (endTime - arrivalTime);
-		double average = avgTime/id;
+		double average = (double) avgTime /id;
 		System.out.println("Order average service time: "+ average);
+		calculateAverage(average);
+	}
+
+	public static void calculateAverage(Double time){
+		// tän toiminta on vähän hassu kun joka tilaus laskee totalia
+
+		averageTime = time;
+//		totalTime += time;
+//        if (counter > 1) {
+//            averageTime = totalTime/(counter);
+//        }
+    }
+
+	public static double getAverageTime(){
+		return averageTime;
 	}
 
 }

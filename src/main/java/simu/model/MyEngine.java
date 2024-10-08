@@ -1,9 +1,12 @@
 package simu.model;
 
 import controller.IControllerForEng;
-import simu.framework.*;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
+import simu.framework.ArrivalProcess;
+import simu.framework.Clock;
+import simu.framework.Engine;
+import simu.framework.Event;
 
 public class MyEngine extends Engine {
 
@@ -85,8 +88,9 @@ public class MyEngine extends Engine {
         System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
         System.out.println("Results ... are not implemented yet");
 
-        controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
+        controller.showAverageTime(controller.getAverageTime()); // tämä uus
     }
+
 
 
 
