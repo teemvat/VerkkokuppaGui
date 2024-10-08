@@ -72,13 +72,13 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
     }
 
     private boolean simulation() {
-        Trace.out(Trace.Level.INFO, "Clock is " + clock.getTime());
+        //Trace.out(Trace.Level.INFO, "Clock is " + clock.getTime());
         return clock.getTime() < simulationTime;
     }
 
 
     private void delay() { // UUSI
-        Trace.out(Trace.Level.INFO, "Delay " + delay);
+        //Trace.out(Trace.Level.INFO, "Delay " + delay);
         try {
             sleep(delay);
         } catch (InterruptedException e) {

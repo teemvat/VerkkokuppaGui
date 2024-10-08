@@ -13,9 +13,6 @@ public class MyEngine extends Engine {
     private int warehouseAmount;
     private int packagerAmount;
     private ArrivalProcess arrivalProcess;
-    private int orderHandlerIndex;
-    private int warehouseIndex;
-    private int packagerIndex;
     private ServicePoint[][] servicePoints;
 
     //orginal servicepoints
@@ -91,40 +88,56 @@ public class MyEngine extends Engine {
 
             case ORDHNDL:
 
-                int queueIndex1 = 0;//initilize  next min queue index
                 int minQueueSize1 = servicePoints[1][0].getQueueSize();//initilize  next min queue  size
-                a = (Order) servicePoints[0][orderHandlerIndex].getFromQueue();
-                for (int j = 0; j < warehouseAmount; j++) {
-                    int currentQueueSize = servicePoints[1][j].getQueueSize();
-                    if (currentQueueSize < minQueueSize1) {//get the index of the next min queue so we can add order to smallest queue
-                        minQueueSize1 = currentQueueSize;
-                        queueIndex1 = j;
+                for (int i = 0; i < ordHndlAmount; i++) {
+                    if (servicePoints[0][i].isBusy()) {
+                        int queueIndex1 = 0;//initilize  next min queue index
+                        a = (Order) servicePoints[0][i].getFromQueue();
+                        for (int j = 0; j < warehouseAmount; j++) {
+                            int currentQueueSize = servicePoints[1][j].getQueueSize();
+                            if (currentQueueSize < minQueueSize1) {//get the index of the next min queue so we can add order to smallest queue
+                                minQueueSize1 = currentQueueSize;
+                                queueIndex1 = j;
+                            }
+
+
+                        }
+                        servicePoints[1][queueIndex1].addToQueue(a);
                     }
-                    servicePoints[1][queueIndex1].addToQueue(a);//add order to warehouse queue
                 }
+
 
                 break;
 
             case WAREHOUSE:
 
-                int queueIndex2 = 0;//initilize  next min queue index
                 int minQueueSize2 = servicePoints[2][0].getQueueSize();//initilize  next min queue  size
-                a = (Order) servicePoints[1][warehouseIndex].getFromQueue();
-                for (int j = 0; j < packagerAmount; j++) {
-                    int currentQueueSize = servicePoints[2][j].getQueueSize();
-                    if (currentQueueSize < minQueueSize2) {//get the index of the next min queue so we can add order to smallest queue
-                        minQueueSize2 = currentQueueSize;
-                        queueIndex2 = j;
+                for (int i = 0; i < warehouseAmount; i++) {
+                    if (servicePoints[1][i].isBusy()) {
+                        int queueIndex2 = 0;//initilize  next min queue index
+                        a = (Order) servicePoints[1][i].getFromQueue();
+                        for (int j = 0; j < packagerAmount; j++) {
+                            int currentQueueSize = servicePoints[2][j].getQueueSize();
+                            if (currentQueueSize < minQueueSize2) {//get the index of the next min queue so we can add order to smallest queue
+                                minQueueSize2 = currentQueueSize;
+                                queueIndex2 = j;
+                            }
+                        }
+                        servicePoints[2][queueIndex2].addToQueue(a);
                     }
-                    servicePoints[2][queueIndex2].addToQueue(a);//add order to packager queue
                 }
 
 
                 break;
 
             case PACKAGE:
-                a = (Order) servicePoints[2][packagerIndex].getFromQueue();//get order from packager queue
-                servicePoints[3][0].addToQueue(a);//add order to shipping queue
+                for (int i = 0; i < packagerAmount; i++) {
+                    if (servicePoints[2][i].isBusy()) {
+                        a = (Order) servicePoints[2][i].getFromQueue();
+                        servicePoints[3][0].addToQueue(a);
+                    }
+                }
+                //add order to shipping queue
                 break;
 
             case INSHIPPING:
@@ -140,7 +153,7 @@ public class MyEngine extends Engine {
         for (int i = 0; i < ordHndlAmount; i++) {
             if (!servicePoints[0][i].isBusy() && servicePoints[0][i].isQueue()) {
                 servicePoints[0][i].serve();
-                orderHandlerIndex = i;//defines index where order is removed from
+
 
             }
 
@@ -148,7 +161,7 @@ public class MyEngine extends Engine {
         for (int i = 0; i < warehouseAmount; i++) {
             if (!servicePoints[1][i].isBusy() && servicePoints[1][i].isQueue()) {
                 servicePoints[1][i].serve();
-                warehouseIndex = i;//defines index where order is removed from
+
 
             }
 
@@ -157,7 +170,7 @@ public class MyEngine extends Engine {
         for (int i = 0; i < packagerAmount; i++) {
             if (!servicePoints[2][i].isBusy() && servicePoints[2][i].isQueue()) {
                 servicePoints[2][i].serve();
-                packagerIndex = i;//defines index where order is removed from
+
 
             }
 

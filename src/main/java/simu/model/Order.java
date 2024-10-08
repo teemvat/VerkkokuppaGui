@@ -22,7 +22,7 @@ public class Order {
 
 		orderType = randy.nextInt(2) + 1;
 		arrivalTime = Clock.getInstance().getTime();
-		Trace.out(Trace.Level.INFO, "New order nro " + id + " arrived at "+ arrivalTime);
+		//Trace.out(Trace.Level.INFO, "New order nro " + id + " arrived at "+ arrivalTime);
 	}
 
 	public double getEndTime() {

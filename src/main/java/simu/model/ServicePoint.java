@@ -35,7 +35,7 @@ public class ServicePoint {
 	}
 	public Order checkEvent(){
 		// tarkistetaan Eventti olio
-		System.out.println("CheckEvent: "+queue.peek().getOrderType());
+		//System.out.println("CheckEvent: "+queue.peek().getOrderType());
 		return queue.peek();
 	}
 
@@ -47,15 +47,12 @@ public class ServicePoint {
 
 
 	public void serve(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
-		Order order = queue.peek();
-		if (order != null) {
-			System.out.println("Serving order with ID: " + order.getId());
+			Order order = queue.peek();
+			//System.out.println("Serving order with ID: " + order.getId());
 			busy = true;
 			double serviceTime = generator.sample();
 			eventList.add(new Event(scheduledEventType, Clock.getInstance().getTime() + serviceTime));
-		} else {
-			System.out.println("Queue is empty, no order to serve.");
-		}
+
 	}
 
 
