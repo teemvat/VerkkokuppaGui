@@ -1,142 +1,100 @@
 package view;
 
 
-import java.text.DecimalFormat;
-
 import controller.Controller;
 import controller.IControllerForView;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
-import javafx.scene.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
 
+import java.io.IOException;
+import java.text.DecimalFormat;
 
 
 public class SimulatorGUI extends Application implements ISimulatorUI {
 
     //Kontrollerin esittely (tarvitaan käyttöliittymässä)
-    private IControllerForView controller;
+    private IControllerForView controller = new Controller(this);
 
     // Käyttöliittymäkomponentit:
+    @FXML
     private TextField time;
+    @FXML
     private TextField delay;
+    @FXML
     private Label result;
+
     private Label timeLabel;
     private Label delayLabel;
     private Label resultLabel;
 
-    private Button startButton;
     private Button slowButton;
     private Button fastButton;
 
-    private IVisualization screen;
+    @FXML
+    private Button startButton;
+
+    @FXML
+    private HBox box1;
+    @FXML
+    private HBox box2;
+    @FXML
+    private HBox box3;
+    @FXML
+    private HBox box4;
+
+    @FXML
+    private IVisualization screen1 = new Visualization(450,80);
+    @FXML
+    private IVisualization screen2 = new Visualization(450,80);
+    @FXML
+    private IVisualization screen3 = new Visualization(450,80);
+    @FXML
+    private IVisualization screen4 = new Visualization(450,80);
 
 
     @Override
     public void init() {
 
         Trace.setTraceLevel(Level.INFO);
-
-        controller = new Controller(this);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        // Käyttöliittymän rakentaminen
+
         try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/verkkokuppa.fxml"));
+            fxmlLoader.setController(this);
 
-            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent evt) {
-                    Platform.exit();
-                    System.exit(0);
-                }
+            Parent root = fxmlLoader.load();
+
+            primaryStage.setTitle("Verkkokuppa simulator");
+
+            primaryStage.setOnCloseRequest(evt -> {
+                Platform.exit();
+                System.exit(0);
             });
 
+            box1.getChildren().add((Canvas)screen1);
+            box2.getChildren().add((Canvas)screen2);
+            box3.getChildren().add((Canvas)screen3);
+            box4.getChildren().add((Canvas)screen4);
 
-            primaryStage.setTitle("Simulator");
-
-            startButton = new Button();
-            startButton.setText("Start simulation");
-            startButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    controller.startSimulation();
-                    startButton.setDisable(true);
-                }
-            });
-
-            slowButton = new Button();
-            slowButton.setText("Slower");
-            slowButton.setOnAction(e -> controller.slow());
-
-            fastButton = new Button();
-            fastButton.setText("Faster");
-            fastButton.setOnAction(e -> controller.fast());
-
-            timeLabel = new Label("Simulation time:");
-            timeLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            time = new TextField();
-            time.setPromptText("Give time");
-            time.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            time.setPrefWidth(150);
-
-            delayLabel = new Label("Delay:");
-            delayLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            delay = new TextField();
-            delay.setPromptText("Simulation speed");
-            delay.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            delay.setPrefWidth(150);
-
-            resultLabel = new Label("Order average time:");
-            resultLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            result = new Label();
-            result.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            result.setPrefWidth(150);
-
-            HBox hBox = new HBox();
-            hBox.setPadding(new Insets(15, 12, 15, 12)); // marginaalit ylÃ¤, oikea, ala, vasen
-            hBox.setSpacing(10);   // noodien välimatka 10 pikseliä
-
-            GridPane grid = new GridPane();
-            grid.setAlignment(Pos.CENTER);
-            grid.setVgap(10);
-            grid.setHgap(5);
-            grid.requestFocus();
-
-            grid.add(timeLabel, 0, 0);   // sarake, rivi
-            grid.add(time, 1, 0);          // sarake, rivi
-            grid.add(delayLabel, 0, 1);      // sarake, rivi
-            grid.add(delay, 1, 1);           // sarake, rivi
-            grid.add(resultLabel, 0, 2);      // sarake, rivi
-            grid.add(result, 1, 2);           // sarake, rivi
-            grid.add(startButton, 0, 3);  // sarake, rivi
-            grid.add(fastButton, 0, 4);   // sarake, rivi
-            grid.add(slowButton, 1, 4);   // sarake, rivi
-
-            screen = new Visualization(400, 200);
-
-            // Täytetään boxi:
-            hBox.getChildren().addAll(grid, (Canvas) screen);
-
-            Scene scene = new Scene(hBox);
-            primaryStage.setScene(scene);
+            primaryStage.setScene(new Scene(root));
             primaryStage.show();
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -145,12 +103,24 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     @Override
     public double getTime() {
-        return Double.parseDouble(time.getText());
+        double t;
+        if (!time.getText().isEmpty()){
+            t = Double.parseDouble(time.getText());
+        } else{
+            t = 1000.0; // tai joku defaulttiarvo
+        }
+        return t;
     }
 
     @Override
-    public long getDelay() {
-        return Long.parseLong(delay.getText());
+    public long getDelay() { // tän vois ehkä haluta muuks ku longiks? vois tehdä jopa slideriks
+        long d;
+        if (!delay.getText().isEmpty()){
+            d = Long.parseLong(delay.getText());
+        } else {
+            d = 10;
+        }
+        return d;
     }
 
     @Override
@@ -164,10 +134,30 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         this.result.setText(formatter.format(time));
     }
 
+    @FXML
+    public void startSimulation(){
+        controller.startSimulation();
+    }
+
 
     @Override
-    public IVisualization getVisualization() {
-        return screen;
+    public IVisualization getVisualization1() {
+        return screen1;
+    }
+
+    @Override
+    public IVisualization getVisualization2() {
+        return screen2;
+    }
+
+    @Override
+    public IVisualization getVisualization3() {
+        return screen3;
+    }
+
+    @Override
+    public IVisualization getVisualization4() {
+        return screen4;
     }
 
     //TODO: Eetu tee nämä metodit jotta saadaan työntekijöiden määrä asetettua ISimulatorUI:lle->controllerille->moottorille

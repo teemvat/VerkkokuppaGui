@@ -17,7 +17,10 @@ public interface ISimulatorUI {
 	public int getPackagers();
 
 	// Kontrolleri tarvitsee  
-	public IVisualization getVisualization();
+	public IVisualization getVisualization1();
+	public IVisualization getVisualization2();
+	public IVisualization getVisualization3();
+	public IVisualization getVisualization4();
 
 	void setAverageTime(double time);
 
