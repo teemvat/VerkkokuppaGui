@@ -73,8 +73,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
                 @Override
                 public void handle(ActionEvent event) {
                     controller.startSimulation();
-                    startButton.setDisable(true);
+                    startButton.setDisable(false);
                 }
+
             });
 
             slowButton = new Button();
@@ -167,16 +168,21 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     //TODO: Eetu tee nämä metodit jotta saadaan työntekijöiden määrä asetettua ISimulatorUI:lle->controllerille->moottorille
     @Override
     public int getOrderHandlers(){
-        return 1;//TODO: Tämä tod näk lukittava 1!!!
+        return 2;//TODO: Tämä tod näk lukittava 1!!!
     };
     @Override
     public int getWarehousers(){
-        return 3;//TODO: korvaa ui:n kentän arvolla
+        return 4;//TODO: korvaa ui:n kentän arvolla
     };
     @Override
     public int getPackagers()
     {
-        return 1;//TODO: korvaa ui:n kentän arvolla
+        return 2;//TODO: korvaa ui:n kentän arvolla
+    };
+    @Override
+    public int getShippers()
+    {
+        return 3;//TODO: korvaa ui:n kentän arvolla
     };
 }
 

@@ -52,13 +52,16 @@ public class Order {
 	}
 	
 	public void report(){
-		Trace.out(Trace.Level.INFO, "\nOrder "+id+ " ready! ");
-		Trace.out(Trace.Level.INFO, "Order "+id+ " arrived: " + arrivalTime);
-		Trace.out(Trace.Level.INFO,"Order "+id+ " exited: " + endTime);
-		Trace.out(Trace.Level.INFO,"Order "+id+ " stayed: " +(endTime - arrivalTime));
+		Trace.out(Trace.Level.INFO, "\nOrders "+id+ " shipped today! ");
+		Trace.out(Trace.Level.INFO, "Last order  "+id+ " arrived: " + arrivalTime);
+		Trace.out(Trace.Level.INFO,"Last order "+id+ " exited: " + endTime);
+		Trace.out(Trace.Level.INFO,"Last order "+id+ " stayed: " +(endTime - arrivalTime));
 		avgTime += (endTime - arrivalTime);
 		double average = avgTime/id;
-		System.out.println("Order average service time: "+ average);
+		System.out.println("Orders average service time: "+ average);
+	}
+	public void reportAfterPackaging() {
+		Trace.out(Trace.Level.INFO, "\nOrder " + id + " ready from packing! ");
 	}
 
 }
