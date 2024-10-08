@@ -16,8 +16,13 @@ public interface ISimulatorUI {
 	public int getWarehousers();
 	public int getPackagers();
 
-	// Kontrolleri tarvitsee  
-	public IVisualization getVisualization();
+	void setSimuProgress(double d);
+
+	// Kontrolleri tarvitsee
+	public IVisualization getVisualization1();
+	public IVisualization getVisualization2();
+	public IVisualization getVisualization3();
+	public IVisualization getVisualization4();
 
 	void setAverageTime(double time);
 
