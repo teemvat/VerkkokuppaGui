@@ -30,7 +30,7 @@ public class MyEngine extends Engine {
         this.shippingAmount = shippingAmount;
 
 
-        arrivalProcess = new ArrivalProcess(new Negexp(40, 5), eventList, EventType.ARR1);
+        arrivalProcess = new ArrivalProcess(new Negexp(25, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
         servicePoints[0] = new ServicePoint[ordHndlAmount];//servicepoint[0]= orderHandler
         servicePoints[1] = new ServicePoint[warehouseAmount];//servicepoint[1]= warehouse
@@ -41,7 +41,7 @@ public class MyEngine extends Engine {
 
         /**************************************************/
         for (int i = 0; i < ordHndlAmount; i++) {
-            servicePoints[0][i] = new ServicePoint(new Normal(5, 1), eventList, EventType.ORDHNDL);
+            servicePoints[0][i] = new ServicePoint(new Normal(8, 1), eventList, EventType.ORDHNDL);
         }
         for (int i = 0; i < warehouseAmount; i++) {
             servicePoints[1][i] = new ServicePoint(new Normal(30, 2), eventList, EventType.WAREHOUSE);
