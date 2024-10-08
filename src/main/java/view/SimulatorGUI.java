@@ -161,6 +161,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
 
+
+
     @Override
     public IVisualization getVisualization() {
         return screen;
@@ -186,7 +188,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     };
     @Override
     public int  gerOrderInterval(){
-        return 15;
+        return 15;//TODO: korvaa ui:n kentän arvolla
     }
 }
 
