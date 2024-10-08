@@ -6,49 +6,51 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="639.0" stylesheets="@CSS/GUI.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="377.0" prefWidth="163.0" styleClass="coloredBackground" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Workers" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Workers" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </VBox.margin>
             </Label>
             <Label text="Order Handlers" />
-            <Spinner fx:id="ohSpinner" />
+            <Spinner fx:id="orderhandlersField" />
             <Label layoutX="10.0" layoutY="10.0" text="Warehousers" />
-            <Spinner fx:id="whSpinner" />
+            <Spinner fx:id="warehousersField" />
             <Label layoutX="10.0" layoutY="10.0" text="Packagers" />
-            <Spinner fx:id="pckSpinner" />
+            <Spinner fx:id="packagersField" />
             <Label text="Simulation Time" />
-            <TextField fx:id="timeField" promptText="Give time" />
+            <TextField fx:id="time" promptText="Give time" />
             <Label text="Simulation Speed" />
-            <TextField fx:id="speedField" promptText="Give speed" />
-            <HBox alignment="CENTER" prefHeight="43.0" prefWidth="80.0">
+            <TextField fx:id="delay" promptText="Give speed" />
+            <HBox prefHeight="22.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="slowBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="-" />
-                  <Button fx:id="fastBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="+" />
+                  <Button fx:id="slowButton" mnemonicParsing="false" onAction="#slow" prefHeight="26.0" prefWidth="50.0" text="-" />
+                  <Button fx:id="fastButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fast" prefHeight="26.0" prefWidth="57.0" text="+" />
                </children>
             </HBox>
-            <VBox alignment="CENTER" prefHeight="83.0" prefWidth="80.0">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="startBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Start" />
+                  <Button fx:id="startButton" layoutY="107.0" mnemonicParsing="false" onAction="#startSimulation" prefHeight="50.0" prefWidth="100.0" text="Start" AnchorPane.bottomAnchor="1.0" />
                </children>
-            </VBox>
+            </AnchorPane>
          </children>
          <BorderPane.margin>
-            <Insets />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin>
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
       </VBox>
    </left>
    <bottom>
@@ -56,72 +58,114 @@
          <children>
             <StackPane prefHeight="31.0" prefWidth="102.0">
                <children>
-                  <ProgressBar prefHeight="31.0" prefWidth="100.0" progress="0.0" />
+                  <ProgressBar fx:id="simuProgress" prefHeight="31.0" prefWidth="100.0" progress="0.0" />
                   <Label text="Progress">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
             </StackPane>
-            <VBox prefHeight="54.0" prefWidth="122.0">
+            <VBox alignment="CENTER" prefHeight="54.0" prefWidth="122.0">
                <children>
                   <Label text="Läpimenneet tilaukset" />
-                  <Label text="numero tähän" />
+                  <Label fx:id="totalOrders" text="numero tähän" />
                </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
             </VBox>
-            <VBox layoutX="112.0" layoutY="10.0" prefHeight="54.0" prefWidth="122.0">
+            <VBox alignment="CENTER" layoutX="112.0" layoutY="10.0" prefHeight="54.0" prefWidth="122.0">
                <children>
                   <Label text="Keskiarvo käsittelyajoista" />
-                  <Label text="numero tähän" />
+                  <Label fx:id="result" text="numero tähän" />
                </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>
    </bottom>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="508.0">
+            <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <HBox fx:id="box1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                <children>
-                  <Label text="Order in" />
+                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                     <children>
+                        <Label text="Order in">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
-                  <Insets right="20.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="482.0">
+            <Region prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <HBox fx:id="box2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                <children>
-                  <Label text="Warehouse" />
+                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                     <children>
+                        <Label text="Warehouse">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
-                  <Insets right="20.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="469.0">
+            <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <HBox fx:id="box3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                <children>
-                  <Label text="Packing">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin></Label>
+                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                     <children>
+                        <Label text="Packing">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
-                  <Insets right="20.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="480.0">
+            <Region layoutX="10.0" layoutY="228.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <HBox fx:id="box4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                <children>
-                  <Label text="Shipping">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
+                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                     <children>
+                        <Label text="Shipping">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
-                  <Insets right="20.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
+            <Region layoutX="10.0" layoutY="387.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
          </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
       </VBox>
    </center>
 </BorderPane>
