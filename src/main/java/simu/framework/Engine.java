@@ -34,6 +34,8 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 	public void setSimulationTime(double time) {
 		simulationTime = time;
 	}
+
+	// TODO tarvitaan myös getteri simulaatioajalle
 	
 	@Override // UUSI
 	public void setDelay(long time) {
@@ -66,6 +68,7 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 		
 	}
     //TODO: nämä ehkä turhia...
+	// Tarvitaan näitä Simulation-entityssä, jos ne vaan saisi ulos jotenkin. Miksi private?
 	private int getOrdHndlAmount() {
 		return ordHndlAmount;
 	}
