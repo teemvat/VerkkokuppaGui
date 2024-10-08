@@ -47,11 +47,15 @@ public class ServicePoint {
 
 
 	public void serve(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
-
-		Trace.out(Trace.Level.INFO, "Start new service for the order " + queue.peek().getId());
-		busy = true;
-		double serviceTime = generator.sample();
-		eventList.add(new Event(scheduledEventType, Clock.getInstance().getTime()+serviceTime));
+		Order order = queue.peek();
+		if (order != null) {
+			System.out.println("Serving order with ID: " + order.getId());
+			busy = true;
+			double serviceTime = generator.sample();
+			eventList.add(new Event(scheduledEventType, Clock.getInstance().getTime() + serviceTime));
+		} else {
+			System.out.println("Queue is empty, no order to serve.");
+		}
 	}
 
 

@@ -43,12 +43,12 @@ public class MyEngine extends Engine {
             servicePoints[0][i] = new ServicePoint(new Normal(3, 1), eventList, EventType.ORDHNDL);
         }
         for (int i = 0; i < warehouseAmount; i++) {
-            servicePoints[1][i] = new ServicePoint(new Normal(15, 5), eventList, EventType.WAREHOUSE);
+            servicePoints[1][i] = new ServicePoint(new Normal(30, 5), eventList, EventType.WAREHOUSE);
         }
         for (int i = 0; i < packagerAmount; i++) {
-            servicePoints[2][i] = new ServicePoint(new Normal(15, 5), eventList, EventType.PACKAGE);
+            servicePoints[2][i] = new ServicePoint(new Normal(5, 1), eventList, EventType.PACKAGE);
         }
-        servicePoints[3][0] = new ServicePoint(new Normal(15, 5), eventList, EventType.INSHIPPING);
+        servicePoints[3][0] = new ServicePoint(new Normal(1, 1), eventList, EventType.INSHIPPING);
         /**************************************************/
 
 
@@ -111,7 +111,7 @@ public class MyEngine extends Engine {
                 int minQueueSize2 = servicePoints[2][0].getQueueSize();//initilize  next min queue  size
                 a = (Order) servicePoints[1][warehouseIndex].getFromQueue();
                 for (int j = 0; j < packagerAmount; j++) {
-                    int currentQueueSize = servicePoints[1][j].getQueueSize();
+                    int currentQueueSize = servicePoints[2][j].getQueueSize();
                     if (currentQueueSize < minQueueSize2) {//get the index of the next min queue so we can add order to smallest queue
                         minQueueSize2 = currentQueueSize;
                         queueIndex2 = j;
@@ -120,59 +120,61 @@ public class MyEngine extends Engine {
                 }
 
 
+                break;
 
-        break;
+            case PACKAGE:
+                a = (Order) servicePoints[2][packagerIndex].getFromQueue();//get order from packager queue
+                servicePoints[3][0].addToQueue(a);//add order to shipping queue
+                break;
 
-        case PACKAGE:
-        a = (Order) servicePoints[2][packagerIndex].getFromQueue();//get order from packager queue
-        servicePoints[3][0].addToQueue(a);//add order to shipping queue
-        break;
-
-        case INSHIPPING:
-        a = (Order) servicePoints[3][0].getFromQueue();
-        a.setEndTime(Clock.getInstance().getTime());
-        a.report();
+            case INSHIPPING:
+                a = (Order) servicePoints[3][0].getFromQueue();
+                a.setEndTime(Clock.getInstance().getTime());
+                a.report();
+        }
     }
-}
 
 
-@Override
-protected void tryCEvent() {
-    for (int i = 0; i < ordHndlAmount; i++) {
-        if (!servicePoints[0][i].isBusy() && servicePoints[0][i].isQueue()) {
-            servicePoints[0][i].serve();
-            orderHandlerIndex = i;//defines index where order is removed from
+    @Override
+    protected void tryCEvent() {
+        for (int i = 0; i < ordHndlAmount; i++) {
+            if (!servicePoints[0][i].isBusy() && servicePoints[0][i].isQueue()) {
+                servicePoints[0][i].serve();
+                orderHandlerIndex = i;//defines index where order is removed from
+
+            }
+
+        }
+        for (int i = 0; i < warehouseAmount; i++) {
+            if (!servicePoints[1][i].isBusy() && servicePoints[1][i].isQueue()) {
+                servicePoints[1][i].serve();
+                warehouseIndex = i;//defines index where order is removed from
+
+            }
+
         }
 
-    }
-    for (int i = 0; i < warehouseAmount; i++) {
-        if (!servicePoints[1][i].isBusy() && servicePoints[1][i].isQueue()) {
-            servicePoints[1][i].serve();
-            warehouseIndex = i;//defines index where order is removed from
+        for (int i = 0; i < packagerAmount; i++) {
+            if (!servicePoints[2][i].isBusy() && servicePoints[2][i].isQueue()) {
+                servicePoints[2][i].serve();
+                packagerIndex = i;//defines index where order is removed from
+
+            }
+
         }
 
-    }
-
-    for (int i = 0; i < packagerAmount; i++) {
-        if (!servicePoints[2][i].isBusy() && servicePoints[2][i].isQueue()) {
-            servicePoints[2][i].serve();
-            packagerIndex = i;//defines index where order is removed from
+        if (!servicePoints[3][0].isBusy() && servicePoints[3][0].isQueue()) {
+            servicePoints[3][0].serve();
         }
-
     }
 
-    if (!servicePoints[3][0].isBusy() && servicePoints[3][0].isQueue()) {
-        servicePoints[3][0].serve();
+    @Override
+    protected void results() {
+        System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
+        System.out.println("Results ... are not implemented yet");
+
+        controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
     }
-}
-
-@Override
-protected void results() {
-    System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
-    System.out.println("Results ... are not implemented yet");
-
-    controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
-}
 
 
 }
