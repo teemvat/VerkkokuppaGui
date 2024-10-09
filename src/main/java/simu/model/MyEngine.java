@@ -160,14 +160,30 @@ public class MyEngine extends Engine {
                 break;
 
             case INSHIPPING:
-                for(int i=0; i<shippingAmount; i++){
+             /*   for(int i=0; i<shippingAmount; i++){
                     if(servicePoints[3][i].isBusy()){
                         a = (Order) servicePoints[3][i].getFromQueue();
                         a.setEndTime(Clock.getInstance().getTime());
                         //a.report();
                         packageShippedCount++;
+
                     }
-                }
+                }*/
+                 //TODO: for looppi joka getFromQueue kaikki service[3][i] jonossa olevat ja asettaa niille endTime
+                        for(int i = 0; i < shippingAmount; i++){
+                            a = (Order) servicePoints[3][i].getFromQueue();
+
+                            if(a!=null){
+                                a.setEndTime(Clock.getInstance().getTime());
+                                packageShippedCount++;
+                                a.report();
+                                //update(a.getSimulationId(),a.getOrderId(),a.setCompletionTime(Clock.getInstance().getTime()))
+                            }
+
+                        }
+                //TODO:
+                //TODO:tämä alempi pois
+
 
 
 
