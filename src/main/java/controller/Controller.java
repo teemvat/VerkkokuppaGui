@@ -241,9 +241,11 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 
 	@Override
 	public void populatePastSimulations() {
-		List<Simulation> sims = sdao.findAll();
-		for (Simulation s : sims) {
-			ui.addSimulationToHistory(s);
+		List<Object> sims = sdao.findAll();
+		for (Object s : sims) {
+			ui.addSimulationToHistory((Simulation) s);
 		}
 	}
+
+
 }

@@ -252,8 +252,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     public void newHistoryWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simulationHistory.fxml"));
-            Parent root = fxmlLoader.load();
             fxmlLoader.setController(this);
+            Parent root = fxmlLoader.load();
             Stage history = new Stage();
             history.setTitle("Simulation History");
             history.setScene(new Scene(root));
@@ -266,9 +266,16 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     @Override
     public void addSimulationToHistory(Simulation s) {
-        pastSimus.getItems().add(s.toString());
+        pastSimus.getItems().add(s.toString1());
+    }
+
+    @FXML
+    private void getSimuByID() {
+        // Your logic to handle the mouse click event
     }
 }
+
+
 
 
 

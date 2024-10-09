@@ -6,10 +6,11 @@ CREATE TABLE SIMULATION (
 	simulation_id INT AUTO_INCREMENT PRIMARY KEY,
 	simulation_time FLOAT NOT NULL,
 	order_interval FLOAT NOT NULL,
+	pickup_interval FLOAT NOT NULL,
 	orderhandlers INT NOT NULL,
 	warehousers INT NOT NULL,
 	packagers INT NOT NULL,
-	shippers INT NOT NULL,
+	packages_received INT NOT NULL,
 	packages_processed INT NOT NULL,
 	avg_time FLOAT NOT NULL
 );
