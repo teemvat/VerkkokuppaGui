@@ -22,6 +22,8 @@ public class Visualization extends Canvas implements IVisualization {
 	public void clearScreen() {
 		gc.setFill(Color.YELLOW);
 		gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+		i = 0;
+		j = 10;
 	}
 	
 	public void newPackage() {
