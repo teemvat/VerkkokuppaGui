@@ -28,4 +28,6 @@ public interface IControllerForEng {
     int getPickupInterval();
 
     double getSimulationTime();
+
+    int getOrderInterval();
 }

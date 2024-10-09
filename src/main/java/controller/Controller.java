@@ -219,4 +219,9 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	public double getSimulationTime() {
 		return ui.getTime();
 	}
+
+	@Override
+	public int getOrderInterval(){
+		return ui.getOrderInterval();
+	}
 }

@@ -12,6 +12,8 @@ public interface ISimulatorUI {
 
 	//TODO: make UI methods for setting the number of workers to -> controller -> engine
 
+	int getOrderInterval();
+
 	public int getOrderHandlers();
 	public int getWarehousers();
 	public int getPackagers();
