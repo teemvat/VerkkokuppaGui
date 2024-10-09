@@ -11,6 +11,7 @@ public interface IControllerForEng {
     public void visualizeShipping();
 
     void showAverageTime(double time);
+    void showTotalShipped(int orders);
 
     double getAverageTime();
 

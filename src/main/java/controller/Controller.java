@@ -129,7 +129,11 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 
 	public void showAverageTime(double time){
 		Platform.runLater(() ->ui.setAverageTime(time));
-		//ui.setAverageTime(Order.getAverageTime());
+	}
+
+	@Override
+	public void showTotalShipped(int orders){
+		Platform.runLater(() ->ui.setReadyOrders(orders));
 	}
 
 	public double getAverageTime(){
@@ -163,6 +167,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		Simulation s = sdao.find(simulationID);
 		s.setPackagesProcessed(s.getPackagesProcessed() +1);
 		s.updateAverageTime(o.getProcessingTime());
+		ui.setAverageTime(s.getAverageTime()); // miksä tää ei toimi?
 		sdao.update(s);
 	}
 

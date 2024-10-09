@@ -32,6 +32,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private TextField delay;
     @FXML
     private Label result;
+    @FXML
+    private Label totalOrders;
 
     private Label timeLabel;
     private Label delayLabel;
@@ -146,9 +148,15 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         this.result.setText(formatter.format(time));
     }
 
+    @Override
     public void setAverageTime(double time){
         DecimalFormat formatter = new DecimalFormat("#0.00");
         this.result.setText(formatter.format(time));
+    }
+
+    @Override
+    public void setReadyOrders(int ordercount){
+        this.totalOrders.setText("Shipped: " + ordercount);
     }
 
     @FXML
