@@ -72,7 +72,7 @@ public class MyEngine extends Engine {
             case INSHIPPING:
                 a = (Order) servicePoints[3].getFromQueue();
                 controller.visualizeShipping();
-                a.setEndTime(Clock.getInstance().getTime());
+                a.setCompletionTime(Clock.getInstance().getTime());
                 a.report();
         }
         controller.showProgress();

@@ -4,6 +4,7 @@ import dao.OrderDAO;
 import dao.SimulationDAO;
 import javafx.application.Platform;
 import simu.framework.Clock;
+import simu.framework.Engine;
 import simu.framework.IEngine;
 import simu.model.MyEngine;
 import simu.model.entity.Order;
@@ -19,11 +20,11 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	private ISimulatorUI ui;
 	private SimulationDAO sdao = new SimulationDAO();
 	private OrderDAO odao = new OrderDAO();
+	private Simulation simu;
 
 
 	public Controller(ISimulatorUI ui) {
 		this.ui = ui;
-		
 	}
 
 	
@@ -32,6 +33,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public void startSimulation() {
 		engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
+		simu = new Simulation(this);
 		engine.setSimulationTime(ui.getTime());
 		engine.setDelay(ui.getDelay());
 		engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());//UI:sta saadut arvot
@@ -40,8 +42,21 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		ui.getVisualization3().clearScreen();
 		ui.getVisualization4().clearScreen();
 		((Thread) engine).start();
-		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?		
+		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?
 	}
+
+	public int getOrderHandlers() {
+		return ui.getOrderHandlers();
+	}
+
+	public int getWarehousers() {
+		return ui.getWarehousers();
+	}
+
+	public int getPackagers() {
+		return ui.getPackagers();
+	}
+
 	
 	@Override
 	public void slow() { // hidastetaan moottorisäiettä
@@ -118,7 +133,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	}
 
 	public double getAverageTime(){
-		return Order.getAverageTime();
+		return simu.getAverageTime();
 	}
 
 
