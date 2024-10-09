@@ -31,7 +31,7 @@ public class MyEngine extends Engine {
         this.ordHndlAmount = ordHndlAmount;
         this.warehouseAmount = warehouseAmount;
         this.packagerAmount = packagerAmount;
-        this.shippingAmount = shippingAmount;
+        this.shippingAmount = 1;
         this.orderInterval = orderInterval;
         this.shippingInterval = shippingInterval;
 
