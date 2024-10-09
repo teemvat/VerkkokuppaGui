@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -14,62 +14,114 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="724.0" styleClass="backgroundGray" stylesheets="@css/GUI.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="407.0" prefWidth="180.0" style="-fx-border-color: d40511; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Workers" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="94.0" prefWidth="181.0" text="Simulation options" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </VBox.margin>
+               <styleClass>
+                  <String fx:value="header1" />
+                  <String fx:value="dropShadow" />
+               </styleClass>
             </Label>
-            <Label text="Order Handlers" />
-            <Spinner fx:id="orderHandlersField" />
-            <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <Label layoutX="10.0" layoutY="10.0" text="Warehousers" />
-            <Spinner fx:id="warehousersField" />
-            <Region layoutX="10.0" layoutY="87.0" prefHeight="200.0" prefWidth="200.0" />
-            <Label layoutX="10.0" layoutY="10.0" text="Packagers" />
-            <Spinner fx:id="packagersField" />
-            <Region layoutX="10.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
-            <Label layoutX="33.0" layoutY="130.0" text="Pick-up interval" />
-            <Spinner fx:id="pickupField" layoutX="10.0" layoutY="148.0" />
-            <Region layoutX="10.0" layoutY="172.0" prefHeight="200.0" prefWidth="200.0" />
-            <Label text="Simulation Time" />
-            <TextField fx:id="time" promptText="Give time" />
-            <Region layoutX="10.0" layoutY="216.0" prefHeight="200.0" prefWidth="200.0" />
-            <Label text="Simulation Delay" />
-            <TextField fx:id="delay" promptText="Give delay" />
-            <HBox prefHeight="22.0" prefWidth="100.0">
+            <Label prefHeight="16.0" prefWidth="98.0" styleClass="dropShadow" text="Order Handlers">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Label>
+            <Spinner fx:id="orderHandlersField">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="borderSlimRed" />
+                  <String fx:value="backgroundGray" />
+               </styleClass></Spinner>
+            <Label layoutX="10.0" layoutY="10.0" styleClass="dropShadow" text="Warehousers">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Label>
+            <Spinner fx:id="warehousersField" styleClass="borderSlimRed">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Spinner>
+            <Label layoutX="10.0" layoutY="10.0" styleClass="dropShadow" text="Packagers">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Label>
+            <Spinner fx:id="packagersField" styleClass="borderSlimRed">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Spinner>
+            <Label styleClass="dropShadow" text="Simulation Time">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Label>
+            <TextField fx:id="time" alignment="CENTER" promptText="Give time" styleClass="borderSlimRed">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" />
+               </VBox.margin></TextField>
+            <Label styleClass="dropShadow" text="Simulation Speed">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Label>
+            <TextField fx:id="delay" alignment="CENTER" prefHeight="25.0" prefWidth="129.0" promptText="Give speed" styleClass="borderSlimRed">
+               <VBox.margin>
+                  <Insets bottom="4.0" left="10.0" right="10.0" />
+               </VBox.margin></TextField>
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="187.0" styleClass="label">
                <children>
-                  <Button fx:id="slowButton" mnemonicParsing="false" onAction="#slow" prefHeight="26.0" prefWidth="50.0" text="-" />
-                  <Button fx:id="fastButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fast" prefHeight="26.0" prefWidth="57.0" text="+" />
+                  <Button fx:id="slowButton" mnemonicParsing="false" onAction="#slow" prefHeight="26.0" prefWidth="50.0" text="-" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="2.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="backgroundRed" />
+                        <String fx:value="borderBlack" />
+                     </styleClass></Button>
+                  <Button fx:id="fastButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fast" prefHeight="26.0" prefWidth="57.0" text="+" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="2.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="backgroundRed" />
+                        <String fx:value="borderBlack" />
+                     </styleClass></Button>
                </children>
             </HBox>
-            <Region layoutX="10.0" layoutY="260.0" prefHeight="200.0" prefWidth="200.0" />
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <VBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="187.0" styleClass="label">
                <children>
-                  <Button fx:id="startButton" layoutY="107.0" mnemonicParsing="false" onAction="#startSimulation" prefHeight="50.0" prefWidth="100.0" text="Start" AnchorPane.bottomAnchor="1.0" />
+                  <Button fx:id="startButton" alignment="CENTER" mnemonicParsing="false" onAction="#startSimulation" prefHeight="41.0" prefWidth="111.0" text="Start" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="4.0" top="4.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="backgroundRed" />
+                        <String fx:value="borderBlack" />
+                     </styleClass>
+                  </Button>
                </children>
-            </AnchorPane>
+            </VBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" right="5.0" />
          </BorderPane.margin>
       </VBox>
    </left>
    <center>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox prefHeight="408.0" prefWidth="576.0" BorderPane.alignment="CENTER">
          <children>
             <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox fx:id="box1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="539.0">
+            <HBox fx:id="box1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                <children>
-                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                  <VBox maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
                      <children>
-                        <Label text="Order in">
+                        <Label prefHeight="16.0" prefWidth="58.0" styleClass="dropWhite" text="Order in">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -80,13 +132,17 @@
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <styleClass>
+                  <String fx:value="borderYellow" />
+                  <String fx:value="backgroundWhite" />
+               </styleClass>
             </HBox>
             <Region prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox fx:id="box2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="539.0">
+            <HBox fx:id="box2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                <children>
-                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                  <VBox maxWidth="83.0" minWidth="80.0" prefHeight="79.0" prefWidth="83.0">
                      <children>
-                        <Label text="Warehouse">
+                        <Label prefHeight="16.0" prefWidth="79.0" styleClass="dropWhite" text="Warehouse">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -97,13 +153,17 @@
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <styleClass>
+                  <String fx:value="borderYellow" />
+                  <String fx:value="backgroundWhite" />
+               </styleClass>
             </HBox>
             <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox fx:id="box3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="539.0">
+            <HBox fx:id="box3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                <children>
-                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                  <VBox maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
                      <children>
-                        <Label text="Packing">
+                        <Label styleClass="dropWhite" text="Packing">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -114,8 +174,32 @@
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <styleClass>
+                  <String fx:value="borderYellow" />
+                  <String fx:value="backgroundWhite" />
+               </styleClass>
             </HBox>
             <Region layoutX="10.0" layoutY="228.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <HBox fx:id="box4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
+               <children>
+                  <VBox maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                     <children>
+                        <Label styleClass="dropWhite" text="Shipping">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="borderYellow" />
+                  <String fx:value="backgroundWhite" />
+               </styleClass>
+            </HBox>
             <Region layoutX="10.0" layoutY="387.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
          </children>
          <BorderPane.margin>
@@ -124,40 +208,70 @@
       </VBox>
    </center>
    <bottom>
-      <BorderPane prefHeight="74.0" prefWidth="639.0" BorderPane.alignment="CENTER">
-         <left>
-            <StackPane prefHeight="74.0" prefWidth="114.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="55.0" prefWidth="724.0" BorderPane.alignment="CENTER">
+         <right>
+            <VBox alignment="TOP_CENTER" prefHeight="68.0" prefWidth="268.0" BorderPane.alignment="CENTER">
                <children>
-                  <ProgressBar fx:id="simuProgress" prefHeight="31.0" prefWidth="100.0" progress="0.0" />
-                  <Label text="Progress">
+                  <Label text="Keskiarvo käsittelyajoista">
+                     <styleClass>
+                        <String fx:value="dropShadow" />
+                        <String fx:value="labelBigger" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Label>
+                  <Label fx:id="result">
+                     <styleClass>
+                        <String fx:value="dropShadow" />
+                        <String fx:value="labelBigger" />
+                     </styleClass></Label>
+               </children>
+               <opaqueInsets>
+                  <Insets right="5.0" />
+               </opaqueInsets>
+            </VBox>
+         </right>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="258.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="160.0" text="Läpimenneet tilaukset">
+                     <styleClass>
+                        <String fx:value="dropShadow" />
+                        <String fx:value="labelBigger" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin></Label>
+                  <Label fx:id="totalOrders">
+                     <styleClass>
+                        <String fx:value="dropShadow" />
+                        <String fx:value="labelBigger" />
+                     </styleClass></Label>
+               </children>
+            </VBox>
+         </center>
+         <left>
+            <StackPane prefHeight="55.0" prefWidth="198.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ProgressBar fx:id="simuProgress" prefHeight="31.0" prefWidth="100.0" progress="0.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <styleClass>
+                        <String fx:value="borderYellow" />
+                        <String fx:value="backgroundWhite" />
+                     </styleClass></ProgressBar>
+                  <Label styleClass="dropShadow" text="Progress">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                </children>
+               <opaqueInsets>
+                  <Insets left="5.0" />
+               </opaqueInsets>
             </StackPane>
          </left>
-         <center>
-            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="74.0" prefWidth="134.0">
-                     <children>
-                        <Label text="Läpimenneet tilaukset" />
-                        <Label fx:id="totalOrders" text="numero tähän" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="54.0" prefWidth="122.0">
-                     <children>
-                        <Label text="Keskiarvo käsittelyajoista" />
-                        <Label fx:id="result" text="numero tähän" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </center>
-         <right>
-            <Button fx:id="historyButton" mnemonicParsing="false" onMouseClicked="#newHistoryWindow" text="History" BorderPane.alignment="CENTER" />
-         </right>
       </BorderPane>
    </bottom>
 </BorderPane>

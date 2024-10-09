@@ -17,6 +17,14 @@
     -fx-font-weight: bold;
 }
 
+.labelBigger {
+    -fx-text-fill: #d40511;
+    -fx-font-style: Sans-serif;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
 .whitelabel{
     -fx-text-fill: #ffffff;
     -fx-font-style: Sans-serif;
@@ -26,7 +34,10 @@
 }
 
 .dropShadow{
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 1, 0, 0, 1);
+    -fx-effect: dropshadow(three-pass-box, black, 1, 0, 0, 1);
+}
+.dropWhite{
+    -fx-effect: dropshadow(three-pass-box, #ffffff, 2, 0, 0, 2);
 }
 
 .backgroundYellow {
@@ -42,7 +53,7 @@
 }
 
 .backgroundGray {
-    -fx-background-color: #eaeaea;
+    -fx-background-color: #dadada;
 }
 
 .backgroundWhite {
@@ -50,16 +61,20 @@
 }
 
 .borderYellow {
-    -fx-border-color: #000;
-    -fx-border-width: 1px;
+    -fx-border-color: #d40511;
+    -fx-border-width: 3px;
     -fx-border-radius: 2px;
 }
 
-
+.borderSlimRed{
+    -fx-border-color: #d40511;
+    -fx-border-width: 2px;
+    -fx-border-radius: 2px;
+}
 
 .borderBlack {
     -fx-border-color: #000000;
-    -fx-border-width: 1px;
+    -fx-border-width: 2px;
     -fx-border-radius: 2px;
 }
 

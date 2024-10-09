@@ -29,20 +29,20 @@
             </Label>
          </left>
          <bottom>
-            <Line endX="100.0" startX="-500.0" strokeWidth="2.0" BorderPane.alignment="CENTER" />
+            <Line endX="100.0" startX="-500.0" stroke="#d40511" strokeWidth="3.0" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </top>
    <left>
       <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="328.0" prefWidth="146.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="idSearchField" alignment="CENTER" prefHeight="25.0" prefWidth="100.0" promptText="Simulation ID" styleClass="borderBlack" />
+            <TextField fx:id="idSearchField" alignment="CENTER" prefHeight="25.0" prefWidth="100.0" promptText="Simulation ID" styleClass="borderSlimRed" />
             <Button fx:id="searchBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#searchSimulation" text="Search">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
                <styleClass>
-                  <String fx:value="borderBlack" />
+                  <String fx:value="borderSlimRed" />
                   <String fx:value="label" />
                </styleClass>
             </Button>
@@ -54,7 +54,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ListView fx:id="pastSimus" editable="true" prefHeight="202.0" prefWidth="100.0" styleClass="borderBlack" />
+            <ListView fx:id="pastSimus" editable="true" prefHeight="202.0" prefWidth="100.0" styleClass="borderYellow" />
          </children>
          <BorderPane.margin>
             <Insets left="5.0" top="10.0" />
@@ -94,11 +94,11 @@
                               <Label fx:id="ordStat4" layoutX="12.0" layoutY="193.0" styleClass="dropShadow" text="Arrival Time:" />
                               <Label fx:id="ordStat5" layoutX="12.0" layoutY="224.0" styleClass="dropShadow" text="Completion Time:" />
                               <Label fx:id="ordStat6" layoutX="12.0" layoutY="252.0" styleClass="dropShadow" text="Processing Time:" />
-                              <TextField fx:id="packageIdField" alignment="CENTER" layoutX="146.0" layoutY="17.0" promptText="Package ID" styleClass="borderBlack" />
+                              <TextField fx:id="packageIdField" alignment="CENTER" layoutX="146.0" layoutY="17.0" promptText="Package ID" styleClass="borderSlimRed" />
                               <Button fx:id="packageSearch" layoutX="194.0" layoutY="48.0" mnemonicParsing="false" onMouseClicked="#searchPackage" text="Search">
                                  <styleClass>
                                     <String fx:value="label" />
-                                    <String fx:value="borderBlack" />
+                                    <String fx:value="borderSlimRed" />
                                  </styleClass>
                               </Button>
                            </children>
