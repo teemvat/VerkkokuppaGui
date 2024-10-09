@@ -26,6 +26,9 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		this.ui = ui;
 	}
 
+	public Controller() {
+	}
+
 	
 	// Moottorin ohjausta:
 		
@@ -60,6 +63,11 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public void slow() { // hidastetaan moottorisäiettä
 		engine.setDelay((long)(engine.getDelay()*1.10));
+	}
+
+	@Override
+	public void newHistoryWindow() {
+		ui.newHistoryWindow();
 	}
 
 	@Override

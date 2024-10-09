@@ -29,4 +29,6 @@ public interface ISimulatorUI {
 	void setAverageTime(double time);
 
     int getPickupInterval();
+
+	void newHistoryWindow();
 }

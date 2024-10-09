@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
@@ -48,6 +49,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private Button startButton;
 
     @FXML
+    private Button historyButton;
+
+    @FXML
     private ProgressBar simuProgress;
 
     @FXML
@@ -76,6 +80,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private Spinner<Integer> packagersField;
     @FXML
     private Spinner<Integer> pickupField;
+
 
 
     @Override
@@ -213,6 +218,22 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @Override
     public int getPickupInterval(){
         return pickupField.getValue();
+    }
+
+    @Override
+    public void newHistoryWindow() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simulationHistory.fxml"));
+            Parent root = fxmlLoader.load();
+            fxmlLoader.setController(this);
+            Stage history = new Stage();
+            history.setTitle("Simulation History");
+            history.setScene(new Scene(root));
+            history.initModality(Modality.APPLICATION_MODAL); // Make the window modal
+            history.showAndWait(); // Open the window as a modal dialog
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

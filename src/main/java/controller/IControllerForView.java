@@ -7,6 +7,7 @@ public interface IControllerForView {
     public void startSimulation();
     public void fast();
     public void slow();
+    public void newHistoryWindow();
 
     void showProgress();
 }
