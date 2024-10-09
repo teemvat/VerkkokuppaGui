@@ -8,5 +8,7 @@ public interface IControllerForView {
     public void fast();
     public void slow();
 
+    long getDelay();
+
     void showProgress();
 }

@@ -21,6 +21,7 @@ public interface ISimulatorUI {
 
 	void setSimuProgress(double d);
 
+	// Kontrolleri tarvitsee
 	public IVisualization getVisualization1();
 	public IVisualization getVisualization2();
 	public IVisualization getVisualization3();
@@ -28,5 +29,8 @@ public interface ISimulatorUI {
 
 	void setAverageTime(double time);
 
+    int getPickupInterval();
+    void setLock();
 
+    void setEdit();
 }

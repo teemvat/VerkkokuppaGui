@@ -76,6 +76,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @FXML
     private IVisualization screen4 = new Visualization(450,90);
 
+
+    @FXML
+    private Spinner<Integer> orderIntervalField;
     @FXML
     private Spinner<Integer> orderHandlersField;
     @FXML
@@ -115,10 +118,11 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             box3.getChildren().add((Canvas)screen3);
             //box4.getChildren().add((Canvas)screen4);
 
-            orderHandlersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
-            warehousersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
-            packagersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
-            pickupField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
+            orderIntervalField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,200,1,1));
+            orderHandlersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25, 1, 1));
+            warehousersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25,1,1));
+            packagersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25,1,1));
+            pickupField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(100,2000,100,100));
 
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
@@ -181,10 +185,12 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     public void slow(){
         controller.slow();
+        delay.setText(String.valueOf(controller.getDelay()));
     }
 
     public void fast(){
         controller.fast();
+        delay.setText(String.valueOf(controller.getDelay()));
     }
 
 
@@ -209,6 +215,10 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
+    public int getOrderInterval(){
+        return orderIntervalField.getValue();
+    }
+    @Override
     public int getOrderHandlers(){
         return orderHandlersField.getValue();
     }
@@ -229,6 +239,28 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @Override
     public int getPickupInterval(){
         return pickupField.getValue();
+    }
+
+    @Override
+    public void setLock(){
+        time.setEditable(false);
+        delay.setEditable(false);
+        orderIntervalField.setDisable(true);
+        orderHandlersField.setDisable(true);
+        warehousersField.setDisable(true);
+        packagersField.setDisable(true);
+        pickupField.setDisable(true);
+    }
+
+    @Override
+    public void setEdit(){
+        time.setEditable(true);
+        delay.setEditable(true);
+        orderIntervalField.setDisable(false);
+        orderHandlersField.setDisable(false);
+        warehousersField.setDisable(false);
+        packagersField.setDisable(false);
+        pickupField.setDisable(false);
     }
 }
 
