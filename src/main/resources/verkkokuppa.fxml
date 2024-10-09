@@ -27,7 +27,7 @@
                </VBox.margin>
             </Label>
             <Label text="Order Handlers" />
-            <Spinner fx:id="orderhandlersField" />
+            <Spinner fx:id="orderHandlersField" />
             <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <Label layoutX="10.0" layoutY="10.0" text="Warehousers" />
             <Spinner fx:id="warehousersField" />
@@ -35,8 +35,8 @@
             <Label layoutX="10.0" layoutY="10.0" text="Packagers" />
             <Spinner fx:id="packagersField" />
             <Region layoutX="10.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
-            <Label layoutX="33.0" layoutY="130.0" text="Shippers" />
-            <Spinner fx:id="pickupPeriodSpinner" layoutX="10.0" layoutY="148.0" />
+            <Label layoutX="33.0" layoutY="130.0" text="Pick-up interval" />
+            <Spinner fx:id="pickupField" layoutX="10.0" layoutY="148.0" />
             <Region layoutX="10.0" layoutY="172.0" prefHeight="200.0" prefWidth="200.0" />
             <Label text="Simulation Time" />
             <TextField fx:id="time" promptText="Give time" />
