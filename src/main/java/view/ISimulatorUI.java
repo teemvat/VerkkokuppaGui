@@ -14,9 +14,8 @@ public interface ISimulatorUI {
 	public int getOrderHandlers();
 	public int getWarehousers();
 	public int getPackagers();
-	public int getShippers();
 	public int gerOrderInterval();
-	public int getShippingInterval();
+	public int getPickupInterval();
 
     void setReadyOrders(int ordercount);
 
@@ -29,5 +28,5 @@ public interface ISimulatorUI {
 
 	void setAverageTime(double time);
 
-    //turha? int getPickupInterval();
+
 }

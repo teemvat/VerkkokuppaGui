@@ -54,7 +54,7 @@ public class Order {
     }
 
     public void setSimulation(Simulation simulation) {
-        this.simulation = simulation;
+        //this.simulation = simulation;
     }
 
     public int getOrderNumber() {
@@ -111,4 +111,6 @@ public class Order {
 		//double average = avgTime/id;
 		System.out.println("Order average service time: "+ s.getAverageTime());
 	}
+
+
 }

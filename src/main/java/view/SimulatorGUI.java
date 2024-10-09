@@ -220,6 +220,12 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     public int getPackagers(){
         return packagersField.getValue();
     }
+
+    @Override
+    public int gerOrderInterval() {
+        return 15;
+    }
+
     @Override
     public int getPickupInterval(){
         return pickupField.getValue();

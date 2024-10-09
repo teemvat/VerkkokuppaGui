@@ -29,34 +29,13 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 
     // Moottorin ohjausta:
 
-    /**
-     * This starts simulation and gets parameters from ui
-     */
-    @Override
-    public void startSimulation() {
-        //engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());/*UI:sta saadut arvot**/
-        engine = new MyEngine(this,ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers(),ui.getShippers(),ui.gerOrderInterval(),ui.getShippingInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
-        engine.setSimulationTime(ui.getTime());
-        engine.setDelay(ui.getDelay());
-        ui.getVisualization().clearScreen();
-        ((Thread) engine).start();
-        //((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?
-    }
-
-    @Override
-    public void slow() { // hidastetaan moottorisäiettä
-        engine.setDelay((long) (engine.getDelay() * 1.10));
-    }
-
-	// Moottorin ohjausta:
 
 	@Override
 	public void startSimulation() {
-		engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
 		simu = new Simulation(this);
+		engine = new MyEngine(this,ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers(),ui.gerOrderInterval(),ui.getPickupInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
 		engine.setSimulationTime(ui.getTime());
 		engine.setDelay(ui.getDelay());
-		engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());//UI:sta saadut arvot
 		ui.getVisualization1().clearScreen();
 		ui.getVisualization2().clearScreen();
 		ui.getVisualization3().clearScreen();
@@ -97,15 +76,6 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         Platform.runLater(() -> ui.setEndTime(time));
     }
 
-
-    @Override
-    public void visualizeOrder() {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                ui.getVisualization().newPackage();
-            }
-        });
-    }
 
 	@Override
 	public void visualizeArrival() {
@@ -247,5 +217,10 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public double getSimulationTime() {
 		return ui.getTime();
+	}
+
+	@Override
+	public void visualizeOrder() {
+
 	}
 }

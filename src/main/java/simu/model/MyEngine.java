@@ -7,6 +7,7 @@ import simu.framework.ArrivalProcess;
 import simu.framework.Clock;
 import simu.framework.Engine;
 import simu.framework.Event;
+import simu.model.entity.Order;
 
 public class MyEngine extends Engine {
     private int ordHndlAmount;
@@ -14,7 +15,7 @@ public class MyEngine extends Engine {
     private int packagerAmount;
     private int orderInterval;
     private int shippingInterval;
-    int shippingAmount;
+    int shippingAmount = 1;// hardcoded one car
     int orderCount = 0;
     int packageCount = 0;
     int packageShippedCount = 0;
@@ -24,7 +25,7 @@ public class MyEngine extends Engine {
     // private ServicePoint[] servicePoints;
 
 
-    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingAmount, int orderInterval, int shippingInterval) {
+    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount,  int orderInterval, int shippingInterval) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
         this.warehouseAmount = warehouseAmount;
@@ -54,15 +55,10 @@ public class MyEngine extends Engine {
             servicePoints[2][i] = new ServicePoint(new Normal(45, 5), eventList, EventType.PACKAGE);
         }
         for (int i = 0; i < shippingAmount; i++) {
-            servicePoints[3][i] = new ServicePoint(new Normal(shippingInterval, 1), eventList, EventType.INSHIPPING);
+            servicePoints[3][i] = new ServicePoint(new Normal(this.shippingInterval, 1), eventList, EventType.INSHIPPING);
         }
 
-
-        //servicePoints[3][0] = new ServicePoint(new Normal(0.3, 1), eventList, EventType.INSHIPPING);
-        /**************************************************/
-
-
-    }
+            }
 
     @Override
     protected void initialization() {
@@ -180,27 +176,25 @@ public class MyEngine extends Engine {
                     do {
                         a = (Order) servicePoints[3][i].getFromQueue();
                         if (a != null) {
-                            //TODO:update(a.getSimulationId(),a.getOrderId(),a.setCompletionTime(Clock.getInstance().getTime()))
+                            double completionTime =Clock.getInstance().getTime();
+                             a.setCompletionTime(completionTime);
+                            // controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
                             //TODO:tämä alempi pois
-                            a.setEndTime(Clock.getInstance().getTime());
+                            //a.setEndTime(Clock.getInstance().getTime());
                             packageShippedCount++;
-                            a.report();
+                            //a.report();
+                            controller.showProgress();
                         }
-                    }while (a != null);
-
-
-
+                    } while (a != null);
 
 
                 }
-                controller.showProgress();
 
 
 
         }
     }
 
-    }
 
     @Override
     protected void tryCEvent() {
