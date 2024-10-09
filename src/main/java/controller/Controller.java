@@ -26,12 +26,12 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
 		engine.setSimulationTime(ui.getTime());
 		engine.setDelay(ui.getDelay());
 		engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());//UI:sta saadut arvot
+		// tähän tietokantaan simun luonti
 		ui.getVisualization1().clearScreen();
 		ui.getVisualization2().clearScreen();
 		ui.getVisualization3().clearScreen();
 		ui.getVisualization4().clearScreen();
 		((Thread) engine).start();
-		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?		
 	}
 	
 	@Override

@@ -61,13 +61,13 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private HBox box4;
 
     @FXML
-    private IVisualization screen1 = new Visualization(450,80);
+    private IVisualization screen1 = new Visualization(450,90);
     @FXML
-    private IVisualization screen2 = new Visualization(450,80);
+    private IVisualization screen2 = new Visualization(450,90);
     @FXML
-    private IVisualization screen3 = new Visualization(450,80);
+    private IVisualization screen3 = new Visualization(450,90);
     @FXML
-    private IVisualization screen4 = new Visualization(450,80);
+    private IVisualization screen4 = new Visualization(450,90);
 
 
     @Override
@@ -96,6 +96,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             box2.getChildren().add((Canvas)screen2);
             box3.getChildren().add((Canvas)screen3);
             box4.getChildren().add((Canvas)screen4);
+
+
 
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
