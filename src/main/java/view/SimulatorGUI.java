@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
+import simu.model.entity.Simulation;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -31,6 +32,10 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private TextField time;
     @FXML
     private TextField delay;
+    @FXML
+    private TextField idSearchField;
+
+
     @FXML
     private Label result;
     @FXML
@@ -80,6 +85,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private Spinner<Integer> packagersField;
     @FXML
     private Spinner<Integer> pickupField;
+
+    @FXML
+    private ListView<String> pastSimus;
 
 
 
@@ -219,6 +227,10 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     public int getPickupInterval(){
         return pickupField.getValue();
     }
+    @Override
+    public int getSimulationID(){
+        return Integer.parseInt(idSearchField.getText());
+    }
 
     @Override
     public void newHistoryWindow() {
@@ -234,6 +246,11 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void addSimulationToHistory(Simulation s) {
+        pastSimus.getItems().add(s.toString());
     }
 }
 

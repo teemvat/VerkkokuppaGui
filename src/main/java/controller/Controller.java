@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Controller implements IControllerForEng, IControllerForView, IControllerForDao {   // UUSI
-	
+
 	private IEngine engine;
 	private ISimulatorUI ui;
 	private SimulationDAO sdao = new SimulationDAO();
@@ -29,9 +29,9 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	public Controller() {
 	}
 
-	
+
 	// Moottorin ohjausta:
-		
+
 	@Override
 	public void startSimulation() {
 		engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
@@ -59,7 +59,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		return ui.getPackagers();
 	}
 
-	
+
 	@Override
 	public void slow() { // hidastetaan moottorisäiettä
 		engine.setDelay((long)(engine.getDelay()*1.10));
@@ -68,24 +68,25 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public void newHistoryWindow() {
 		ui.newHistoryWindow();
+		populatePastSimulations();
 	}
 
 	@Override
 	public void fast() { // nopeutetaan moottorisäiettä
 		engine.setDelay((long)(engine.getDelay()*0.9));
 	}
-	
-	
-	
+
+
+
 	// Simulointitulosten välittämistä käyttöliittymään.
 	// Koska FX-ui:n päivitykset tulevat moottorisäikeestä, ne pitää ohjata JavaFX-säikeeseen:
-		
+
 	@Override
 	public void showEndTime(double time) {
 		Platform.runLater(()->ui.setEndTime(time));
 	}
 
-	
+
 	@Override
 	public void visualizeArrival() {
 		Platform.runLater(new Runnable(){
@@ -226,5 +227,13 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public double getSimulationTime() {
 		return ui.getTime();
+	}
+
+	@Override
+	public void populatePastSimulations() {
+		List<Simulation> sims = sdao.findAll();
+		for (Simulation s : sims) {
+			ui.addSimulationToHistory(s);
+		}
 	}
 }

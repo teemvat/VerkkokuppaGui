@@ -1,5 +1,7 @@
 package view;
 
+import simu.model.entity.Simulation;
+
 public interface ISimulatorUI {
 	
 	// Kontrolleri tarvitsee syötteitä, jotka se välittää Moottorille
@@ -30,5 +32,9 @@ public interface ISimulatorUI {
 
     int getPickupInterval();
 
+	int getSimulationID();
+
 	void newHistoryWindow();
+
+	void addSimulationToHistory(Simulation s);
 }

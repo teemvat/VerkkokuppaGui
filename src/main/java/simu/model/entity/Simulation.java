@@ -126,4 +126,8 @@ public class Simulation {
     public void setOrder_interval(double order_interval) {
         this.order_interval = order_interval;
     }
+
+    public String toString1(){
+        return "# "+simulation_id;
+    }
 }
