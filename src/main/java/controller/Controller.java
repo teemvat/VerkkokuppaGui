@@ -24,7 +24,7 @@ public class Controller implements IControllerForEng, IControllerForView {   // 
     @Override
     public void startSimulation() {
         //engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());/*UI:sta saadut arvot**/
-        engine = new MyEngine(this,ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers(),ui.getShippers(),ui.gerOrderInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
+        engine = new MyEngine(this,ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers(),ui.getShippers(),ui.gerOrderInterval(),ui.getShippingInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
         engine.setSimulationTime(ui.getTime());
         engine.setDelay(ui.getDelay());
         ui.getVisualization().clearScreen();

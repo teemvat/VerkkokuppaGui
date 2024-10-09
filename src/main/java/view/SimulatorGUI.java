@@ -182,13 +182,17 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         return 1;//TODO: korvaa ui:n kentän arvolla
     };
     @Override
-    public int getShippers()//shipping interval in minutes
+    public int getShippers()//this can be hardcoded to 1
     {
         return 1;//TODO: korvaa ui:n kentän arvolla
     };
     @Override
     public int  gerOrderInterval(){
         return 15;//TODO: korvaa ui:n kentän arvolla
+    }
+    @Override
+    public int getShippingInterval(){
+        return 400;//TODO: korvaa ui:n kentän arvolla
     }
 }
 

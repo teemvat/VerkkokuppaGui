@@ -13,6 +13,7 @@ public class MyEngine extends Engine {
     private int warehouseAmount;
     private int packagerAmount;
     private int orderInterval;
+    private int shippingInterval;
     int shippingAmount;
     int orderCount = 0;
     int packageCount = 0;
@@ -23,13 +24,14 @@ public class MyEngine extends Engine {
     // private ServicePoint[] servicePoints;
 
 
-    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingAmount, int orderInterval) {
+    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingAmount, int orderInterval, int shippingInterval) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
         this.warehouseAmount = warehouseAmount;
         this.packagerAmount = packagerAmount;
         this.shippingAmount = shippingAmount;
         this.orderInterval = orderInterval;
+        this.shippingInterval = shippingInterval;
 
 
 
@@ -53,7 +55,7 @@ public class MyEngine extends Engine {
             servicePoints[2][i] = new ServicePoint(new Normal(45, 5), eventList, EventType.PACKAGE);
         }
         for(int i = 0; i < shippingAmount; i++){
-            servicePoints[3][i] = new ServicePoint(new Normal(300, 1), eventList, EventType.INSHIPPING);
+            servicePoints[3][i] = new ServicePoint(new Normal(shippingInterval, 1), eventList, EventType.INSHIPPING);
         }
 
 

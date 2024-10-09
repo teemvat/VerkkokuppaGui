@@ -16,6 +16,7 @@ public interface ISimulatorUI {
 	public int getPackagers();
 	public int getShippers();
 	public int gerOrderInterval();
+	public int getShippingInterval();
 	// Kontrolleri tarvitsee  
 	public IVisualization getVisualization();
 
