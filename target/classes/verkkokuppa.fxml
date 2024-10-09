@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Workers" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Order Handlers" />
+            <Spinner />
+            <Label layoutX="10.0" layoutY="10.0" text="Warehousers" />
+            <Spinner />
+            <Label layoutX="10.0" layoutY="10.0" text="Packagers" />
+            <Spinner />
+            <Label text="Simulation Time" />
+            <TextField promptText="Give time" />
+            <Label text="Simulation Speed" />
+            <TextField promptText="Give speed" />
+            <HBox prefHeight="22.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="-" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="+" />
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button layoutY="107.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Start" AnchorPane.bottomAnchor="1.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </left>
+   <bottom>
+      <HBox prefHeight="54.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="31.0" prefWidth="102.0">
+               <children>
+                  <ProgressBar prefHeight="31.0" prefWidth="100.0" progress="0.0" />
+                  <Label text="Progress">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <VBox prefHeight="54.0" prefWidth="122.0">
+               <children>
+                  <Label text="Läpimenneet tilaukset" />
+                  <Label text="numero tähän" />
+               </children>
+            </VBox>
+            <VBox layoutX="112.0" layoutY="10.0" prefHeight="54.0" prefWidth="122.0">
+               <children>
+                  <Label text="Keskiarvo käsittelyajoista" />
+                  <Label text="numero tähän" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="539.0">
+               <children>
+                  <Label text="Order in" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="539.0">
+               <children>
+                  <Label text="Warehouse" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="89.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="539.0">
+               <children>
+                  <Label text="Packing" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="168.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="79.0" prefWidth="539.0">
+               <children>
+                  <Label text="Shipping" />
+               </children>
+            </HBox>
+         </children>
+      </FlowPane>
+   </center>
+</BorderPane>
