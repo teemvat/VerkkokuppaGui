@@ -214,9 +214,9 @@ public class MyEngine extends Engine {
     @Override
     protected void results() {
         System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
-        System.out.println("" +
+        System.out.println("Order interval: " + orderInterval +" minutes "+
                 "Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount + " Shipping interval: " + shippingAmount
-                + "Orders arrived: " + orderCount +
+                + " Orders arrived: " + orderCount +
                 " Orders packed: " + packageCount +
                 " Orders shipped: " + packageShippedCount);
 
