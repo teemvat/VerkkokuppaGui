@@ -22,8 +22,7 @@ public class OrderDAO {
 
     public List<Order> findAll() {
         EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        List<Order> orders = em.createQuery("select e from Order e").getResultList();
-        return orders;
+        return em.createQuery("select e from Order e").getResultList();
     }
 
     public void update(Order o) {

@@ -71,6 +71,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 
 
 	// Tietokantatoimintoja:
+	// TODO etsi oikeat kohdat näille metodikutsuille
 
 	// Tallenna uusi simulaatioistunto tietokantaan aina kun käyttäjä painaa start-nappia
 	// Tallenna uusi lähetys tietokantaan aina kun paketti saapuu orderhandlerille
@@ -92,8 +93,8 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		odao.update(o);
 
 		Simulation s = sdao.find(simulationID);
-		s.setPackages_processed(s.getPackages_processed() +1);
-		s.setAvg_time(o.getProcessingTime());
+		s.setPackagesProcessed(s.getPackagesProcessed() +1);
+		s.updateAverageTime(o.getProcessingTime());
 		sdao.update(s);
 	}
 

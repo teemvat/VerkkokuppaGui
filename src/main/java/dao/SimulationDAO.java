@@ -22,8 +22,7 @@ public class SimulationDAO {
 
     public List<Simulation> findAll() {
         EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        List<Simulation> simulations = em.createQuery("select e from Order e").getResultList();
-        return simulations;
+        return (List<Simulation>) em.createQuery("select e from Order e").getResultList();
     }
 
     public void update(Simulation s) {
