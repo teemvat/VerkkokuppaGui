@@ -31,7 +31,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 
     @Override
     public void startSimulation() {
-        engine = new MyEngine(this, getOrdHndlAmount(), ui.getWarehousers(), ui.getPackagers(), ui.getOrderInterval(), ui.getPickupInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
+        engine = new MyEngine(this, getOrdHndlAmount(), getWarehouseAmount(), getPackagerAmount(), getOrderInterval(), getPickupInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
         simulation = save(new Simulation(this));    // TODO tälläinen samanlainen siihen kohtaan kun luodaan uusi paketti, aina save-metodin kautta ei koskaan Paketti p = new jne
         engine.setSimulationTime(ui.getTime());
         engine.setDelay(ui.getDelay());
@@ -44,17 +44,14 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         //((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?
     }
 
-    public int getOrderHandlers() {
-        return ui.getOrderHandlers();
-    }
-
-    public int getWarehousers() {
-        return ui.getWarehousers();
-    }
-
-    public int getPackagers() {
-        return ui.getPackagers();
-    }
+//
+//    public int getWarehousers() {
+//        return ui.getWarehousers();
+//    }
+//
+//    public int getPackagers() {
+//        return ui.getPackagers();
+//    }
 
 
     @Override
@@ -134,12 +131,13 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	public void showProgress(){
 		double maxTime = ui.getTime();
 		double currentTime = Clock.getInstance().getTime();
-		ui.setSimuProgress(currentTime + 4 / maxTime);
+		ui.setSimuProgress((currentTime + 4) / maxTime);
 	}
 
 
 
-	public void showAverageTime(double time){
+
+    public void showAverageTime(double time){
 		Platform.runLater(() ->ui.setAverageTime(time));
 	}
 
@@ -175,7 +173,6 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		o.setCompletionTime(completionTime);
 		o.setProcessingTime(o.getArrivalTime(), completionTime);
 		odao.update(o);
-
         Simulation s = sdao.find(simulationID);
         s.setPackagesProcessed(s.getPackagesProcessed() + 1);
         s.updateAverageTime(o.getProcessingTime());
@@ -203,10 +200,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         return new ArrayList<>();
     }
 
-    @Override
-    public double getInterval() {
-        return ui.getOrderHandlers();
-    }
+
 
     @Override
     public int getOrdHndlAmount() {
@@ -234,7 +228,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
     }
 
 	@Override
-	public int getOrderInterval(){
+    public int getOrderInterval(){
 		return ui.getOrderInterval();
 	}
 

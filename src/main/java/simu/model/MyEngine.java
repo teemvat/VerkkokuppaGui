@@ -158,6 +158,7 @@ public class MyEngine extends Engine {
                         packageCount++;//count packages for statistics
                         servicePoints[3][queueIndex3].addToQueue(a);//add order to shipping queue
                         controller.visualizeShipping();
+                        controller.showProgress();
                     }
                 }
                 break;
@@ -168,13 +169,12 @@ public class MyEngine extends Engine {
                         a = (Order) servicePoints[3][i].getFromQueue();
                         if (a != null) {
                             double completionTime =Clock.getInstance().getTime();
-                             a.setCompletionTime(completionTime);
+                            a.setCompletionTime(completionTime);
                             controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
                             controller.showAverageTime(controller.getAverageTime());
                             controller.showTotalShipped(a.getPackagesProcessed());
                             packageShippedCount++;
                             a.report();
-                            controller.showProgress();
                         }
                     } while (a != null);
                     controller.visualizeClear();

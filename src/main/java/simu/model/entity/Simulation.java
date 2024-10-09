@@ -26,7 +26,7 @@ public class Simulation {
 
     public Simulation(Controller controller) {
         this.simulation_time = controller.getSimulationTime();
-        this.order_interval = controller.getInterval();
+        this.order_interval = Double.parseDouble(String.valueOf(controller.getOrderInterval()));
         this.pickup_interval = controller.getPickupInterval();
         this.orderhandlers = controller.getOrdHndlAmount();
         this.warehousers = controller.getWarehouseAmount();
@@ -36,7 +36,8 @@ public class Simulation {
         this.avg_time = 0;
     }
 
-    public Simulation() {}
+    public Simulation() {
+    }
 
 
     public int getSimulationID() {
@@ -70,6 +71,7 @@ public class Simulation {
     public void setPackagers(int packagers) {
         this.packagers = packagers;
     }
+
     public int getPackagesProcessed() {
         return packages_processed;
     }
@@ -93,6 +95,7 @@ public class Simulation {
     public void setAverageTime(double time) {
         this.avg_time = time;
     }
+
     public double getOrder_interval() {
         return order_interval;
     }
@@ -100,15 +103,19 @@ public class Simulation {
     public void setOrder_interval(double order_interval) {
         this.order_interval = order_interval;
     }
+
     public double getPickup_interval() {
         return pickup_interval;
     }
+
     public void setPickup_interval(double pickup_interval) {
         this.pickup_interval = pickup_interval;
     }
+
     public int getPackages_received() {
         return packages_received;
     }
+
     public void setPackages_received(int packages_received) {
         this.packages_received = packages_received;
     }

@@ -12,27 +12,25 @@ public interface ISimulatorUI {
 
 	//TODO: make UI methods for setting the number of workers to -> controller -> myengine
 
-	int getOrderInterval();
 
 	public int getOrderHandlers();
 	public int getWarehousers();
 	public int getPackagers();
 	public int getOrderInterval();
+
 	public int getPickupInterval();
 
     void setReadyOrders(int ordercount);
 
 	void setSimuProgress(double d);
-
 	// Kontrolleri tarvitsee
 	public IVisualization getVisualization1();
 	public IVisualization getVisualization2();
 	public IVisualization getVisualization3();
+
 	public IVisualization getVisualization4();
 
 	void setAverageTime(double time);
-
-    int getPickupInterval();
 
     void setLock();
 

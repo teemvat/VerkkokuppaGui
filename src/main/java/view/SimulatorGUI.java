@@ -212,13 +212,12 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
-    public IVisualization getVisualization4() {
-        return screen4;
-    }
-
-    @Override
     public int getOrderInterval(){
         return orderIntervalField.getValue();
+    }
+    @Override
+    public IVisualization getVisualization4() {
+        return screen4;
     }
     @Override
     public int getOrderHandlers(){

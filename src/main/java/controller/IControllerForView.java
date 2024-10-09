@@ -11,4 +11,6 @@ public interface IControllerForView {
     long getDelay();
 
     void showProgress();
+
+    int getOrderInterval();
 }

@@ -24,7 +24,6 @@ public interface IControllerForEng {
 
     void showProgress();
 
-    double getInterval();
 
     int getOrdHndlAmount();
 
@@ -35,11 +34,6 @@ public interface IControllerForEng {
     int getPickupInterval();
 
     double getSimulationTime();
-
-
-     void update (int simulationID,int orderID,double time);
-
-
 
 
     Simulation getSimulation();
