@@ -17,7 +17,17 @@ public interface ISimulatorUI {
 	public int getShippers();
 	public int gerOrderInterval();
 	public int getShippingInterval();
-	// Kontrolleri tarvitsee  
-	public IVisualization getVisualization();
 
+    void setReadyOrders(int ordercount);
+
+	void setSimuProgress(double d);
+
+	public IVisualization getVisualization1();
+	public IVisualization getVisualization2();
+	public IVisualization getVisualization3();
+	public IVisualization getVisualization4();
+
+	void setAverageTime(double time);
+
+    //turha? int getPickupInterval();
 }

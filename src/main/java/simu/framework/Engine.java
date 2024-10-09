@@ -30,20 +30,22 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 
     }
 
-    @Override
-    public void setSimulationTime(double time) {
-        simulationTime = time;
-    }
+	@Override
+	public void setSimulationTime(double time) {
+		simulationTime = time;
+	}
 
-    @Override // UUSI
-    public void setDelay(long time) {
-        this.delay = time;
-    }
+	// TODO tarvitaan myös getteri simulaatioajalle
 
-    @Override // UUSI
-    public long getDelay() {
-        return delay;
-    }
+	@Override // UUSI
+	public void setDelay(long time) {
+		this.delay = time;
+	}
+
+	@Override // UUSI
+	public long getDelay() {
+		return delay;
+	}
 
     @Override
     public void run() { // Entinen aja()

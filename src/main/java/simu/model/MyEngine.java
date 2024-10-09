@@ -95,6 +95,7 @@ public class MyEngine extends Engine {
                 servicePoints[0][queueIndex].addToQueue(ord);//add order to OrderHandler queue
                 controller.visualizeOrder();
                 arrivalProcess.generateNext();
+                controller.visualizeArrival();
                 break;
 
             case ORDHNDL:
@@ -114,6 +115,8 @@ public class MyEngine extends Engine {
 
                         }
                         servicePoints[1][queueIndex1].addToQueue(a);
+                        controller.visualizeWarehouse();
+
                     }
                 }
 
@@ -134,6 +137,8 @@ public class MyEngine extends Engine {
                             }
                         }
                         servicePoints[2][queueIndex2].addToQueue(a);
+                        controller.visualizePacking();
+
                     }
                 }
 
@@ -155,7 +160,7 @@ public class MyEngine extends Engine {
                         }
                         packageCount++;//count packages for statistics
                         servicePoints[3][queueIndex3].addToQueue(a);//add order to shipping queue
-
+                        controller.visualizeShipping();
                     }
                 }
                 break;
@@ -188,12 +193,14 @@ public class MyEngine extends Engine {
 
 
                 }
+                controller.showProgress();
 
 
 
         }
     }
 
+    }
 
     @Override
     protected void tryCEvent() {
@@ -239,7 +246,7 @@ public class MyEngine extends Engine {
                 " Orders packed: " + packageCount +
                 " Orders shipped: " + packageShippedCount);
 
-        controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
+        controller.showAverageTime(controller.getAverageTime()); // tämä uus
     }
 
 
