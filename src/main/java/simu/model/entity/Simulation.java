@@ -2,8 +2,6 @@ package simu.model.entity;
 
 import controller.Controller;
 import jakarta.persistence.*;
-import simu.framework.Engine;
-import view.ISimulatorUI;
 
 
 @Entity
@@ -31,19 +29,19 @@ public class Simulation {
 
         // TODO katsotaan tämä yhdessä kuntoon (enginestä pitää saada tiedot ulos)
 
-        this.order_interval = 1;
-        //this.order_interval = controller.getInterval();
-        this.orderhandlers = 1;
-        //this.orderhandlers = controller.getOrdHndlAmount();
-        this.warehousers = 1;
-        //this.warehousers = controller.getWarehouseAmount();
-        this.packagers = 1;
-        //this.packagers = controller.getPackagerAmount();
-        this.shippers = 1;
-        //this.shippers = controller.getShippersAmount();
+        //this.order_interval = 1;
+        this.order_interval = controller.getInterval();
+        //this.orderhandlers = 1;
+        this.orderhandlers = controller.getOrdHndlAmount();
+        //this.warehousers = 1;
+        this.warehousers = controller.getWarehouseAmount();
+        //this.packagers = 1;
+        this.packagers = controller.getPackagerAmount();
+        //this.shippers = 1;
+        this.shippers = controller.getPickupInterval();
         this.packages_processed = 0;
-        this.simulation_time = 100;
-        //this.simulation_time = controller.getSimulationTime;
+        //this.simulation_time = 100;
+        this.simulation_time = controller.getSimulationTime();
         this.avg_time = 0;
     }
 
