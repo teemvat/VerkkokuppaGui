@@ -14,26 +14,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Controller implements IControllerForEng, IControllerForView, IControllerForDao {   // UUSI
-
+	
 	private IEngine engine;
 	private ISimulatorUI ui;
 	private SimulationDAO sdao = new SimulationDAO();
 	private OrderDAO odao = new OrderDAO();
-	private Simulation simu;
+	private Simulation simulation;
 
 
 	public Controller(ISimulatorUI ui) {
 		this.ui = ui;
 	}
 
-
-    // Moottorin ohjausta:
-
-
+	
+	// Moottorin ohjausta:
+		
 	@Override
 	public void startSimulation() {
-		simu = new Simulation(this);
 		engine = new MyEngine(this,ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers(),ui.gerOrderInterval(),ui.getPickupInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
+		simulation = save(new Simulation(this));	// TODO tälläinen samanlainen siihen kohtaan kun luodaan uusi paketti, aina save-metodin kautta ei koskaan Paketti p = new jne
 		engine.setSimulationTime(ui.getTime());
 		engine.setDelay(ui.getDelay());
 		ui.getVisualization1().clearScreen();
@@ -56,7 +55,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		return ui.getPackagers();
 	}
 
-
+	
 	@Override
 	public void slow() { // hidastetaan moottorisäiettä
 		engine.setDelay((long)(engine.getDelay()*1.10));
@@ -76,7 +75,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         Platform.runLater(() -> ui.setEndTime(time));
     }
 
-
+	
 	@Override
 	public void visualizeArrival() {
 		Platform.runLater(new Runnable(){
@@ -135,7 +134,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	}
 
 	public double getAverageTime(){
-		return simu.getAverageTime();
+		return simulation.getAverageTime();
 	}
 
 
@@ -146,12 +145,13 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	// Tallenna uusi simulaatioistunto tietokantaan aina kun käyttäjä painaa start-nappia
 	// Tallenna uusi lähetys tietokantaan aina kun paketti saapuu orderhandlerille
 	@Override
-	public <T> void save(T entity) {
+	public <T> T save(T entity) {
 		if (entity instanceof Simulation) {
 			sdao.persist((Simulation) entity);
 		} else if (entity instanceof Order) {
 			odao.persist((Order) entity);
 		}
+		return entity;
 	}
 
 	// Päivitä simulaation ja lähetyksen tietoja aina kun uusi lähetys valmistuu
@@ -222,5 +222,10 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public void visualizeOrder() {
 
+	}
+
+	@Override
+	public Simulation getSimulation() {
+		return simulation;
 	}
 }

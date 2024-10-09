@@ -25,6 +25,7 @@ public class MyEngine extends Engine {
     // private ServicePoint[] servicePoints;
 
 
+
     public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount,  int orderInterval, int shippingInterval) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
@@ -68,17 +69,18 @@ public class MyEngine extends Engine {
 
     }
 
-
     @Override
     protected void runEvent(Event evt) {  // B-vaiheen tapahtumat
 
         Order a;
 
         switch ((EventType) evt.getType()) {
+
             case ARR1:
                 int minQueueSize = servicePoints[0][0].getQueueSize();//initilize  next min queue  size
                 int queueIndex = 0;//initilize  next min queue index
-                Order ord = new Order();
+                Order ord = new Order(controller.getSimulation());
+                controller.save(ord);
                 orderCount++;
                 for (int i = 0; i < ordHndlAmount; i++) {
                     int currentQueueSize = servicePoints[0][i].getQueueSize();
@@ -195,7 +197,6 @@ public class MyEngine extends Engine {
         }
     }
 
-
     @Override
     protected void tryCEvent() {
         for (int i = 0; i < ordHndlAmount; i++) {
@@ -242,6 +243,8 @@ public class MyEngine extends Engine {
 
         controller.showAverageTime(controller.getAverageTime()); // tämä uus
     }
+
+
 
 
 }
