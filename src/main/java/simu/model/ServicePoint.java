@@ -6,6 +6,7 @@ import simu.framework.Clock;
 import simu.framework.Event;
 import simu.framework.EventList;
 import simu.framework.Trace;
+import simu.model.entity.Order;
 
 // TODO:
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
@@ -46,7 +47,7 @@ public class ServicePoint {
 
 	public void serve(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
 		
-		Trace.out(Trace.Level.INFO, "Start new service for the order " + queue.peek().getId());
+		Trace.out(Trace.Level.INFO, "Start new service for the order " + queue.peek().getOrderNumber());
 		
 		busy = true;
 		double serviceTime = generator.sample();
