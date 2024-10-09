@@ -34,7 +34,7 @@ public interface IControllerForEng {
     int getPickupInterval();
 
     double getSimulationTime();
-     void visualizeOrder();
+
      void update (int simulationID,int orderID,double time);
 
     int getOrderInterval();
