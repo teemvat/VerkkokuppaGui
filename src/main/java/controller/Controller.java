@@ -168,13 +168,13 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         return entity;
     }
 
-    // Päivitä simulaation ja lähetyksen tietoja aina kun uusi lähetys valmistuu
-    @Override
-    public void update(int simulationID, int orderID, double completionTime) {
-        Order o = odao.find(orderID);
-        o.setCompletionTime(completionTime);
-        o.setProcessingTime();
-        odao.update(o);
+	// Päivitä simulaation ja lähetyksen tietoja aina kun uusi lähetys valmistuu
+	@Override
+	public void update(int simulationID, int orderID, double completionTime) {
+		Order o = odao.find(orderID);
+		o.setCompletionTime(completionTime);
+		o.setProcessingTime(o.getArrivalTime(), completionTime);
+		odao.update(o);
 
         Simulation s = sdao.find(simulationID);
         s.setPackagesProcessed(s.getPackagesProcessed() + 1);

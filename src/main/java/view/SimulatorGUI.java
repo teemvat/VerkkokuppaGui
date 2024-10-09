@@ -164,8 +164,10 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     @Override
     public void setAverageTime(double time){
-        DecimalFormat formatter = new DecimalFormat("#0.00");
-        this.result.setText(formatter.format(time));
+        Platform.runLater(() -> {
+            DecimalFormat formatter = new DecimalFormat("#0.00");
+            this.result.setText(formatter.format(time));
+        });
     }
 
     @Override

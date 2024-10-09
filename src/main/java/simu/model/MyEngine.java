@@ -26,6 +26,7 @@ public class MyEngine extends Engine {
 
 
 
+
     public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount,  int orderInterval, int shippingInterval) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
@@ -162,16 +163,6 @@ public class MyEngine extends Engine {
                 break;
 
             case INSHIPPING:
-             /*   for(int i=0; i<shippingAmount; i++){
-                    if(servicePoints[3][i].isBusy()){
-                        a = (Order) servicePoints[3][i].getFromQueue();
-                        a.setEndTime(Clock.getInstance().getTime());
-                        //a.report();
-                        packageShippedCount++;
-
-                    }
-                }*/
-                //TODO: for looppi joka getFromQueue kaikki service[3][i] jonossa olevat ja asettaa niille endTime
                 for (int i = 0; i < shippingAmount; i++) {
                     do {
                         a = (Order) servicePoints[3][i].getFromQueue();
@@ -179,10 +170,10 @@ public class MyEngine extends Engine {
                             double completionTime =Clock.getInstance().getTime();
                              a.setCompletionTime(completionTime);
                             controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
-                            //TODO:tämä alempi pois
-                            //a.setEndTime(Clock.getInstance().getTime());
+                            controller.showAverageTime(controller.getAverageTime());
+                            controller.showTotalShipped(a.getPackagesProcessed());
                             packageShippedCount++;
-                            //a.report();
+                            a.report();
                             controller.showProgress();
                         }
                     } while (a != null);

@@ -13,6 +13,7 @@ public interface IControllerForEng {
     public void visualizePacking();
     public void visualizeShipping();
     public <T> T save(T entity);
+    public void update(int id1, int id2, double time);
 
     void showAverageTime(double time);
     void showTotalShipped(int orders);
