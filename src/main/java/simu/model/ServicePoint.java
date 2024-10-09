@@ -6,6 +6,7 @@ import simu.framework.Clock;
 import simu.framework.Event;
 import simu.framework.EventList;
 import simu.framework.Trace;
+import simu.model.entity.Order;
 
 // TODO:
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
@@ -15,9 +16,9 @@ public class ServicePoint {
 	private final ContinuousGenerator generator;
 	private final EventList eventList;
 	private final EventType scheduledEventType;
-
+	
 	//JonoStartegia strategia; //optio: asiakkaiden järjestys
-
+	
 	private boolean busy = false;
 
 
@@ -25,17 +26,15 @@ public class ServicePoint {
 		this.eventList = eventList;
 		this.generator = generator;
 		this.scheduledEventType = type;
-
+				
 	}
 
 
 	public void addToQueue(Order a){   // Jonon 1. asiakas aina palvelussa
 		queue.add(a);
-
+		
 	}
-	public Order checkEvent(){
-		// tarkistetaan Eventti olio
-		//System.out.println("CheckEvent: "+queue.peek().getOrderType());
+	public Order checkEvent(){  // tarkistetaan Eventti olio
 		return queue.peek();
 	}
 
@@ -47,12 +46,12 @@ public class ServicePoint {
 
 
 	public void serve(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
-			Order order = queue.peek();
-			//System.out.println("Serving order with ID: " + order.getId());
-			busy = true;
-			double serviceTime = generator.sample();
-			eventList.add(new Event(scheduledEventType, Clock.getInstance().getTime() + serviceTime));
-
+		
+		Trace.out(Trace.Level.INFO, "Start new service for the order " + queue.peek().getOrderNumber());
+		
+		busy = true;
+		double serviceTime = generator.sample();
+		eventList.add(new Event(scheduledEventType, Clock.getInstance().getTime()+serviceTime));
 	}
 
 

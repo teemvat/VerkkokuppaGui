@@ -7,6 +7,7 @@ import simu.framework.ArrivalProcess;
 import simu.framework.Clock;
 import simu.framework.Engine;
 import simu.framework.Event;
+import simu.model.entity.Order;
 
 public class MyEngine extends Engine {
     private int ordHndlAmount;
@@ -14,25 +15,25 @@ public class MyEngine extends Engine {
     private int packagerAmount;
     private int orderInterval;
     private int shippingInterval;
-    int shippingAmount;
+    int shippingAmount = 1;// hardcoded one car
     int orderCount = 0;
     int packageCount = 0;
     int packageShippedCount = 0;
     private ArrivalProcess arrivalProcess;
     private ServicePoint[][] servicePoints;
-    //orginal servicepoints
-    // private ServicePoint[] servicePoints;
 
 
-    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int shippingAmount, int orderInterval, int shippingInterval) {
+
+
+
+    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount,  int orderInterval, int shippingInterval) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
         this.warehouseAmount = warehouseAmount;
         this.packagerAmount = packagerAmount;
-        this.shippingAmount = shippingAmount;
+        this.shippingAmount = 1;
         this.orderInterval = orderInterval;
         this.shippingInterval = shippingInterval;
-
 
         arrivalProcess = new ArrivalProcess(new Negexp(orderInterval, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
@@ -54,15 +55,10 @@ public class MyEngine extends Engine {
             servicePoints[2][i] = new ServicePoint(new Normal(45, 5), eventList, EventType.PACKAGE);
         }
         for (int i = 0; i < shippingAmount; i++) {
-            servicePoints[3][i] = new ServicePoint(new Normal(shippingInterval, 1), eventList, EventType.INSHIPPING);
+            servicePoints[3][i] = new ServicePoint(new Normal(this.shippingInterval, 1), eventList, EventType.INSHIPPING);
         }
 
-
-        //servicePoints[3][0] = new ServicePoint(new Normal(0.3, 1), eventList, EventType.INSHIPPING);
-        /**************************************************/
-
-
-    }
+            }
 
     @Override
     protected void initialization() {
@@ -72,17 +68,18 @@ public class MyEngine extends Engine {
 
     }
 
-
     @Override
     protected void runEvent(Event evt) {  // B-vaiheen tapahtumat
 
         Order a;
 
         switch ((EventType) evt.getType()) {
+
             case ARR1:
                 int minQueueSize = servicePoints[0][0].getQueueSize();//initilize  next min queue  size
                 int queueIndex = 0;//initilize  next min queue index
-                Order ord = new Order();
+                Order ord = new Order(controller.getSimulation());
+                controller.save(ord);
                 orderCount++;
                 for (int i = 0; i < ordHndlAmount; i++) {
                     int currentQueueSize = servicePoints[0][i].getQueueSize();
@@ -93,8 +90,8 @@ public class MyEngine extends Engine {
                     //System.out.println("Order added to queue" + i);
                 }
                 servicePoints[0][queueIndex].addToQueue(ord);//add order to OrderHandler queue
-                controller.visualizeOrder();
                 arrivalProcess.generateNext();
+                controller.visualizeArrival();
                 break;
 
             case ORDHNDL:
@@ -114,6 +111,8 @@ public class MyEngine extends Engine {
 
                         }
                         servicePoints[1][queueIndex1].addToQueue(a);
+                        controller.visualizeWarehouse();
+
                     }
                 }
 
@@ -134,6 +133,8 @@ public class MyEngine extends Engine {
                             }
                         }
                         servicePoints[2][queueIndex2].addToQueue(a);
+                        controller.visualizePacking();
+
                     }
                 }
 
@@ -155,36 +156,27 @@ public class MyEngine extends Engine {
                         }
                         packageCount++;//count packages for statistics
                         servicePoints[3][queueIndex3].addToQueue(a);//add order to shipping queue
-
+                        controller.visualizeShipping();
+                        controller.showProgress();
                     }
                 }
                 break;
 
             case INSHIPPING:
-             /*   for(int i=0; i<shippingAmount; i++){
-                    if(servicePoints[3][i].isBusy()){
-                        a = (Order) servicePoints[3][i].getFromQueue();
-                        a.setEndTime(Clock.getInstance().getTime());
-                        //a.report();
-                        packageShippedCount++;
-
-                    }
-                }*/
-                //TODO: for looppi joka getFromQueue kaikki service[3][i] jonossa olevat ja asettaa niille endTime
                 for (int i = 0; i < shippingAmount; i++) {
                     do {
                         a = (Order) servicePoints[3][i].getFromQueue();
                         if (a != null) {
-                            //TODO:update(a.getSimulationId(),a.getOrderId(),a.setCompletionTime(Clock.getInstance().getTime()))
-                            //TODO:tämä alempi pois
-                            a.setEndTime(Clock.getInstance().getTime());
+                            double completionTime =Clock.getInstance().getTime();
+                            a.setCompletionTime(completionTime);
+                            controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
+                            controller.showAverageTime(controller.getAverageTime());//TODO tee näistä fiksummat
+                            controller.showTotalShipped(a.getPackagesProcessed());
                             packageShippedCount++;
                             a.report();
                         }
-                    }while (a != null);
-
-
-
+                    } while (a != null);
+                    controller.visualizeClear();
 
 
                 }
@@ -193,7 +185,6 @@ public class MyEngine extends Engine {
 
         }
     }
-
 
     @Override
     protected void tryCEvent() {
@@ -239,8 +230,10 @@ public class MyEngine extends Engine {
                 " Orders packed: " + packageCount +
                 " Orders shipped: " + packageShippedCount);
 
-        controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
+        controller.showAverageTime(controller.getAverageTime()); // tämä uus
     }
+
+
 
 
 }

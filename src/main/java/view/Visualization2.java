@@ -34,6 +34,7 @@ public class Visualization2 extends Canvas implements IVisualization {
 		gc.fillText("Package " + asiakasLkm, 100, 100);
 		
 	}
-	
+
+	public void movePackage(){} // tää on olemassa ihan vaa ettei tarvii poistaa tätä classia viel
 
 }
