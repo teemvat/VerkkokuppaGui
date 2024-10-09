@@ -124,6 +124,15 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	}
 
 	@Override
+	public void visualizeClear(){
+		Platform.runLater(new Runnable(){
+			public void run(){
+				ui.getVisualization4().clearScreen();
+			}
+		});
+	}
+
+	@Override
 	public void showProgress(){
 		double maxTime = ui.getTime();
 		double currentTime = Clock.getInstance().getTime();

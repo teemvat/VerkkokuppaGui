@@ -15,6 +15,8 @@ public interface IControllerForEng {
 
     double getAverageTime();
 
+    void visualizeClear();
+
     void showProgress();
 
     double getInterval();
