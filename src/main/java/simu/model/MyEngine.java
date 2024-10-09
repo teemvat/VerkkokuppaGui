@@ -34,7 +34,6 @@ public class MyEngine extends Engine {
         this.shippingInterval = shippingInterval;
 
 
-
         arrivalProcess = new ArrivalProcess(new Negexp(orderInterval, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
         servicePoints[0] = new ServicePoint[ordHndlAmount];//servicepoint[0]= orderHandler
@@ -54,7 +53,7 @@ public class MyEngine extends Engine {
         for (int i = 0; i < packagerAmount; i++) {
             servicePoints[2][i] = new ServicePoint(new Normal(45, 5), eventList, EventType.PACKAGE);
         }
-        for(int i = 0; i < shippingAmount; i++){
+        for (int i = 0; i < shippingAmount; i++) {
             servicePoints[3][i] = new ServicePoint(new Normal(shippingInterval, 1), eventList, EventType.INSHIPPING);
         }
 
@@ -147,9 +146,9 @@ public class MyEngine extends Engine {
                     if (servicePoints[2][i].isBusy()) {
                         int queueIndex3 = 0;//initilize  next min queue index
                         a = (Order) servicePoints[2][i].getFromQueue();
-                        for(int j = 0; j < shippingAmount;j++){
+                        for (int j = 0; j < shippingAmount; j++) {
                             int currentQueueSize = servicePoints[3][j].getQueueSize();
-                            if(currentQueueSize < minQueueSize3){
+                            if (currentQueueSize < minQueueSize3) {
                                 minQueueSize3 = currentQueueSize;
                                 queueIndex3 = j;
                             }
@@ -171,22 +170,24 @@ public class MyEngine extends Engine {
 
                     }
                 }*/
-                 //TODO: for looppi joka getFromQueue kaikki service[3][i] jonossa olevat ja asettaa niille endTime
-                        for(int i = 0; i < shippingAmount; i++){
-                            a = (Order) servicePoints[3][i].getFromQueue();
-
-                            if(a!=null){
-                                a.setEndTime(Clock.getInstance().getTime());
-                                packageShippedCount++;
-                                a.report();
-                                //update(a.getSimulationId(),a.getOrderId(),a.setCompletionTime(Clock.getInstance().getTime()))
-                            }
-
+                //TODO: for looppi joka getFromQueue kaikki service[3][i] jonossa olevat ja asettaa niille endTime
+                for (int i = 0; i < shippingAmount; i++) {
+                    do {
+                        a = (Order) servicePoints[3][i].getFromQueue();
+                        if (a != null) {
+                            //TODO:update(a.getSimulationId(),a.getOrderId(),a.setCompletionTime(Clock.getInstance().getTime()))
+                            //TODO:tämä alempi pois
+                            a.setEndTime(Clock.getInstance().getTime());
+                            packageShippedCount++;
+                            a.report();
                         }
-                //TODO:
-                //TODO:tämä alempi pois
+                    }while (a != null);
 
 
+
+
+
+                }
 
 
 
@@ -221,7 +222,7 @@ public class MyEngine extends Engine {
             }
 
         }
-        for(int i = 0; i < shippingAmount; i++){
+        for (int i = 0; i < shippingAmount; i++) {
             if (!servicePoints[3][i].isBusy() && servicePoints[3][i].isQueue()) {
                 servicePoints[3][i].serve();
             }
@@ -232,7 +233,7 @@ public class MyEngine extends Engine {
     @Override
     protected void results() {
         System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
-        System.out.println("Order interval: " + orderInterval +" minutes "+
+        System.out.println("Order interval: " + orderInterval + " minutes " +
                 "Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount + " Shipping interval: " + shippingAmount
                 + " Orders arrived: " + orderCount +
                 " Orders packed: " + packageCount +
