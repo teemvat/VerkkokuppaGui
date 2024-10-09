@@ -25,7 +25,7 @@ public class Simulation {
 
 
     public Simulation(Controller controller) {
-        this.simulation_time = controller.getSimulationTime;
+        this.simulation_time = controller.getSimulationTime();
         this.order_interval = controller.getInterval();
         this.pickup_interval = controller.getPickupInterval();
         this.orderhandlers = controller.getOrdHndlAmount();

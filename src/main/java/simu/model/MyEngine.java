@@ -1,6 +1,6 @@
 package simu.model;
 
-import controller.IControllerForEng;
+import controller.Controller;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 import simu.framework.ArrivalProcess;
@@ -16,7 +16,7 @@ public class MyEngine extends Engine {
     private ServicePoint[] servicePoints;
 
 
-    public MyEngine(IControllerForEng controller) {
+    public MyEngine(Controller controller) {
         super(controller);
 //		servicepoint[0]= orderHandler
 //		servicepoint[1]= warehouse
@@ -28,10 +28,6 @@ public class MyEngine extends Engine {
         servicePoints[1] = new ServicePoint(new Normal(15, 5), eventList, EventType.WAREHOUSE);
         servicePoints[2] = new ServicePoint(new Normal(15, 5), eventList, EventType.PACKAGE);
         servicePoints[3] = new ServicePoint(new Normal(15, 5), eventList, EventType.INSHIPPING);
-
-
-
-
     }
 
     @Override
@@ -47,7 +43,7 @@ public class MyEngine extends Engine {
         switch ((EventType) evt.getType()) {
 
             case ARR1:
-                servicePoints[0].addToQueue(new Order()); //ARR1 = tilaustyyppi 1 ja ARR2 = tilaustyyppi 2
+                servicePoints[0].addToQueue(controller.save(new Order(controller.getSimulation()))); //ARR1 = tilaustyyppi 1 ja ARR2 = tilaustyyppi 2
                 arrivalProcess.generateNext();
                 controller.visualizeArrival();
                 break;

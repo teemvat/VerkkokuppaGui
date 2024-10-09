@@ -1,6 +1,7 @@
 package simu.framework;
 
 
+import controller.Controller;
 import controller.IControllerForEng; // UUSI
 
 public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄRITYKSET

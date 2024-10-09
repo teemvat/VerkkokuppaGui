@@ -19,7 +19,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	private ISimulatorUI ui;
 	private SimulationDAO sdao = new SimulationDAO();
 	private OrderDAO odao = new OrderDAO();
-	private Simulation simu;
+	private Simulation simulation;
 
 
 	public Controller(ISimulatorUI ui) {
@@ -32,7 +32,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public void startSimulation() {
 		engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
-		simu = new Simulation(this);
+		simulation = save(new Simulation(this));	// TODO tälläinen samanlainen siihen kohtaan kun luodaan uusi paketti, aina save-metodin kautta ei koskaan Paketti p = new jne
 		engine.setSimulationTime(ui.getTime());
 		engine.setDelay(ui.getDelay());
 		engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());//UI:sta saadut arvot
@@ -136,7 +136,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	}
 
 	public double getAverageTime(){
-		return simu.getAverageTime();
+		return simulation.getAverageTime();
 	}
 
 
@@ -147,12 +147,13 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	// Tallenna uusi simulaatioistunto tietokantaan aina kun käyttäjä painaa start-nappia
 	// Tallenna uusi lähetys tietokantaan aina kun paketti saapuu orderhandlerille
 	@Override
-	public <T> void save(T entity) {
+	public <T> T save(T entity) {
 		if (entity instanceof Simulation) {
 			sdao.persist((Simulation) entity);
 		} else if (entity instanceof Order) {
 			odao.persist((Order) entity);
 		}
+		return entity;
 	}
 
 	// Päivitä simulaation ja lähetyksen tietoja aina kun uusi lähetys valmistuu
@@ -218,5 +219,10 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public double getSimulationTime() {
 		return ui.getTime();
+	}
+
+	@Override
+	public Simulation getSimulation() {
+		return simulation;
 	}
 }
