@@ -32,5 +32,13 @@ public class Visualization extends Canvas implements IVisualization {
 		//j = (j + 12) % this.getHeight();
 		if (i==0) j+=10;			
 	}
+
+	public void movePackage(){
+		i = (i - 10) % this.getWidth();
+		if (i<0) j-=10;
+
+		gc.setFill(Color.YELLOW);
+		gc.fillRect(i,j,10,10);
+	}
 	
 }
