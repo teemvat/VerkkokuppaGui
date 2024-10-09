@@ -5,12 +5,29 @@ import simu.model.entity.Simulation;
 import java.util.List;
 
 
-public class SimulationDAO {
+public class SimulationDAO implements IDAO {
 
-    public void persist(Simulation s) {
+    @Override
+    public void persist(Object o) {
         EntityManager em = datasource.MariaDbJpaConnection.getInstance();
         em.getTransaction().begin();
-        em.persist(s);
+        em.persist(o);
+        em.getTransaction().commit();
+    }
+
+    @Override
+    public void update(Object o) {
+        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
+        em.getTransaction().begin();
+        em.merge(o);
+        em.getTransaction().commit();
+    }
+
+    @Override
+    public void delete(Object o) {
+        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
+        em.getTransaction().begin();
+        em.remove(o);
         em.getTransaction().commit();
     }
 
@@ -20,22 +37,8 @@ public class SimulationDAO {
         return s;
     }
 
-    public List<Simulation> findAll() {
+    public List<Object> findAll() {
         EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        return (List<Simulation>) em.createQuery("select e from Order e").getResultList();
-    }
-
-    public void update(Simulation s) {
-        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        em.getTransaction().begin();
-        em.merge(s);
-        em.getTransaction().commit();
-    }
-
-    public void delete(Simulation s) {
-        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        em.getTransaction().begin();
-        em.remove(s);
-        em.getTransaction().commit();
+        return em.createQuery("select e from Order e").getResultList();
     }
 }
