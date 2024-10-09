@@ -5,6 +5,7 @@ USE simulator;
 CREATE TABLE SIMULATION (
 	simulation_id INT AUTO_INCREMENT PRIMARY KEY,
 	simulation_time FLOAT NOT NULL,
+	order_interval FLOAT NOT NULL,
 	orderhandlers INT NOT NULL,
 	warehousers INT NOT NULL,
 	packagers INT NOT NULL,

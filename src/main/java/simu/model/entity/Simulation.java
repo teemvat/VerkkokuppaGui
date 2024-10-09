@@ -3,6 +3,7 @@ package simu.model.entity;
 import jakarta.persistence.*;
 import simu.framework.Engine;
 
+
 @Entity
 @Table(name = "simulation")
 public class Simulation {
@@ -12,6 +13,7 @@ public class Simulation {
     private int simulation_id;
 
     private double simulation_time;
+    private double order_interval;
     private int orderhandlers;
     private int warehousers;
     private int packagers;
@@ -22,10 +24,13 @@ public class Simulation {
 
 
 
-    public Simulation(int orderhandlers, int warehousers, int packagers, int shippers, double simulationTime) {
+    public Simulation(Engine e) {
         //super();
-        //Engine e = new Engine();                        // TODO katsotaan tämä yhdessä kuntoon (enginestä pitää saada tiedot ulos)
 
+        // TODO katsotaan tämä yhdessä kuntoon (enginestä pitää saada tiedot ulos)
+
+        this.order_interval = 1;
+        //this.orderhandlers = e.getInterval();
         this.orderhandlers = 1;
         //this.orderhandlers = e.getOrdHndlAmount();
         this.warehousers = 1;
@@ -112,5 +117,13 @@ public class Simulation {
         if (packages_processed > 0) {
             this.avg_time = this.total_time / this.packages_processed;
         }
+    }
+
+    public double getOrder_interval() {
+        return order_interval;
+    }
+
+    public void setOrder_interval(double order_interval) {
+        this.order_interval = order_interval;
     }
 }
