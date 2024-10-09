@@ -43,7 +43,7 @@ public class MyEngine extends Engine {
         switch ((EventType) evt.getType()) {
 
             case ARR1:
-                servicePoints[0].addToQueue(controller.save(new Order(controller.getSimulation()))); //ARR1 = tilaustyyppi 1 ja ARR2 = tilaustyyppi 2
+                servicePoints[0].addToQueue(controller.save(new Order(controller.getSimulation())));
                 arrivalProcess.generateNext();
                 controller.visualizeArrival();
                 break;
@@ -68,9 +68,10 @@ public class MyEngine extends Engine {
             case INSHIPPING:
                 a = (Order) servicePoints[3].getFromQueue();
                 controller.visualizeShipping();
-                a.setCompletionTime(Clock.getInstance().getTime());
                 controller.showAverageTime(controller.getAverageTime());
-                controller.showTotalShipped(1); //TODO: tähän jostain se arvo!!
+                controller.showTotalShipped(a.getPackagesProcessed()); //TODO: tähän jostain se arvo!!
+                controller.update(a.getSimulationID(), a.getOrderID(), Clock.getInstance().getTime());
+
                 a.report();
         }
         controller.showProgress();

@@ -32,7 +32,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public void startSimulation() {
 		engine = new MyEngine(this); // luodaan uusi moottorisäie jokaista simulointia varten
-		simulation = save(new Simulation(this));	// TODO tälläinen samanlainen siihen kohtaan kun luodaan uusi paketti, aina save-metodin kautta ei koskaan Paketti p = new jne
+		simulation = save(new Simulation(this));
 		engine.setSimulationTime(ui.getTime());
 		engine.setDelay(ui.getDelay());
 		engine.makeWorkers(ui.getOrderHandlers(), ui.getWarehousers(), ui.getPackagers());//UI:sta saadut arvot
@@ -161,7 +161,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	public void update(int simulationID, int orderID, double completionTime) {
 		Order o = odao.find(orderID);
 		o.setCompletionTime(completionTime);
-		o.setProcessingTime();
+		o.setProcessingTime(o.getArrivalTime(), completionTime);
 		odao.update(o);
 
 		Simulation s = sdao.find(simulationID);
