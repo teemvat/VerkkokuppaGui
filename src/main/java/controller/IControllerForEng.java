@@ -16,4 +16,16 @@ public interface IControllerForEng {
     double getAverageTime();
 
     void showProgress();
+
+    double getInterval();
+
+    int getOrdHndlAmount();
+
+    int getWarehouseAmount();
+
+    int getPackagerAmount();
+
+    int getPickupInterval();
+
+    double getSimulationTime();
 }

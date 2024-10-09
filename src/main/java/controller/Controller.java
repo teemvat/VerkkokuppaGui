@@ -4,7 +4,6 @@ import dao.OrderDAO;
 import dao.SimulationDAO;
 import javafx.application.Platform;
 import simu.framework.Clock;
-import simu.framework.Engine;
 import simu.framework.IEngine;
 import simu.model.MyEngine;
 import simu.model.entity.Order;
@@ -189,5 +188,35 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 			return (List<T>) odao.findAll();
 		}
 		return new ArrayList<>();
+	}
+
+	@Override
+	public double getInterval() {
+		return ui.getOrderHandlers();
+	}
+
+	@Override
+	public int getOrdHndlAmount() {
+		return ui.getOrderHandlers();
+	}
+
+	@Override
+	public int getWarehouseAmount() {
+		return ui.getWarehousers();
+	}
+
+	@Override
+	public int getPackagerAmount() {
+		return ui.getPackagers();
+	}
+
+	@Override
+	public int getPickupInterval() {
+		return ui.getPickupInterval();
+	}
+
+	@Override
+	public double getSimulationTime() {
+		return ui.getTime();
 	}
 }
