@@ -134,7 +134,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	public void showProgress(){
 		double maxTime = ui.getTime();
 		double currentTime = Clock.getInstance().getTime();
-		ui.setSimuProgress(currentTime / maxTime);
+		ui.setSimuProgress(currentTime + 4 / maxTime);
 	}
 
 
