@@ -108,7 +108,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             orderHandlersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
             warehousersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
             packagersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
-            pickupField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
+            pickupField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(100,2000,100,100));
 
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
