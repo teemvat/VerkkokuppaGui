@@ -175,10 +175,12 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     public void slow(){
         controller.slow();
+        delay.setText(String.valueOf(controller.getDelay()));
     }
 
     public void fast(){
         controller.fast();
+        delay.setText(String.valueOf(controller.getDelay()));
     }
 
 
@@ -221,6 +223,28 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @Override
     public int getPickupInterval(){
         return pickupField.getValue();
+    }
+
+    @Override
+    public void setLock(){
+        time.setEditable(false);
+        delay.setEditable(false);
+        orderIntervalField.setDisable(true);
+        orderHandlersField.setDisable(true);
+        warehousersField.setDisable(true);
+        packagersField.setDisable(true);
+        pickupField.setDisable(true);
+    }
+
+    @Override
+    public void setEdit(){
+        time.setEditable(true);
+        delay.setEditable(true);
+        orderIntervalField.setDisable(false);
+        orderHandlersField.setDisable(false);
+        warehousersField.setDisable(false);
+        packagersField.setDisable(false);
+        pickupField.setDisable(false);
     }
 }
 

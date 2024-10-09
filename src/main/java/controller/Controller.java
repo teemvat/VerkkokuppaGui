@@ -40,6 +40,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 		ui.getVisualization2().clearScreen();
 		ui.getVisualization3().clearScreen();
 		ui.getVisualization4().clearScreen();
+		ui.setLock();
 		((Thread) engine).start();
 		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?
 	}
@@ -65,6 +66,11 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	@Override
 	public void fast() { // nopeutetaan moottorisäiettä
 		engine.setDelay((long)(engine.getDelay()*0.9));
+	}
+
+	@Override
+	public long getDelay(){
+		return engine.getDelay();
 	}
 	
 	

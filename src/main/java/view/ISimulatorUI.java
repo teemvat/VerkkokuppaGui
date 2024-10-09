@@ -31,4 +31,8 @@ public interface ISimulatorUI {
 	void setAverageTime(double time);
 
     int getPickupInterval();
+
+	void setLock();
+
+	void setEdit();
 }
