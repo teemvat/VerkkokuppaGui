@@ -7,6 +7,7 @@ import simu.framework.ArrivalProcess;
 import simu.framework.Clock;
 import simu.framework.Engine;
 import simu.framework.Event;
+import simu.model.entity.Order;
 
 public class MyEngine extends Engine {
 
@@ -71,7 +72,7 @@ public class MyEngine extends Engine {
             case INSHIPPING:
                 a = (Order) servicePoints[3].getFromQueue();
                 controller.visualizeShipping();
-                a.setEndTime(Clock.getInstance().getTime());
+                a.setCompletionTime(Clock.getInstance().getTime());
                 a.report();
         }
         controller.showProgress();
