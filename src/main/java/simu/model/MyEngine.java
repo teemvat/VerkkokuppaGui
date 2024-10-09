@@ -170,7 +170,7 @@ public class MyEngine extends Engine {
                             double completionTime =Clock.getInstance().getTime();
                             a.setCompletionTime(completionTime);
                             controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
-                            controller.showAverageTime(controller.getAverageTime());
+                            controller.showAverageTime(controller.getAverageTime());//TODO tee näistä fiksummat
                             controller.showTotalShipped(a.getPackagesProcessed());
                             packageShippedCount++;
                             a.report();
