@@ -16,6 +16,8 @@ public interface ISimulatorUI {
 	public int getWarehousers();
 	public int getPackagers();
 
+	void setReadyOrders(int ordercount);
+
 	void setSimuProgress(double d);
 
 	// Kontrolleri tarvitsee
@@ -26,4 +28,5 @@ public interface ISimulatorUI {
 
 	void setAverageTime(double time);
 
+    int getPickupInterval();
 }

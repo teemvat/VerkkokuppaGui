@@ -73,6 +73,8 @@ public class MyEngine extends Engine {
                 a = (Order) servicePoints[3].getFromQueue();
                 controller.visualizeShipping();
                 a.setCompletionTime(Clock.getInstance().getTime());
+                controller.showAverageTime(controller.getAverageTime());
+                controller.showTotalShipped(1); //TODO: tähän jostain se arvo!!
                 a.report();
         }
         controller.showProgress();

@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import simu.framework.Trace;
@@ -35,6 +32,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private TextField delay;
     @FXML
     private Label result;
+    @FXML
+    private Label totalOrders;
 
     private Label timeLabel;
     private Label delayLabel;
@@ -57,17 +56,26 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private HBox box2;
     @FXML
     private HBox box3;
-    @FXML
-    private HBox box4;
+//    @FXML
+//    private HBox box4;
 
     @FXML
-    private IVisualization screen1 = new Visualization(450,80);
+    private IVisualization screen1 = new Visualization(450,90);
     @FXML
-    private IVisualization screen2 = new Visualization(450,80);
+    private IVisualization screen2 = new Visualization(450,90);
     @FXML
-    private IVisualization screen3 = new Visualization(450,80);
+    private IVisualization screen3 = new Visualization(450,90);
     @FXML
-    private IVisualization screen4 = new Visualization(450,80);
+    private IVisualization screen4 = new Visualization(450,90);
+
+    @FXML
+    private Spinner<Integer> orderHandlersField;
+    @FXML
+    private Spinner<Integer> warehousersField;
+    @FXML
+    private Spinner<Integer> packagersField;
+    @FXML
+    private Spinner<Integer> pickupField;
 
 
     @Override
@@ -95,7 +103,12 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             box1.getChildren().add((Canvas)screen1);
             box2.getChildren().add((Canvas)screen2);
             box3.getChildren().add((Canvas)screen3);
-            box4.getChildren().add((Canvas)screen4);
+            //box4.getChildren().add((Canvas)screen4);
+
+            orderHandlersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
+            warehousersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
+            packagersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
+            pickupField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
 
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
@@ -135,9 +148,15 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         this.result.setText(formatter.format(time));
     }
 
+    @Override
     public void setAverageTime(double time){
         DecimalFormat formatter = new DecimalFormat("#0.00");
         this.result.setText(formatter.format(time));
+    }
+
+    @Override
+    public void setReadyOrders(int ordercount){
+        this.totalOrders.setText("Shipped: " + ordercount);
     }
 
     @FXML
@@ -179,20 +198,22 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         return screen4;
     }
 
-    //TODO: Eetu tee nämä metodit jotta saadaan työntekijöiden määrä asetettua ISimulatorUI:lle->controllerille->moottorille
     @Override
     public int getOrderHandlers(){
-        return 1;//TODO: korvaa ui:n kentän arvolla
-    };
+        return orderHandlersField.getValue();
+    }
     @Override
     public int getWarehousers(){
-        return 1;//TODO: korvaa ui:n kentän arvolla
-    };
+        return warehousersField.getValue();
+    }
     @Override
-    public int getPackagers()
-    {
-        return 1;//TODO: korvaa ui:n kentän arvolla
-    };
+    public int getPackagers(){
+        return packagersField.getValue();
+    }
+    @Override
+    public int getPickupInterval(){
+        return pickupField.getValue();
+    }
 }
 
 

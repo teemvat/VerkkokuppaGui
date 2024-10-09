@@ -27,21 +27,29 @@
                </VBox.margin>
             </Label>
             <Label text="Order Handlers" />
-            <Spinner fx:id="orderhandlersField" />
+            <Spinner fx:id="orderHandlersField" />
+            <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <Label layoutX="10.0" layoutY="10.0" text="Warehousers" />
             <Spinner fx:id="warehousersField" />
+            <Region layoutX="10.0" layoutY="87.0" prefHeight="200.0" prefWidth="200.0" />
             <Label layoutX="10.0" layoutY="10.0" text="Packagers" />
             <Spinner fx:id="packagersField" />
+            <Region layoutX="10.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label layoutX="33.0" layoutY="130.0" text="Pick-up interval" />
+            <Spinner fx:id="pickupField" layoutX="10.0" layoutY="148.0" />
+            <Region layoutX="10.0" layoutY="172.0" prefHeight="200.0" prefWidth="200.0" />
             <Label text="Simulation Time" />
             <TextField fx:id="time" promptText="Give time" />
-            <Label text="Simulation Speed" />
-            <TextField fx:id="delay" promptText="Give speed" />
+            <Region layoutX="10.0" layoutY="216.0" prefHeight="200.0" prefWidth="200.0" />
+            <Label text="Simulation Delay" />
+            <TextField fx:id="delay" promptText="Give delay" />
             <HBox prefHeight="22.0" prefWidth="100.0">
                <children>
                   <Button fx:id="slowButton" mnemonicParsing="false" onAction="#slow" prefHeight="26.0" prefWidth="50.0" text="-" />
                   <Button fx:id="fastButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fast" prefHeight="26.0" prefWidth="57.0" text="+" />
                </children>
             </HBox>
+            <Region layoutX="10.0" layoutY="260.0" prefHeight="200.0" prefWidth="200.0" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Button fx:id="startButton" layoutY="107.0" mnemonicParsing="false" onAction="#startSimulation" prefHeight="50.0" prefWidth="100.0" text="Start" AnchorPane.bottomAnchor="1.0" />
@@ -94,7 +102,7 @@
       <VBox BorderPane.alignment="CENTER">
          <children>
             <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox fx:id="box1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
+            <HBox fx:id="box1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="539.0">
                <children>
                   <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
                      <children>
@@ -111,7 +119,7 @@
                </VBox.margin>
             </HBox>
             <Region prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox fx:id="box2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
+            <HBox fx:id="box2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="539.0">
                <children>
                   <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
                      <children>
@@ -128,7 +136,7 @@
                </VBox.margin>
             </HBox>
             <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox fx:id="box3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
+            <HBox fx:id="box3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="90.0" prefWidth="539.0">
                <children>
                   <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
                      <children>
@@ -145,22 +153,6 @@
                </VBox.margin>
             </HBox>
             <Region layoutX="10.0" layoutY="228.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            <HBox fx:id="box4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
-                     <children>
-                        <Label text="Shipping">
-                           <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
             <Region layoutX="10.0" layoutY="387.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
          </children>
          <BorderPane.margin>
