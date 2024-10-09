@@ -1,21 +1,70 @@
-
-
-    /*--color-red-400: #eb131e;
+/*
+    --color-red-400: #eb131e;
     --color-red-500: #d40511;
     --color-red-600: #9a0000;
     --color-yellow-300: #fff0b2;
     --color-yellow-400: #ffde59;
     --color-yellow-500: #fc0;
-    --color-yellow-600: #e37729; */
+    --color-yellow-600: #e37729;
+ */
 
 
-.label{
+.label {
+    -fx-text-fill: #d40511;
     -fx-font-style: Sans-serif;
-    -fx-font-size: 14px;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-text-fill: #9a0000;
 }
 
-.coloredBackground{
-    -fx-background-color: #fc0;
+.whitelabel{
+    -fx-text-fill: #ffffff;
+    -fx-font-style: Sans-serif;
+    -fx-font-family: sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.dropShadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 1, 0, 0, 1);
+}
+
+.backgroundYellow {
+    -fx-background-color: #ffde59;
+}
+
+.backgroundYellowLight {
+    -fx-background-color: #fff0b2;
+}
+
+.backgroundRed {
+    -fx-background-color: #d40511;
+}
+
+.backgroundGray {
+    -fx-background-color: #eaeaea;
+}
+
+.backgroundWhite {
+    -fx-background-color: #ffffff;
+}
+
+.borderYellow {
+    -fx-border-color: #000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+}
+
+
+
+.borderBlack {
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-radius: 2px;
+}
+
+.header1{
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d40511;
 }

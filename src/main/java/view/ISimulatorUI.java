@@ -2,6 +2,8 @@ package view;
 
 import simu.model.entity.Simulation;
 
+import java.util.List;
+
 public interface ISimulatorUI {
 	
 	// Kontrolleri tarvitsee syötteitä, jotka se välittää Moottorille
@@ -34,5 +36,40 @@ public interface ISimulatorUI {
 
     void newHistoryWindow();
 
-    void addSimulationToHistory(Simulation s);
+
+	void updateSimuStat1(int id);
+
+	void updateSimuStat2(double time);
+
+	void updateSimuStat3(double oInterval);
+
+	void updateSimuStat4(double puInterval);
+
+	void updateSimuStat5(int oh);
+
+	void updateSimuStat6(int wh);
+
+	void updateSimuStat7(int pck);
+
+	void updateSimuStat8(int pReceived);
+
+	void updateSimuStat9(int pProcessed);
+
+	void updateSimuStat10(double avgTime);
+
+	void updateOrdStat1(int id);
+
+	void updateOrdStat2(int simID);
+
+	void updateOrdStat3(int oNum);
+
+	void updateOrdStat4(double arrivalTime);
+
+	void updateOrdStat5(double completionTime);
+
+	void updateOrdStat6(double processingTime);
+
+	void addSimulationToHistory(List<Simulation> sims);
+
+
 }

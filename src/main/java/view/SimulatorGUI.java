@@ -16,24 +16,19 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
 import simu.model.entity.Simulation;
-import javafx.scene.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
+import java.util.List;
 
 
 public class SimulatorGUI extends Application implements ISimulatorUI {
 
     //Kontrollerin esittely (tarvitaan käyttöliittymässä)
     private IControllerForView controller = new Controller(this);
+    private String currentSimulation = null;
 
     // Käyttöliittymäkomponentit:
     @FXML
@@ -42,6 +37,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private TextField delay;
     @FXML
     private TextField idSearchField;
+    @FXML
+    private TextField packageIdField;
 
 
     @FXML
@@ -54,6 +51,40 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private Label resultLabel;
 
     @FXML
+    private Label simuStat1;
+    @FXML
+    private Label simuStat2;
+    @FXML
+    private Label simuStat3;
+    @FXML
+    private Label simuStat4;
+    @FXML
+    private Label simuStat5;
+    @FXML
+    private Label simuStat6;
+    @FXML
+    private Label simuStat7;
+    @FXML
+    private Label simuStat8;
+    @FXML
+    private Label simuStat9;
+    @FXML
+    private Label simuStat10;
+    @FXML
+    private Label ordStat1;
+    @FXML
+    private Label ordStat2;
+    @FXML
+    private Label ordStat3;
+    @FXML
+    private Label ordStat4;
+    @FXML
+    private Label ordStat5;
+    @FXML
+    private Label ordStat6;
+
+
+    @FXML
     private Button slowButton;
     @FXML
     private Button fastButton;
@@ -63,6 +94,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     @FXML
     private Button historyButton;
+
+    @FXML
+    private Button packageSearch;
 
     @FXML
     private ProgressBar simuProgress;
@@ -187,6 +221,16 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         controller.startSimulation();
     }
 
+    @FXML
+    public void searchPackage(){
+        controller.searchPackage(Integer.parseInt(packageIdField.getText().replaceAll("[^0-9]", "")));
+    }
+
+    @FXML
+    public void searchSimulation(){
+        controller.getSimulationByID(Integer.parseInt(idSearchField.getText().replaceAll("[^0-9]", "")));
+    }
+
     @Override
     public void setSimuProgress(double d){
         simuProgress.setProgress(d);
@@ -258,21 +302,150 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             history.setTitle("Simulation History");
             history.setScene(new Scene(root));
             history.initModality(Modality.APPLICATION_MODAL); // Make the window modal
+            controller.populatePastSimulations();
+            pastSimus.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                currentSimulation = newValue;
+                updateSimuStat();
+
+            });
             history.showAndWait(); // Open the window as a modal dialog
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public void addSimulationToHistory(Simulation s) {
-        pastSimus.getItems().add(s.toString1());
+    @FXML
+    public void updateSimuStat(){
+        if (currentSimulation != null){
+            controller.getSimulationByID(Integer.parseInt(currentSimulation.replaceAll("[^a-zA-Z0-9]", "")));
+        }
     }
 
-    @FXML
-    private void getSimuByID() {
-        // Your logic to handle the mouse click event
+    @Override
+    public void updateSimuStat1(int id){
+        if (id != 0){
+            String text = "Simulation ID: #"+id;
+            simuStat1.setText(text);
+        }
     }
+    @Override
+    public void updateSimuStat2(double time){
+        if (time != 0){
+            String text = "Simulation Time: "+time;
+            simuStat2.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat3(double oInterval){
+        if (oInterval != 0){
+            String text = "Order Interval: "+oInterval;
+            simuStat3.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat4(double puInterval){
+        if (puInterval != 0){
+            String text = "Pickup Interval: "+puInterval;
+            simuStat4.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat5(int oh){
+        if (oh != 0){
+            String text = "Order Handlers: "+oh;
+            simuStat5.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat6(int wh){
+        if (wh != 0){
+            String text = "Warehousers: "+wh;
+            simuStat6.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat7(int pck){
+        if (pck != 0){
+            String text = "Packagers: "+pck;
+            simuStat7.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat8(int pReceived){
+        if (pReceived != 0){
+            String text = "Packets Received: "+pReceived;
+            simuStat8.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat9(int pProcessed){
+        if (pProcessed != 0){
+            String text = "Packets Processed: "+pProcessed;
+            simuStat9.setText(text);
+        }
+    }
+    @Override
+    public void updateSimuStat10(double avgTime){
+        if (avgTime != 0){
+            String text = "Average Time: "+avgTime;
+            simuStat10.setText(text);
+        }
+    }
+
+    @Override
+    public void updateOrdStat1(int id){
+        if (id != 0){
+            String text = "Order ID: #"+id;
+            ordStat1.setText(text);
+        }
+    }
+    @Override
+    public void updateOrdStat2(int simID){
+        if (simID != 0){
+            String text = "Simulation ID: #"+simID;
+            ordStat2.setText(text);
+        }
+    }
+    @Override
+    public void updateOrdStat3(int oNum){
+        if (oNum != 0){
+            String text = "Order Number: #"+oNum;
+            ordStat3.setText(text);
+        }
+    }
+    @Override
+    public void updateOrdStat4(double arrivalTime){
+        if (arrivalTime != 0){
+            String text = "Arrival Time: "+arrivalTime;
+            ordStat4.setText(text);
+        }
+    }
+
+    @Override
+    public void updateOrdStat5(double completionTime){
+        if (completionTime != 0){
+            String text = "Completion Time: "+completionTime;
+            ordStat5.setText(text);
+        }
+    }
+
+    @Override
+    public void updateOrdStat6(double processingTime){
+        if (processingTime != 0){
+            String text = "Processing Time: "+processingTime;
+            ordStat6.setText(text);
+        }
+    }
+
+
+    @Override
+    public void addSimulationToHistory(List<Simulation> sims) {
+        for (Simulation sim : sims) {
+            pastSimus.getItems().add(sim.toString1());
+        }
+    }
+
+
 }
 
 
