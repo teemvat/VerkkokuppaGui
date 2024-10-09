@@ -20,7 +20,7 @@ public interface IDAO {
     /**
      * Finds an object by id in the database.
      *
-     * @param id Id of the object
+     * @param id ID of the object
      * @return Object found
      */
     public Object find(int id);

@@ -68,7 +68,7 @@ public class OrderDAO implements IDAO {
      * 1. Get the entity manager from the datasource class MariaDbJpaConnection
      * 2. Find the object by id
      *
-     * @param id Id of the object
+     * @param id ID of the object
      * @return Object found
      */
     public Order find(int id) {
