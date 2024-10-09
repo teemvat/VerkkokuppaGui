@@ -5,11 +5,19 @@ import simu.model.entity.Simulation;
 import java.util.List;
 
 /**
- * DAO class for Simulation
+ * This class is a Data Access Object class for Simulation. It is used to persist, update, delete, find and find all Simulation objects in the database.
+ *
+ * @author Mira Peryshko
+ * @version 1.0
  */
 public class SimulationDAO implements IDAO {
 
     /**
+     * Persists an object to the database.
+     * 1. Get the entity manager from the datasource class MariaDbJpaConnection
+     * 2. Begin a transaction
+     * 3. Persist the object to the database
+     * 4. Commit the transaction to save the changes to the database
      *
      * @param o Object to persist
      */
@@ -22,6 +30,11 @@ public class SimulationDAO implements IDAO {
     }
 
     /**
+     * Updates an object in the database.
+     * 1. Get the entity manager from the datasource class MariaDbJpaConnection
+     * 2. Begin a transaction
+     * 3. Merge the object to the database
+     * 4. Commit the transaction to save the changes to the database
      *
      * @param o Object to update
      */
@@ -34,6 +47,11 @@ public class SimulationDAO implements IDAO {
     }
 
     /**
+     * Deletes an object from the database.
+     * 1. Get the entity manager from the datasource class MariaDbJpaConnection
+     * 2. Begin a transaction
+     * 3. Remove the object from the database
+     * 4. Commit the transaction to save the changes to the database
      *
      * @param o Object to delete
      */
@@ -46,6 +64,9 @@ public class SimulationDAO implements IDAO {
     }
 
     /**
+     * Finds an object by id in the database.
+     * 1. Get the entity manager from the datasource class MariaDbJpaConnection
+     * 2. Find the object by id
      *
      * @param id Id of the object
      * @return Object found
@@ -57,6 +78,9 @@ public class SimulationDAO implements IDAO {
     }
 
     /**
+     * Finds all objects in the database.
+     * 1. Get the entity manager from the datasource class MariaDbJpaConnection
+     * 2. Create a query to select all objects
      *
      * @return List of objects
      */
