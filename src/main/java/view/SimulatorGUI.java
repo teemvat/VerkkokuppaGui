@@ -1,6 +1,8 @@
 package view;
 
 
+import java.text.DecimalFormat;
+
 import controller.Controller;
 import controller.IControllerForView;
 import javafx.application.Application;
@@ -13,8 +15,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
+import javafx.scene.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -85,6 +93,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     public void init() {
 
         Trace.setTraceLevel(Level.INFO);
+
+        controller = new Controller(this);
     }
 
     @Override
@@ -220,6 +230,12 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     public int getPackagers(){
         return packagersField.getValue();
     }
+
+    @Override
+    public int gerOrderInterval() {
+        return 15;
+    }
+
     @Override
     public int getPickupInterval(){
         return pickupField.getValue();

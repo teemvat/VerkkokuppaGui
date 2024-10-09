@@ -17,12 +17,13 @@ public interface ISimulatorUI {
 	public int getOrderHandlers();
 	public int getWarehousers();
 	public int getPackagers();
+	public int gerOrderInterval();
+	public int getPickupInterval();
 
-	void setReadyOrders(int ordercount);
+    void setReadyOrders(int ordercount);
 
 	void setSimuProgress(double d);
 
-	// Kontrolleri tarvitsee
 	public IVisualization getVisualization1();
 	public IVisualization getVisualization2();
 	public IVisualization getVisualization3();
