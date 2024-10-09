@@ -180,7 +180,7 @@ public class MyEngine extends Engine {
                         if (a != null) {
                             double completionTime =Clock.getInstance().getTime();
                              a.setCompletionTime(completionTime);
-                            // controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
+                            controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
                             //TODO:tämä alempi pois
                             //a.setEndTime(Clock.getInstance().getTime());
                             packageShippedCount++;
