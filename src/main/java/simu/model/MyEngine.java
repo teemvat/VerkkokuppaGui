@@ -21,8 +21,7 @@ public class MyEngine extends Engine {
     int packageShippedCount = 0;
     private ArrivalProcess arrivalProcess;
     private ServicePoint[][] servicePoints;
-    //orginal servicepoints
-    // private ServicePoint[] servicePoints;
+
 
 
 
