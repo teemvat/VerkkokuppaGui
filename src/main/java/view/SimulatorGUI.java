@@ -232,11 +232,6 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
-    public int gerOrderInterval() {
-        return 15;
-    }
-
-    @Override
     public int getPickupInterval(){
         return pickupField.getValue();
     }

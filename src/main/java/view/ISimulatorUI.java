@@ -14,7 +14,7 @@ public interface ISimulatorUI {
 	public int getOrderHandlers();
 	public int getWarehousers();
 	public int getPackagers();
-	public int gerOrderInterval();
+	public int getOrderInterval();
 	public int getPickupInterval();
 
     void setReadyOrders(int ordercount);
@@ -29,7 +29,7 @@ public interface ISimulatorUI {
 
 	void setAverageTime(double time);
 
-    int getPickupInterval();
+
     void setLock();
 
     void setEdit();
