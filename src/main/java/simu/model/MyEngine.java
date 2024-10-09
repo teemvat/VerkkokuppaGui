@@ -47,8 +47,8 @@ public class MyEngine extends Engine {
 
             case ARR1:
                 servicePoints[0].addToQueue(new Order()); //ARR1 = tilaustyyppi 1 ja ARR2 = tilaustyyppi 2
-                controller.visualizeOrder();
                 arrivalProcess.generateNext();
+                controller.visualizeArrival();
                 break;
 
             case ORDHNDL:
@@ -58,19 +58,23 @@ public class MyEngine extends Engine {
 
             case WAREHOUSE:
                 a = (Order) servicePoints[1].getFromQueue();
+                controller.visualizeWarehouse();
                 servicePoints[2].addToQueue(a);
                 break;
 
             case PACKAGE:
                 a = (Order) servicePoints[2].getFromQueue();
+                controller.visualizePacking();
                 servicePoints[3].addToQueue(a);
                 break;
 
             case INSHIPPING:
                 a = (Order) servicePoints[3].getFromQueue();
+                controller.visualizeShipping();
                 a.setEndTime(Clock.getInstance().getTime());
                 a.report();
         }
+        controller.showProgress();
     }
 
     @Override
@@ -88,7 +92,7 @@ public class MyEngine extends Engine {
         System.out.println("Simulation ended in time : " + Clock.getInstance().getTime());
         System.out.println("Results ... are not implemented yet");
 
-        controller.showEndTime(Clock.getInstance().getTime()); // tämä uus
+        controller.showAverageTime(controller.getAverageTime()); // tämä uus
     }
 
 
