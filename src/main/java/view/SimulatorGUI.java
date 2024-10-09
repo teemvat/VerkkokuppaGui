@@ -64,8 +64,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private HBox box2;
     @FXML
     private HBox box3;
-//    @FXML
-//    private HBox box4;
+    @FXML
+    private HBox box4;
 
     @FXML
     private IVisualization screen1 = new Visualization(450,90);
@@ -116,7 +116,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             box1.getChildren().add((Canvas)screen1);
             box2.getChildren().add((Canvas)screen2);
             box3.getChildren().add((Canvas)screen3);
-            //box4.getChildren().add((Canvas)screen4);
+            box4.getChildren().add((Canvas)screen4);
 
             orderIntervalField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,200,1,1));
             orderHandlersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25, 1, 1));

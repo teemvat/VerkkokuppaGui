@@ -10,7 +10,10 @@ public interface ISimulatorUI {
 	public void setEndTime(double time);
 
 
-	//TODO: make UI methods for setting the number of workers-> controller
+	//TODO: make UI methods for setting the number of workers to -> controller -> myengine
+
+	int getOrderInterval();
+
 	public int getOrderHandlers();
 	public int getWarehousers();
 	public int getPackagers();
@@ -29,6 +32,7 @@ public interface ISimulatorUI {
 
 	void setAverageTime(double time);
 
+    int getPickupInterval();
 
     void setLock();
 

@@ -35,7 +35,6 @@ public class MyEngine extends Engine {
         this.orderInterval = orderInterval;
         this.shippingInterval = shippingInterval;
 
-
         arrivalProcess = new ArrivalProcess(new Negexp(orderInterval, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
         servicePoints[0] = new ServicePoint[ordHndlAmount];//servicepoint[0]= orderHandler
@@ -91,7 +90,6 @@ public class MyEngine extends Engine {
                     //System.out.println("Order added to queue" + i);
                 }
                 servicePoints[0][queueIndex].addToQueue(ord);//add order to OrderHandler queue
-                controller.visualizeOrder();
                 arrivalProcess.generateNext();
                 controller.visualizeArrival();
                 break;
@@ -188,6 +186,7 @@ public class MyEngine extends Engine {
                             controller.showProgress();
                         }
                     } while (a != null);
+                    controller.visualizeClear();
 
 
                 }

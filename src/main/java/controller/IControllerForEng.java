@@ -19,6 +19,8 @@ public interface IControllerForEng {
 
     double getAverageTime();
 
+    void visualizeClear();
+
     void showProgress();
 
     double getInterval();
@@ -32,8 +34,10 @@ public interface IControllerForEng {
     int getPickupInterval();
 
     double getSimulationTime();
-     void visualizeOrder();
+
+
      void update (int simulationID,int orderID,double time);
+
 
 
 

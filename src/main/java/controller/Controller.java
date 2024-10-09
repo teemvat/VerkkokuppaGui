@@ -121,22 +121,32 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         });
     }
 
-    @Override
-    public void showProgress() {
-        double maxTime = ui.getTime();
-        double currentTime = Clock.getInstance().getTime();
-        ui.setSimuProgress(currentTime / maxTime);
-    }
+	@Override
+	public void visualizeClear(){
+		Platform.runLater(new Runnable(){
+			public void run(){
+				ui.getVisualization4().clearScreen();
+			}
+		});
+	}
+
+	@Override
+	public void showProgress(){
+		double maxTime = ui.getTime();
+		double currentTime = Clock.getInstance().getTime();
+		ui.setSimuProgress(currentTime / maxTime);
+	}
 
 
-    public void showAverageTime(double time) {
-        Platform.runLater(() -> ui.setAverageTime(time));
-    }
 
-    @Override
-    public void showTotalShipped(int orders) {
-        Platform.runLater(() -> ui.setReadyOrders(orders));
-    }
+	public void showAverageTime(double time){
+		Platform.runLater(() ->ui.setAverageTime(time));
+	}
+
+	@Override
+	public void showTotalShipped(int orders){
+		Platform.runLater(() ->ui.setReadyOrders(orders));
+	}
 
     public double getAverageTime() {
         return simulation.getAverageTime();
@@ -223,10 +233,10 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         return ui.getTime();
     }
 
-    @Override
-    public void visualizeOrder() {
-
-    }
+	@Override
+	public int getOrderInterval(){
+		return ui.getOrderInterval();
+	}
 
     @Override
     public Simulation getSimulation() {
