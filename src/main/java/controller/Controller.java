@@ -41,6 +41,8 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         ui.getVisualization4().clearScreen();
         ui.setLock();
         ((Thread) engine).start();
+
+
         //((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?
     }
 
@@ -246,7 +248,10 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         }
         return new ArrayList<>();
     }
-
+@Override
+public void setEdit(){
+        ui.setEdit();
+}
 
 
     @Override

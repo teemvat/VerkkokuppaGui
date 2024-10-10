@@ -25,6 +25,8 @@ public interface IControllerForEng {
     void showProgress();
 
 
+    void setEdit();
+
     int getOrdHndlAmount();
 
     int getWarehouseAmount();
