@@ -60,6 +60,12 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
     }
 
     @Override
+    public void newHistoryWindow() {
+        ui.newHistoryWindow();
+    }
+
+
+    @Override
     public void fast() { // nopeutetaan moottorisäiettä
         engine.setDelay((long) (engine.getDelay() * 0.9));
     }
@@ -135,6 +141,47 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	}
 
 
+    @Override
+    public Simulation getSimulationByID(int id) {
+        Simulation simulation1 = find(Simulation.class, id);
+        setSimulationStats(simulation1);
+        return simulation1;
+    }
+
+    @Override
+    public void searchPackage(int i) {
+        Order order = find(Order.class, i);
+        setOrderStats(order);
+    }
+
+    @Override
+    public void searchSimulation(int i) {
+        Simulation simulation = find(Simulation.class, i);
+        setSimulationStats(simulation);
+    }
+
+    public void setSimulationStats(Simulation simulation) {
+        ui.updateSimuStat1(simulation.getSimulationID());
+        ui.updateSimuStat2(simulation.getSimulationTime());
+        ui.updateSimuStat3(simulation.getOrder_interval());
+        ui.updateSimuStat4(simulation.getPickup_interval());
+        ui.updateSimuStat5(simulation.getOrderhandlers());
+        ui.updateSimuStat6(simulation.getWarehousers());
+        ui.updateSimuStat7(simulation.getPackagers());
+        ui.updateSimuStat8(simulation.getPackages_received());
+        ui.updateSimuStat9(simulation.getPackagesProcessed());
+        ui.updateSimuStat10(simulation.getAverageTime());
+
+    }
+
+    public void setOrderStats(Order order) {
+        ui.updateOrdStat1(order.getOrderID());
+        ui.updateOrdStat2(order.getSimulationID());
+        ui.updateOrdStat3(order.getOrderNumber());
+        ui.updateOrdStat4(order.getArrivalTime());
+        ui.updateOrdStat5(order.getCompletionTime());
+        ui.updateOrdStat6(order.getProcessingTime());
+    }
 
 
     public void showAverageTime(double time){
@@ -236,4 +283,9 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
     public Simulation getSimulation() {
         return simulation;
     }
+    @Override
+    public void populatePastSimulations() {
+        ui.addSimulationToHistory(findAll(Simulation.class));
+    }
+
 }

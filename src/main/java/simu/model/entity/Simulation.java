@@ -125,4 +125,8 @@ public class Simulation {
             this.avg_time = ((this.avg_time * this.packages_processed) + newTime) / (this.packages_processed + 1);
         }
     }
+
+    public String toString1(){
+        return "# "+simulation_id;
+    }
 }
