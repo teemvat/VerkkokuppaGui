@@ -118,13 +118,13 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private HBox box4;
 
     @FXML
-    private IVisualization screen1 = new Visualization(450,90);
+    private IVisualization screen1 = new Visualization(450, 90);
     @FXML
-    private IVisualization screen2 = new Visualization(450,90);
+    private IVisualization screen2 = new Visualization(450, 90);
     @FXML
-    private IVisualization screen3 = new Visualization(450,90);
+    private IVisualization screen3 = new Visualization(450, 90);
     @FXML
-    private IVisualization screen4 = new Visualization(450,90);
+    private IVisualization screen4 = new Visualization(450, 90);
 
 
     @FXML
@@ -140,7 +140,6 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
     @FXML
     private ListView<String> pastSimus;
-
 
 
     @Override
@@ -167,16 +166,16 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
                 System.exit(0);
             });
 
-            box1.getChildren().add((Canvas)screen1);
-            box2.getChildren().add((Canvas)screen2);
-            box3.getChildren().add((Canvas)screen3);
-            box4.getChildren().add((Canvas)screen4);
+            box1.getChildren().add((Canvas) screen1);
+            box2.getChildren().add((Canvas) screen2);
+            box3.getChildren().add((Canvas) screen3);
+            box4.getChildren().add((Canvas) screen4);
 
-            orderIntervalField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,200,1,1));
+            orderIntervalField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 200, 1, 1));
             orderHandlersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25, 1, 1));
-            warehousersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25,1,1));
-            packagersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25,1,1));
-            pickupField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(100,2000,100,100));
+            warehousersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25, 1, 1));
+            packagersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25, 1, 1));
+            pickupField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(100, 2000, 100, 100));
 
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
@@ -191,9 +190,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @Override
     public double getTime() {
         double t;
-        if (!time.getText().isEmpty()){
+        if (!time.getText().isEmpty()) {
             t = Double.parseDouble(time.getText());
-        } else{
+        } else {
             t = 1000.0; // tai joku defaulttiarvo
         }
         return t;
@@ -202,7 +201,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @Override
     public long getDelay() { // tän vois ehkä haluta muuks ku longiks? vois tehdä jopa slideriks
         long d;
-        if (!delay.getText().isEmpty()){
+        if (!delay.getText().isEmpty()) {
             d = Long.parseLong(delay.getText());
         } else {
             d = 10;
@@ -217,7 +216,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
-    public void setAverageTime(double time){
+    public void setAverageTime(double time) {
         Platform.runLater(() -> {
             DecimalFormat formatter = new DecimalFormat("#0.00");
             this.result.setText(formatter.format(time));
@@ -225,36 +224,36 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
-    public void setReadyOrders(int ordercount){
+    public void setReadyOrders(int ordercount) {
         this.totalOrders.setText("Shipped: " + ordercount);
     }
 
     @FXML
-    public void startSimulation(){
+    public void startSimulation() {
         controller.startSimulation();
     }
 
     @FXML
-    public void searchPackage(){
+    public void searchPackage() {
         controller.searchPackage(Integer.parseInt(packageIdField.getText().replaceAll("[^0-9]", "")));
     }
 
     @FXML
-    public void searchSimulation(){
+    public void searchSimulation() {
         controller.getSimulationByID(Integer.parseInt(idSearchField.getText().replaceAll("[^0-9]", "")));
     }
 
     @Override
-    public void setSimuProgress(double d){
+    public void setSimuProgress(double d) {
         simuProgress.setProgress(d);
     }
 
-    public void slow(){
+    public void slow() {
         controller.slow();
         delay.setText(String.valueOf(controller.getDelay()));
     }
 
-    public void fast(){
+    public void fast() {
         controller.fast();
         delay.setText(String.valueOf(controller.getDelay()));
     }
@@ -276,33 +275,37 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
-    public int getOrderInterval(){
+    public int getOrderInterval() {
         return orderIntervalField.getValue();
     }
+
     @Override
     public IVisualization getVisualization4() {
         return screen4;
     }
+
     @Override
-    public int getOrderHandlers(){
+    public int getOrderHandlers() {
         return orderHandlersField.getValue();
     }
+
     @Override
-    public int getWarehousers(){
+    public int getWarehousers() {
         return warehousersField.getValue();
     }
+
     @Override
-    public int getPackagers(){
+    public int getPackagers() {
         return packagersField.getValue();
     }
 
     @Override
-    public int getPickupInterval(){
+    public int getPickupInterval() {
         return pickupField.getValue();
     }
 
     @Override
-    public void setLock(){
+    public void setLock() {
         time.setEditable(false);
         delay.setEditable(false);
         orderIntervalField.setDisable(true);
@@ -313,7 +316,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
-    public void setEdit(){
+    public void setEdit() {
         time.setEditable(true);
         delay.setEditable(true);
         orderIntervalField.setDisable(false);
@@ -322,9 +325,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         packagersField.setDisable(false);
         pickupField.setDisable(false);
     }
-}
+
     @Override
-    public int getSimulationID(){
+    public int getSimulationID() {
         return Integer.parseInt(idSearchField.getText());
     }
 
@@ -351,124 +354,136 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @FXML
-    public void updateSimuStat(){
-        if (currentSimulation != null){
+    public void updateSimuStat() {
+        if (currentSimulation != null) {
             controller.getSimulationByID(Integer.parseInt(currentSimulation.replaceAll("[^a-zA-Z0-9]", "")));
         }
     }
 
     @Override
-    public void updateSimuStat1(int id){
-        if (id != 0){
-            String text = "Simulation ID: #"+id;
+    public void updateSimuStat1(int id) {
+        if (id != 0) {
+            String text = "Simulation ID: #" + id;
             simuStat1.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat2(double time){
-        if (time != 0){
-            String text = "Simulation Time: "+time;
+    public void updateSimuStat2(double time) {
+        if (time != 0) {
+            String text = "Simulation Time: " + time;
             simuStat2.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat3(double oInterval){
-        if (oInterval != 0){
-            String text = "Order Interval: "+oInterval;
+    public void updateSimuStat3(double oInterval) {
+        if (oInterval != 0) {
+            String text = "Order Interval: " + oInterval;
             simuStat3.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat4(double puInterval){
-        if (puInterval != 0){
-            String text = "Pickup Interval: "+puInterval;
+    public void updateSimuStat4(double puInterval) {
+        if (puInterval != 0) {
+            String text = "Pickup Interval: " + puInterval;
             simuStat4.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat5(int oh){
-        if (oh != 0){
-            String text = "Order Handlers: "+oh;
+    public void updateSimuStat5(int oh) {
+        if (oh != 0) {
+            String text = "Order Handlers: " + oh;
             simuStat5.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat6(int wh){
-        if (wh != 0){
-            String text = "Warehousers: "+wh;
+    public void updateSimuStat6(int wh) {
+        if (wh != 0) {
+            String text = "Warehousers: " + wh;
             simuStat6.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat7(int pck){
-        if (pck != 0){
-            String text = "Packagers: "+pck;
+    public void updateSimuStat7(int pck) {
+        if (pck != 0) {
+            String text = "Packagers: " + pck;
             simuStat7.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat8(int pReceived){
-        if (pReceived != 0){
-            String text = "Packets Received: "+pReceived;
+    public void updateSimuStat8(int pReceived) {
+        if (pReceived != 0) {
+            String text = "Packets Received: " + pReceived;
             simuStat8.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat9(int pProcessed){
-        if (pProcessed != 0){
-            String text = "Packets Processed: "+pProcessed;
+    public void updateSimuStat9(int pProcessed) {
+        if (pProcessed != 0) {
+            String text = "Packets Processed: " + pProcessed;
             simuStat9.setText(text);
         }
     }
+
     @Override
-    public void updateSimuStat10(double avgTime){
-        if (avgTime != 0){
-            String text = "Average Time: "+avgTime;
+    public void updateSimuStat10(double avgTime) {
+        if (avgTime != 0) {
+            String text = "Average Time: " + avgTime;
             simuStat10.setText(text);
         }
     }
 
     @Override
-    public void updateOrdStat1(int id){
-        if (id != 0){
-            String text = "Order ID: #"+id;
+    public void updateOrdStat1(int id) {
+        if (id != 0) {
+            String text = "Order ID: #" + id;
             ordStat1.setText(text);
         }
     }
+
     @Override
-    public void updateOrdStat2(int simID){
-        if (simID != 0){
-            String text = "Simulation ID: #"+simID;
+    public void updateOrdStat2(int simID) {
+        if (simID != 0) {
+            String text = "Simulation ID: #" + simID;
             ordStat2.setText(text);
         }
     }
+
     @Override
-    public void updateOrdStat3(int oNum){
-        if (oNum != 0){
-            String text = "Order Number: #"+oNum;
+    public void updateOrdStat3(int oNum) {
+        if (oNum != 0) {
+            String text = "Order Number: #" + oNum;
             ordStat3.setText(text);
         }
     }
+
     @Override
-    public void updateOrdStat4(double arrivalTime){
-        if (arrivalTime != 0){
-            String text = "Arrival Time: "+arrivalTime;
+    public void updateOrdStat4(double arrivalTime) {
+        if (arrivalTime != 0) {
+            String text = "Arrival Time: " + arrivalTime;
             ordStat4.setText(text);
         }
     }
 
     @Override
-    public void updateOrdStat5(double completionTime){
-        if (completionTime != 0){
-            String text = "Completion Time: "+completionTime;
+    public void updateOrdStat5(double completionTime) {
+        if (completionTime != 0) {
+            String text = "Completion Time: " + completionTime;
             ordStat5.setText(text);
         }
     }
 
     @Override
-    public void updateOrdStat6(double processingTime){
-        if (processingTime != 0){
-            String text = "Processing Time: "+processingTime;
+    public void updateOrdStat6(double processingTime) {
+        if (processingTime != 0) {
+            String text = "Processing Time: " + processingTime;
             ordStat6.setText(text);
         }
     }
@@ -481,8 +496,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         }
     }
 
-
 }
+
 
 
 
