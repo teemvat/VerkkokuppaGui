@@ -20,7 +20,7 @@ public class Visualization extends Canvas implements IVisualization {
 
 
 	public void clearScreen() {
-		gc.setFill(Color.YELLOW);
+		gc.setFill(Color.DARKGRAY);
 		gc.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 
@@ -37,7 +37,7 @@ public class Visualization extends Canvas implements IVisualization {
 		i = (i - 10) % this.getWidth();
 		if (i<0) j-=10;
 
-		gc.setFill(Color.YELLOW);
+		gc.setFill(Color.DARKGRAY);
 		gc.fillRect(i,j,10,10);
 	}
 

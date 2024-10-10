@@ -107,8 +107,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private HBox box2;
     @FXML
     private HBox box3;
-//    @FXML
-//    private HBox box4;
+   @FXML
+    private HBox box4;
 
     @FXML
     private IVisualization screen1 = new Visualization(450,90);
@@ -150,7 +150,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
             Parent root = fxmlLoader.load();
 
-            primaryStage.setTitle("Verkkokuppa simulator");
+            primaryStage.setTitle("Verkkokuppa Simulator");
 
             primaryStage.setOnCloseRequest(evt -> {
                 Platform.exit();
@@ -160,7 +160,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             box1.getChildren().add((Canvas)screen1);
             box2.getChildren().add((Canvas)screen2);
             box3.getChildren().add((Canvas)screen3);
-            //box4.getChildren().add((Canvas)screen4);
+            box4.getChildren().add((Canvas)screen4);
 
             orderHandlersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
             warehousersField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 25));
