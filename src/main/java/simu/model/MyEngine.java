@@ -44,7 +44,7 @@ public class MyEngine extends Engine {
         this.packagerAmount = packagerAmount;
         this.orderInterval = orderInterval;
         this.shippingInterval = shippingInterval;
-/** Amount of servicepoints are created for simulation with given amount of order handlers, warehousers, packagers and shipping points(last one is hardcoded)*/
+        /** Amount of servicepoints are created for simulation with given amount of order handlers, warehousers, packagers and shipping points(last one is hardcoded)*/
         arrivalProcess = new ArrivalProcess(new Negexp(orderInterval, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
         servicePoints[0] = new ServicePoint[ordHndlAmount];//servicepoint[0]= orderHandler
