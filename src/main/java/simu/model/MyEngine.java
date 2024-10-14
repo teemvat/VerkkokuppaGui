@@ -9,6 +9,9 @@ import simu.framework.Engine;
 import simu.framework.Event;
 import simu.model.entity.Order;
 
+/**
+ * MyEngine class extends the Engine class and handles the simulation of the order processing system.
+ */
 public class MyEngine extends Engine {
     private int ordHndlAmount;
     private int warehouseAmount;
@@ -23,28 +26,32 @@ public class MyEngine extends Engine {
     private ServicePoint[][] servicePoints;
 
 
+    /**
+     * Constructor for MyEngine.
+     *
+     * @param controller       the controller interface for the engine
+     * @param ordHndlAmount    the number of order handlers
+     * @param warehouseAmount  the number of warehousers
+     * @param packagerAmount   the number of packagers
+     * @param orderInterval    the interval between orders
+     * @param shippingInterval the interval for shipping
+     */
 
-
-
-    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount,  int orderInterval, int shippingInterval) {
+    public MyEngine(IControllerForEng controller, int ordHndlAmount, int warehouseAmount, int packagerAmount, int orderInterval, int shippingInterval) {
         super(controller);
         this.ordHndlAmount = ordHndlAmount;
         this.warehouseAmount = warehouseAmount;
         this.packagerAmount = packagerAmount;
-        this.shippingAmount = 1;
         this.orderInterval = orderInterval;
         this.shippingInterval = shippingInterval;
-
+/** Amount of servicepoints are created for simulation with given amount of order handlers, warehousers, packagers and shipping points(last one is hardcoded)*/
         arrivalProcess = new ArrivalProcess(new Negexp(orderInterval, 5), eventList, EventType.ARR1);
         servicePoints = new ServicePoint[4][];
         servicePoints[0] = new ServicePoint[ordHndlAmount];//servicepoint[0]= orderHandler
         servicePoints[1] = new ServicePoint[warehouseAmount];//servicepoint[1]= warehouse
         servicePoints[2] = new ServicePoint[packagerAmount];//servicepoint[2]= packaging
         servicePoints[3] = new ServicePoint[shippingAmount];//servicepoint[3]= shipping
-
-        System.out.println("Order handlers: " + ordHndlAmount + " Warehousers: " + warehouseAmount + " Packagers: " + packagerAmount);
-
-        /**************************************************/
+        /**for loops for making desired amount of servicepoints*/
         for (int i = 0; i < ordHndlAmount; i++) {
             servicePoints[0][i] = new ServicePoint(new Normal(8, 1), eventList, EventType.ORDHNDL);
         }
@@ -58,7 +65,7 @@ public class MyEngine extends Engine {
             servicePoints[3][i] = new ServicePoint(new Normal(this.shippingInterval, 1), eventList, EventType.INSHIPPING);
         }
 
-            }
+    }
 
     @Override
     protected void initialization() {
@@ -68,6 +75,11 @@ public class MyEngine extends Engine {
 
     }
 
+    /**
+     * Handles the events during the simulation.
+     *
+     * @param evt the event to be processed
+     */
     @Override
     protected void runEvent(Event evt) {  // B-vaiheen tapahtumat
 
@@ -167,9 +179,9 @@ public class MyEngine extends Engine {
                     do {
                         a = (Order) servicePoints[3][i].getFromQueue();
                         if (a != null) {
-                            double completionTime =Clock.getInstance().getTime();
+                            double completionTime = Clock.getInstance().getTime();
                             a.setCompletionTime(completionTime);
-                            controller.update(a.getSimulation().getSimulationID(),a.getOrderID(),completionTime);
+                            controller.update(a.getSimulation().getSimulationID(), a.getOrderID(), completionTime);
                             controller.showAverageTime(controller.getAverageTime());//TODO tee näistä fiksummat
                             controller.showTotalShipped(a.getPackagesProcessed());
                             packageShippedCount++;
@@ -182,10 +194,11 @@ public class MyEngine extends Engine {
                 }
 
 
-
         }
     }
-
+    /**
+     * Tries to serve the next event in the queue.
+     */w
     @Override
     protected void tryCEvent() {
         for (int i = 0; i < ordHndlAmount; i++) {
@@ -232,8 +245,6 @@ public class MyEngine extends Engine {
 
         controller.showAverageTime(controller.getAverageTime()); // tämä uus
     }
-
-
 
 
 }
