@@ -8,7 +8,7 @@ import simu.framework.EventList;
 import simu.framework.Trace;
 import simu.model.entity.Order;
 
-// TODO:
+
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
 public class ServicePoint {
 
