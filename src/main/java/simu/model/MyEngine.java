@@ -198,7 +198,7 @@ public class MyEngine extends Engine {
     }
     /**
      * Tries to serve the next event in the queue.
-     */w
+     */
     @Override
     protected void tryCEvent() {
         for (int i = 0; i < ordHndlAmount; i++) {
