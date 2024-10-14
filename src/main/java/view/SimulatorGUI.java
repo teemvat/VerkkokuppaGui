@@ -326,10 +326,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         pickupField.setDisable(false);
     }
 
-    @Override
-    public int getSimulationID() {
-        return Integer.parseInt(idSearchField.getText());
-    }
+
 
     @Override
     public void newHistoryWindow() {
