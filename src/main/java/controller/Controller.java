@@ -42,18 +42,8 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         ui.setLock();
         ((Thread) engine).start();
 
-
-        //((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?
     }
 
-//
-//    public int getWarehousers() {
-//        return ui.getWarehousers();
-//    }
-//
-//    public int getPackagers() {
-//        return ui.getPackagers();
-//    }
 
 
     @Override
@@ -61,10 +51,6 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         engine.setDelay((long) (engine.getDelay() * 1.10));
     }
 
-    @Override
-    public void newHistoryWindow() {
-        ui.newHistoryWindow();
-    }
 
 
     @Override
@@ -81,10 +67,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
     // Simulointitulosten välittämistä käyttöliittymään.
     // Koska FX-ui:n päivitykset tulevat moottorisäikeestä, ne pitää ohjata JavaFX-säikeeseen:
 
-    @Override
-    public void showEndTime(double time) {
-        Platform.runLater(() -> ui.setEndTime(time));
-    }
+
 
 
     @Override
@@ -156,11 +139,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         setOrderStats(order);
     }
 
-    @Override
-    public void searchSimulation(int i) {
-        Simulation simulation = find(Simulation.class, i);
-        setSimulationStats(simulation);
-    }
+
 
     public void setSimulationStats(Simulation simulation) {
         ui.updateSimuStat1(simulation.getSimulationID());
@@ -201,8 +180,6 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 
 
     // Tietokantatoimintoja:
-    // TODO etsi oikeat kohdat näille metodikutsuille
-
     // Tallenna uusi simulaatioistunto tietokantaan aina kun käyttäjä painaa start-nappia
     // Tallenna uusi lähetys tietokantaan aina kun paketti saapuu orderhandlerille
     @Override

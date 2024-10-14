@@ -9,14 +9,10 @@ public interface IControllerForView {
     public void startSimulation();
     public void fast();
     public void slow();
-    public void newHistoryWindow();
-
-    void searchSimulation(int i);
 
     void populatePastSimulations();
     long getDelay();
 
-    void showProgress();
 
     Simulation getSimulationByID(int i);
 

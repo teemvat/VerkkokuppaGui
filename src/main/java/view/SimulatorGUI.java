@@ -16,19 +16,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
-import javafx.scene.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
 import simu.model.entity.Simulation;
 import java.util.List;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 
 
 public class SimulatorGUI extends Application implements ISimulatorUI {
@@ -209,11 +202,6 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         return d;
     }
 
-    @Override
-    public void setEndTime(double time) {
-        DecimalFormat formatter = new DecimalFormat("#0.00");
-        this.result.setText(formatter.format(time));
-    }
 
     @Override
     public void setAverageTime(double time) {
@@ -326,12 +314,8 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         pickupField.setDisable(false);
     }
 
-    @Override
-    public int getSimulationID() {
-        return Integer.parseInt(idSearchField.getText());
-    }
 
-    @Override
+
     public void newHistoryWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simulationHistory.fxml"));
