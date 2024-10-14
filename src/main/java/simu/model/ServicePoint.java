@@ -8,7 +8,7 @@ import simu.framework.EventList;
 import simu.framework.Trace;
 import simu.model.entity.Order;
 
-// TODO:
+
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
 public class ServicePoint {
 
@@ -33,9 +33,6 @@ public class ServicePoint {
 	public void addToQueue(Order a){   // Jonon 1. asiakas aina palvelussa
 		queue.add(a);
 		
-	}
-	public Order checkEvent(){  // tarkistetaan Eventti olio
-		return queue.peek();
 	}
 
 

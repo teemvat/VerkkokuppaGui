@@ -12,7 +12,6 @@ public interface ISimulatorUI {
 	/**Time based values*/
 	public double getTime();
 	public long getDelay();
-	public void setEndTime(double time);
 	void setAverageTime(double time);
 
     /**Servicepoint based values*/
@@ -34,8 +33,9 @@ public interface ISimulatorUI {
 	void setLock();
 	void setEdit();
 
-    /**These are for history functionality*/
-    void newHistoryWindow();
+
+
+	/**These are for history functionality*/
 	void updateSimuStat1(int id);
 	void updateSimuStat2(double time);
 	void updateSimuStat3(double oInterval);

@@ -1,13 +1,11 @@
 package controller;
 
-import simu.model.entity.Order;
 import simu.model.entity.Simulation;
 
 public interface IControllerForEng {
 
     // Rajapinta, joka tarjotaan moottorille:
 
-    public void showEndTime(double time);
     public void visualizeArrival();
     public void visualizeWarehouse();
     public void visualizePacking();
@@ -23,7 +21,6 @@ public interface IControllerForEng {
     void visualizeClear();
 
     void showProgress();
-
 
     void setEdit();
 
