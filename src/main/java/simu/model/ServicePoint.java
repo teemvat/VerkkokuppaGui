@@ -34,9 +34,6 @@ public class ServicePoint {
 		queue.add(a);
 		
 	}
-	public Order checkEvent(){  // tarkistetaan Eventti olio
-		return queue.peek();
-	}
 
 
 	public Order getFromQueue(){  // Poistetaan palvelussa ollut

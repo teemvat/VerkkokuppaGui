@@ -1,6 +1,5 @@
 package controller;
 
-import simu.model.entity.Order;
 import simu.model.entity.Simulation;
 
 public interface IControllerForEng {

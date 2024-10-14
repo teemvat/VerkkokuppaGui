@@ -33,7 +33,7 @@ public interface ISimulatorUI {
 	void setLock();
 	void setEdit();
 
-	void newHistoryWindow();
+
 
 	/**These are for history functionality*/
 	void updateSimuStat1(int id);
