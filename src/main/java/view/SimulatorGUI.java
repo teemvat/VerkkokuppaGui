@@ -315,7 +315,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
 
-
+    @FXML
     public void newHistoryWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simulationHistory.fxml"));
