@@ -58,6 +58,8 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
             tryCEvent();
         }
         results();
+        controller.setEdit();
+        //TODO: ohjelman nollaus
 
     }
 

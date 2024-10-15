@@ -86,6 +86,6 @@ public class SimulationDAO implements IDAO {
      */
     public List<Object> findAll() {
         EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        return em.createQuery("select e from Order e").getResultList();
+        return em.createQuery("select e from Simulation e").getResultList();
     }
 }

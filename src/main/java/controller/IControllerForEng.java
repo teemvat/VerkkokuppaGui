@@ -1,18 +1,17 @@
 package controller;
 
-import simu.model.entity.Order;
 import simu.model.entity.Simulation;
 
 public interface IControllerForEng {
 
     // Rajapinta, joka tarjotaan moottorille:
 
-    public void showEndTime(double time);
     public void visualizeArrival();
     public void visualizeWarehouse();
     public void visualizePacking();
     public void visualizeShipping();
     public <T> T save(T entity);
+    public void update(int id1, int id2, double time);
 
     void showAverageTime(double time);
     void showTotalShipped(int orders);
@@ -23,7 +22,7 @@ public interface IControllerForEng {
 
     void showProgress();
 
-    double getInterval();
+    void setEdit();
 
     int getOrdHndlAmount();
 
@@ -34,10 +33,6 @@ public interface IControllerForEng {
     int getPickupInterval();
 
     double getSimulationTime();
-
-     void update (int simulationID,int orderID,double time);
-
-    int getOrderInterval();
 
 
     Simulation getSimulation();
