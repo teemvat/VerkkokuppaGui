@@ -4,7 +4,7 @@ package simu.framework;
 import controller.Controller;
 import controller.IControllerForEng; // UUSI
 
-public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄRITYKSET
+public abstract class Engine extends Thread implements IEngine {
 //    protected int ordHndlAmount= 0;
 //    protected int warehouseAmount= 0;
 //    protected int packagerAmount= 0;
@@ -15,12 +15,12 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 
     protected EventList eventList;
 
-    protected IControllerForEng controller; // UUSI
+    protected IControllerForEng controller;
 
 
-    public Engine(IControllerForEng controller) {  // UUSITTU
+    public Engine(IControllerForEng controller) {
 
-        this.controller = controller;  //UUSI
+        this.controller = controller;
 
         clock = Clock.getInstance(); // Otetaan kello muuttujaan yksinkertaistamaan koodia
 
@@ -36,30 +36,28 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
 		simulationTime = time;
 	}
 
-	// TODO tarvitaan myös getteri simulaatioajalle
 
-	@Override // UUSI
+	@Override
 	public void setDelay(long time) {
 		this.delay = time;
 	}
 
-	@Override // UUSI
+	@Override
 	public long getDelay() {
 		return delay;
 	}
 
     @Override
-    public void run() { // Entinen aja()
+    public void run() {
         initialization(); // luodaan mm. ensimmäinen tapahtuma
         while (simulation()) {
-            delay(); // UUSI
+            delay();
             clock.setTime(currentTime());
             runBEvent();
             tryCEvent();
         }
         results();
         controller.setEdit();
-        //TODO: ohjelman nollaus
 
     }
 
@@ -77,13 +75,12 @@ public abstract class Engine extends Thread implements IEngine {  // UUDET MÄÄ
     }
 
     private boolean simulation() {
-        //Trace.out(Trace.Level.INFO, "Clock is " + clock.getTime());
+
         return clock.getTime() < simulationTime;
     }
 
 
-    private void delay() { // UUSI
-        //Trace.out(Trace.Level.INFO, "Delay " + delay);
+    private void delay() { 
         try {
             sleep(delay);
         } catch (InterruptedException e) {

@@ -13,7 +13,7 @@ import view.ISimulatorUI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller implements IControllerForEng, IControllerForView, IControllerForDao {   // UUSI
+public class Controller implements IControllerForEng, IControllerForView, IControllerForDao {
 
     private IEngine engine;
     private ISimulatorUI ui;
