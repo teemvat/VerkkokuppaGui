@@ -5,9 +5,6 @@ import controller.Controller;
 import controller.IControllerForEng; // UUSI
 
 public abstract class Engine extends Thread implements IEngine {
-//    protected int ordHndlAmount= 0;
-//    protected int warehouseAmount= 0;
-//    protected int packagerAmount= 0;
     private double simulationTime = 0;
     private long delay = 0;
 
@@ -80,7 +77,7 @@ public abstract class Engine extends Thread implements IEngine {
     }
 
 
-    private void delay() { 
+    private void delay() {
         try {
             sleep(delay);
         } catch (InterruptedException e) {
