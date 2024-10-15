@@ -73,7 +73,7 @@
                         <Insets bottom="5.0" />
                     </VBox.margin>
                 </Spinner>
-                <Label styleClass="dropShadow" text="Simulation time" />
+                <Label styleClass="dropShadow" text="Simulation Time" />
                 <TextField fx:id="time" alignment="CENTER" promptText="Give time" styleClass="borderSlimRed">
                     <VBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" />
@@ -208,7 +208,7 @@
                             <children>
                                 <VBox maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
                                     <children>
-                                        <Label styleClass="dropWhite" text="Shipping">
+                                        <Label styleClass="dropWhite" text="Loading">
                                             <VBox.margin>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                             </VBox.margin>
@@ -286,7 +286,7 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="180.0">
                             <children>
-                                <Label prefHeight="17.0" prefWidth="160.0" text="Läpimenneet tilaukset">
+                                <Label prefHeight="17.0" prefWidth="160.0" text="Completed Orders">
                                     <styleClass>
                                         <String fx:value="dropShadow" />
                                         <String fx:value="labelBigger" />
@@ -308,7 +308,7 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="216.0">
                             <children>
-                                <Label text="Keskiarvo käsittelyajoista">
+                                <Label text="Average Processing Time">
                                     <styleClass>
                                         <String fx:value="dropShadow" />
                                         <String fx:value="labelBigger" />
