@@ -32,7 +32,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
     @Override
     public void startSimulation() {
         engine = new MyEngine(this, getOrdHndlAmount(), getWarehouseAmount(), getPackagerAmount(), getOrderInterval(), getPickupInterval()); // luodaan uusi moottorisäie jokaista simulointia varten
-        simulation = save(new Simulation(this));    // TODO tälläinen samanlainen siihen kohtaan kun luodaan uusi paketti, aina save-metodin kautta ei koskaan Paketti p = new jne
+        simulation = save(new Simulation(this));
         engine.setSimulationTime(ui.getTime());
         engine.setDelay(ui.getDelay());
         ui.getVisualization1().clearScreen();
@@ -202,7 +202,7 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
         Simulation s = sdao.find(simulationID);
         s.setPackagesProcessed(s.getPackagesProcessed() + 1);
         s.updateAverageTime(o.getProcessingTime());
-        ui.setAverageTime(s.getAverageTime()); // miksä tää ei toimi?
+        ui.setAverageTime(s.getAverageTime());
         sdao.update(s);
     }
 

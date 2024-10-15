@@ -34,7 +34,7 @@
 }
 
 .dropShadow{
-    -fx-effect: dropshadow(three-pass-box, black, 1, 0, 0, 1);
+    -fx-effect: dropshadow(three-pass-box, black, 0, 0, 0, 1);
 }
 .dropWhite{
     -fx-effect: dropshadow(three-pass-box, #ffffff, 2, 0, 0, 2);
@@ -79,7 +79,7 @@
 }
 
 .header1{
-    -fx-font-size: 24px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #d40511;
 }
