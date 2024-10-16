@@ -4,9 +4,6 @@ import java.util.List;
 
 /**
  * Represents a Data Access Object interface for CRUD operations on entities in the database.
- *
- * @author Mira Peryshko
- * @version 1.0
  */
 public interface IDAO {
 

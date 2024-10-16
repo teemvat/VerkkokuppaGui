@@ -6,9 +6,6 @@ import java.util.List;
 
 /**
  * This class is a Data Access Object class for Simulation. It is used to persist, update, delete, find and find all Simulation objects in the database.
- *
- * @author Mira Peryshko
- * @version 1.0
  */
 public class SimulationDAO implements IDAO {
 

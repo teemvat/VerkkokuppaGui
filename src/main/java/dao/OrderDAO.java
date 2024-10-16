@@ -6,9 +6,6 @@ import jakarta.persistence.EntityManager;
 
 /**
  * This class is a Data Access Object class for Order. It is used to persist, update, delete, find and find all Order objects in the database.
- *
- * @author Mira Peryshko
- * @version 1.0
  */
 public class OrderDAO implements IDAO {
 
