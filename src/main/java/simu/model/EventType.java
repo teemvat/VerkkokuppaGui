@@ -2,10 +2,8 @@ package simu.model;
 
 import simu.framework.IEventType;
 
-// TODO:
-// Tapahtumien tyypit määritellään simulointimallin vaatimusten perusteella
+
+/**The enumeration EventType defines the types of events in the simulation model.*/
 public enum EventType implements IEventType {
 	ARR1, ORDHNDL, WAREHOUSE, PACKAGE, INSHIPPING
-	;
-
 }
