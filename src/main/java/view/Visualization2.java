@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+
 public class Visualization2 extends Canvas implements IVisualization {
 
 	private GraphicsContext gc;

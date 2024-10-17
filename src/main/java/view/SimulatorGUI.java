@@ -2,7 +2,6 @@ package view;
 
 
 import java.text.DecimalFormat;
-
 import controller.Controller;
 import controller.IControllerForView;
 import javafx.application.Application;
@@ -20,17 +19,23 @@ import simu.framework.Trace;
 import simu.framework.Trace.Level;
 import simu.model.entity.Simulation;
 import java.util.List;
-
 import java.io.IOException;
 
 
+/**
+ * SimulatorGUI class is responsible for the graphical user interface of the simulator.
+ * It extends Application and implements ISimulatorUI.
+ */
 public class SimulatorGUI extends Application implements ISimulatorUI {
 
-    //Kontrollerin esittely (tarvitaan käyttöliittymässä)
+    // Declaration of the controller (needed in the user interface)
     private IControllerForView controller = new Controller(this);
     private String currentSimulation = null;
 
-    // Käyttöliittymäkomponentit:
+    /**
+     * Declaration of the graphical user interface components.
+     */
+
     @FXML
     private TextField time;
     @FXML
@@ -39,7 +44,6 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private TextField idSearchField;
     @FXML
     private TextField packageIdField;
-
 
     @FXML
     private Label result;
@@ -135,6 +139,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     private ListView<String> pastSimus;
 
 
+    /**
+     * Initialize the graphical user interface.
+     */
     @Override
     public void init() {
 
@@ -143,6 +150,17 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         controller = new Controller(this);
     }
 
+    /**
+     * Start the graphical user interface.
+     * 1. Load the FXML file.
+     * 2. Set the controller.
+     * 3. Create the scene.
+     * 4. Set the stage.
+     * 5. Show the stage.
+     *
+     *
+     * @param primaryStage the primary stage of the application
+     */
     @Override
     public void start(Stage primaryStage) {
 
@@ -192,7 +210,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
     @Override
-    public long getDelay() { // tän vois ehkä haluta muuks ku longiks? vois tehdä jopa slideriks
+    public long getDelay() {
         long d;
         if (!delay.getText().isEmpty()) {
             d = Long.parseLong(delay.getText());
@@ -231,6 +249,11 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         controller.getSimulationByID(Integer.parseInt(idSearchField.getText().replaceAll("[^0-9]", "")));
     }
 
+    /**
+     * Set the progress of the simulation.
+     *
+     * @param d the progress of the simulation
+     */
     @Override
     public void setSimuProgress(double d) {
         simuProgress.setProgress(d);
@@ -292,6 +315,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         return pickupField.getValue();
     }
 
+    /**
+     * Lock the user interface.
+     */
     @Override
     public void setLock() {
         time.setEditable(false);
@@ -303,6 +329,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         pickupField.setDisable(true);
     }
 
+    /**
+     * Set the edit mode.
+     */
     @Override
     public void setEdit() {
         time.setEditable(true);
@@ -315,7 +344,9 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     }
 
 
-
+    /**
+     * Open a new window for the simulation history.
+     */
     @FXML
     public void newHistoryWindow() {
         try {
@@ -338,6 +369,10 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         }
     }
 
+
+    /**
+     * Update the simulation status.
+     */
     @FXML
     public void updateSimuStat() {
         if (currentSimulation != null) {
@@ -425,6 +460,12 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         }
     }
 
+
+    /**
+     * Update the order status.
+     *
+     * @param id the order ID
+     */
     @Override
     public void updateOrdStat1(int id) {
         if (id != 0) {
@@ -473,14 +514,17 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         }
     }
 
-
+    /**
+     * Add a simulation to the history.
+     *
+     * @param sims the list of simulations
+     */
     @Override
     public void addSimulationToHistory(List<Simulation> sims) {
         for (Simulation sim : sims) {
             pastSimus.getItems().add(sim.toString1());
         }
     }
-
 }
 
 
