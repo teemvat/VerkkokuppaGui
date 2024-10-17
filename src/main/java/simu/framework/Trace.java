@@ -1,5 +1,8 @@
 package simu.framework;
 
+/**
+ * Trace class for debugging purposes
+ */
 public class Trace {
 
 	public enum Level{INFO, WAR, ERR}
@@ -9,12 +12,10 @@ public class Trace {
 	public static void setTraceLevel(Level lvl){
 		traceLevel = lvl;
 	}
+
 	public static void out(Level lvl, String txt){
 		if (lvl.ordinal() >= traceLevel.ordinal()){
 			System.out.println(txt);
 		}
 	}
-	
-	
-	
 }

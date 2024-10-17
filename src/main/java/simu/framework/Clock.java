@@ -1,5 +1,9 @@
 package simu.framework;
 
+/**
+ * Clock class for simulation time
+ * Singleton pattern
+ */
 public class Clock {
 
 	private double time;
@@ -8,7 +12,11 @@ public class Clock {
 	private Clock(){
 		time = 0;
 	}
-	
+
+	/**
+	 * Gets the instance of the Clock. If the instance is null, creates a new instance.
+	 * @return the instance of the Clock
+	 */
 	public static Clock getInstance(){
 		if (instance == null){
 			instance = new Clock();
