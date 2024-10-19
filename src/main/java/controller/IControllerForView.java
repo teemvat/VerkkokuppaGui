@@ -17,9 +17,9 @@ public interface IControllerForView {
 
     long getDelay();
 
-    Simulation getSimulationByID(int i);
+    Simulation getSimulationByID(int id);
 
-    void searchPackage(int i);
+    void searchPackage(int id);
 
     int getOrderInterval();
 }

@@ -201,13 +201,13 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
     }
 
     /**
-     * Searches for a package by its id.
+     * Searches for a package by its ID and sets the order statistics in the UI by updating the order statistics labels.
      *
-     * @param i The id of the package.
+     * @param id The id of the package.
      */
     @Override
-    public void searchPackage(int i) {
-        Order order = find(Order.class, i);
+    public void searchPackage(int id) {
+        Order order = find(Order.class, id);
         setOrderStats(order);
     }
 

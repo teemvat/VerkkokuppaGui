@@ -1,34 +1,29 @@
 /*
-    --color-red-400: #eb131e;
+Color Palette:
     --color-red-500: #d40511;
-    --color-red-600: #9a0000;
-    --color-yellow-300: #fff0b2;
-    --color-yellow-400: #ffde59;
-    --color-yellow-500: #fc0;
-    --color-yellow-600: #e37729;
+    --color-gray-300: #dadada;
+    --color-white: #ffffff;
+    --color-black: #000000;
  */
 
 
 .label {
     -fx-text-fill: #d40511;
-    -fx-font-style: Sans-serif;
-    -fx-font-family: sans-serif;
+    -fx-font-family: helvetica;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
 .labelBigger {
     -fx-text-fill: #d40511;
-    -fx-font-style: Sans-serif;
-    -fx-font-family: sans-serif;
+    -fx-font-family: helvetica;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 
 .whitelabel{
     -fx-text-fill: #ffffff;
-    -fx-font-style: Sans-serif;
-    -fx-font-family: sans-serif;
+    -fx-font-family: helvetica;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
@@ -38,14 +33,6 @@
 }
 .dropWhite{
     -fx-effect: dropshadow(three-pass-box, #ffffff, 2, 0, 0, 2);
-}
-
-.backgroundYellow {
-    -fx-background-color: #ffde59;
-}
-
-.backgroundYellowLight {
-    -fx-background-color: #fff0b2;
 }
 
 .backgroundRed {

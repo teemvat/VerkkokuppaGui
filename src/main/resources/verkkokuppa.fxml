@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="741.0" styleClass="backgroundGray" stylesheets="@css/GUI.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" styleClass="backgroundGray" stylesheets="@css/GUI.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <left>
         <VBox alignment="CENTER" prefHeight="503.0" prefWidth="177.0" style="-fx-border-color: d40511; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
             <children>
@@ -139,7 +139,7 @@
                         <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="529.0" VBox.vgrow="ALWAYS" />
                         <HBox fx:id="box1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                             <children>
-                                <VBox maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                                <VBox maxWidth="84.0" minWidth="80.0" prefWidth="84.0">
                                     <children>
                                         <Label prefHeight="16.0" prefWidth="58.0" styleClass="dropWhite" text="Order in">
                                             <VBox.margin>
@@ -147,6 +147,9 @@
                                             </VBox.margin>
                                         </Label>
                                     </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                                 </VBox>
                             </children>
                             <VBox.margin>
@@ -164,14 +167,17 @@
                         </Region>
                         <HBox fx:id="box2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                             <children>
-                                <VBox maxWidth="83.0" minWidth="80.0" prefHeight="79.0" prefWidth="83.0">
+                                <VBox maxWidth="84.0" minWidth="80.0" prefHeight="73.0" prefWidth="84.0">
                                     <children>
-                                        <Label prefHeight="16.0" prefWidth="79.0" styleClass="dropWhite" text="Warehouse">
+                                        <Label prefHeight="18.0" prefWidth="67.0" styleClass="dropWhite" text="Warehouse">
                                             <VBox.margin>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                <Insets bottom="5.0" left="5.0" top="5.0" />
                                             </VBox.margin>
                                         </Label>
                                     </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                                 </VBox>
                             </children>
                             <VBox.margin>
@@ -185,7 +191,7 @@
                         <Region layoutX="10.0" layoutY="89.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                         <HBox fx:id="box3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="79.0" prefWidth="539.0">
                             <children>
-                                <VBox maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                                <VBox maxWidth="84.0" minWidth="80.0" prefHeight="73.0" prefWidth="84.0">
                                     <children>
                                         <Label styleClass="dropWhite" text="Packing">
                                             <VBox.margin>
@@ -193,6 +199,9 @@
                                             </VBox.margin>
                                         </Label>
                                     </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                                 </VBox>
                             </children>
                             <VBox.margin>
@@ -204,9 +213,9 @@
                             </styleClass>
                         </HBox>
                         <Region layoutX="10.0" layoutY="228.0" prefHeight="0.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                        <HBox fx:id="box4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="78.0" prefWidth="519.0">
+                        <HBox fx:id="box4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="78.0" prefWidth="539.0">
                             <children>
-                                <VBox maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
+                                <VBox maxWidth="84.0" minWidth="80.0" prefHeight="72.0" prefWidth="84.0">
                                     <children>
                                         <Label styleClass="dropWhite" text="Loading">
                                             <VBox.margin>
@@ -214,6 +223,9 @@
                                             </VBox.margin>
                                         </Label>
                                     </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                                 </VBox>
                             </children>
                             <VBox.margin>
