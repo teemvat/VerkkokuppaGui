@@ -44,6 +44,8 @@ public interface IControllerForEng {
      */
     public void update(int id1, int id2, double time);
 
+    void resetTime();
+
     /**
      * This method shows the average time the orders have been in the system.
      * @param time the average time
@@ -112,4 +114,9 @@ public interface IControllerForEng {
      * @return
      */
     Simulation getSimulation();
+
+    /**
+     * Resets the simulation.
+     */
+    void resetSimulation();
 }

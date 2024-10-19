@@ -2,6 +2,7 @@ package view;
 
 
 import java.text.DecimalFormat;
+
 import controller.Controller;
 import controller.IControllerForView;
 import javafx.application.Application;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
 import simu.model.entity.Simulation;
+
 import java.util.List;
 import java.io.IOException;
 
@@ -45,14 +47,13 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     @FXML
     private TextField packageIdField;
 
-    @FXML
-    private Label result;
-    @FXML
-    private Label totalOrders;
 
-    private Label timeLabel;
+
+    @FXML
+    private Label completedOrderResult;
     private Label delayLabel;
-    private Label resultLabel;
+    @FXML
+    private Label timeResult;
 
     @FXML
     private Label simuStat1;
@@ -158,7 +159,6 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
      * 4. Set the stage.
      * 5. Show the stage.
      *
-     *
      * @param primaryStage the primary stage of the application
      */
     @Override
@@ -197,6 +197,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
 
 
     //Käyttöliittymän rajapintametodit (kutsutaan kontrollerista)
+
     /**
      * Gets the time, which determines how long the simulation will run, from the graphical user interface.
      */
@@ -210,6 +211,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         }
         return t;
     }
+
     /**
      * Gets the delay, which determines how fast the simulation will run, from the graphical user interface.
      */
@@ -233,16 +235,30 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
     public void setAverageTime(double time) {
         Platform.runLater(() -> {
             DecimalFormat formatter = new DecimalFormat("#0.00");
-            this.result.setText(formatter.format(time));
+            this.timeResult.setText(formatter.format(time));
         });
     }
+
+    /**
+     * Resets results and progressbar from the graphical user interface.
+     */
+    @Override
+    public void startReset() {
+        Platform.runLater(() -> {
+            this.timeResult.setText("");
+            this.completedOrderResult.setText("");
+            this.simuProgress.setProgress(0);
+        });
+    }
+
     /**
      * Updates the amount of ready orders to the graphical user interface.
+     *
      * @param ordercount The amount of ready orders.
      */
     @Override
     public void setReadyOrders(int ordercount) {
-        this.totalOrders.setText("Shipped: " + ordercount);
+        this.completedOrderResult.setText("Shipped: " + ordercount);
     }
 
     /**
@@ -286,6 +302,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         controller.slow();
         delay.setText(String.valueOf(controller.getDelay()));
     }
+
     /**
      * Speeds up the simulation.
      */
@@ -404,6 +421,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             controller.getSimulationByID(Integer.parseInt(currentSimulation.replaceAll("[^a-zA-Z0-9]", "")));
         }
     }
+
     /**
      * Update the simulation ID statistic-label in the simulation history window.
      *
@@ -414,11 +432,11 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (id != 0 && id != Double.POSITIVE_INFINITY) {
             String text = "Simulation ID: #" + id;
             simuStat1.setText(text);
-        }
-        else{
+        } else {
             simuStat1.setText("Simulation ID: No data");
         }
     }
+
     /**
      * Update the simulation time statistic-label in the simulation history window.
      *
@@ -429,11 +447,11 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (time != 0 && time != Double.POSITIVE_INFINITY) {
             String text = "Simulation Time: " + time;
             simuStat2.setText(text);
-        }
-        else{
+        } else {
             simuStat2.setText("Simulation Time: No data");
         }
     }
+
     /**
      * Update the order interval statistic-label in the simulation history window.
      *
@@ -444,8 +462,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (oInterval != 0 && oInterval != Double.POSITIVE_INFINITY) {
             String text = "Order Interval: " + oInterval;
             simuStat3.setText(text);
-        }
-        else{
+        } else {
             simuStat3.setText("Order Interval: No data");
         }
     }
@@ -460,8 +477,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (puInterval != 0 && puInterval != Double.POSITIVE_INFINITY) {
             String text = "Pickup Interval: " + puInterval;
             simuStat4.setText(text);
-        }
-        else{
+        } else {
             simuStat4.setText("Pickup Interval: No data");
         }
     }
@@ -476,8 +492,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (oh != 0 && oh != Double.POSITIVE_INFINITY) {
             String text = "Order Handlers: " + oh;
             simuStat5.setText(text);
-        }
-        else{
+        } else {
             simuStat5.setText("Order Handlers: No data");
         }
     }
@@ -492,8 +507,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (wh != 0 && wh != Double.POSITIVE_INFINITY) {
             String text = "Warehousers: " + wh;
             simuStat6.setText(text);
-        }
-        else{
+        } else {
             simuStat6.setText("Warehousers: No data");
         }
     }
@@ -508,8 +522,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (pck != 0 && pck != Double.POSITIVE_INFINITY) {
             String text = "Packagers: " + pck;
             simuStat7.setText(text);
-        }
-        else{
+        } else {
             simuStat7.setText("Packagers: No data");
         }
     }
@@ -524,8 +537,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (pReceived != 0 && pReceived != Double.POSITIVE_INFINITY) {
             String text = "Packets Received: " + pReceived;
             simuStat8.setText(text);
-        }
-        else{
+        } else {
             simuStat8.setText("Packets Received: No data");
         }
     }
@@ -540,8 +552,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (pProcessed != 0 && pProcessed != Double.POSITIVE_INFINITY) {
             String text = "Packets Processed: " + pProcessed;
             simuStat9.setText(text);
-        }
-        else{
+        } else {
             simuStat9.setText("Packets Processed: No data");
         }
     }
@@ -556,8 +567,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
         if (avgTime != 0 && avgTime != Double.POSITIVE_INFINITY) {
             String text = String.format("Average Time: %1$.2f", avgTime);
             simuStat10.setText(text);
-        }
-        else{
+        } else {
             simuStat10.setText("Average Time: No data");
         }
     }
@@ -575,6 +585,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             ordStat1.setText(text);
         }
     }
+
     /**
      * Update the simulation ID in the order history window.
      *
@@ -587,6 +598,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             ordStat2.setText(text);
         }
     }
+
     /**
      * Update the order number in the order history window.
      *
@@ -599,6 +611,7 @@ public class SimulatorGUI extends Application implements ISimulatorUI {
             ordStat3.setText(text);
         }
     }
+
     /**
      * Update the order arrival time in the order history window.
      *

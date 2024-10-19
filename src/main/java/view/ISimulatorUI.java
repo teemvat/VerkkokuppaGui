@@ -21,7 +21,9 @@ public interface ISimulatorUI {
 	public int getOrderInterval();
 	public int getPickupInterval();
 
-    /**These are for simulation progress view*/
+	void startReset();
+
+	/**These are for simulation progress view*/
     void setReadyOrders(int ordercount);
 	void setSimuProgress(double d);
 

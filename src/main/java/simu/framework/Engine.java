@@ -57,6 +57,7 @@ public abstract class Engine extends Thread implements IEngine {
     @Override
     public void run() {
         initialization();
+        controller.resetSimulation();
         while (simulation()) {
             delay();
             clock.setTime(currentTime());
@@ -65,7 +66,7 @@ public abstract class Engine extends Thread implements IEngine {
         }
         results();
         controller.setEdit();
-        //TODO: ohjelman nollaus
+        controller.resetTime();
     }
 
     /**

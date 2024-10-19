@@ -188,6 +188,23 @@ public class Controller implements IControllerForEng, IControllerForView, IContr
 	}
 
     /**
+     * Resets clock's time to 0
+     */
+    @Override
+    public void resetTime(){
+        Clock.getInstance().setTime(0);
+    }
+
+    /**
+     * Resets simulation for a new run.
+     */
+    @Override
+    public void resetSimulation(){
+        resetTime();
+        ui.startReset();
+    }
+
+    /**
      * Sets the simulation statistics in the UI by updating the simulation statistics labels.
      *
      * @param id The ID of the simulation.

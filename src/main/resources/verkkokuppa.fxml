@@ -298,7 +298,7 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="180.0">
                             <children>
-                                <Label prefHeight="17.0" prefWidth="160.0" text="Completed Orders">
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="160.0" text="Completed Orders">
                                     <styleClass>
                                         <String fx:value="dropShadow" />
                                         <String fx:value="labelBigger" />
@@ -307,7 +307,7 @@
                                         <Insets bottom="5.0" />
                                     </VBox.margin>
                                 </Label>
-                                <Label fx:id="totalOrders">
+                                <Label fx:id="completedOrderResult">
                                     <styleClass>
                                         <String fx:value="dropShadow" />
                                         <String fx:value="labelBigger" />
@@ -320,7 +320,7 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="79.0" prefWidth="216.0">
                             <children>
-                                <Label text="Average Processing Time">
+                                <Label alignment="CENTER" text="Average Processing Time">
                                     <styleClass>
                                         <String fx:value="dropShadow" />
                                         <String fx:value="labelBigger" />
@@ -329,7 +329,7 @@
                                         <Insets bottom="5.0" />
                                     </VBox.margin>
                                 </Label>
-                                <Label fx:id="result">
+                                <Label fx:id="timeResult">
                                     <styleClass>
                                         <String fx:value="dropShadow" />
                                         <String fx:value="labelBigger" />
