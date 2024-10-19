@@ -19,7 +19,7 @@
     <left>
         <VBox alignment="CENTER" prefHeight="503.0" prefWidth="177.0" style="-fx-border-color: d40511; -fx-border-width: 3px; -fx-border-radius: 3px; -fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="149.0" styleClass="header1" text="Simulator" textAlignment="CENTER" wrapText="true">
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="149.0" styleClass="header1" text="Verkkokuppa" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
